@@ -7,6 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('learning-node:server');
 var http = require('http');
+require('../api/models/connection/db.js');
+
 
 /**
  * Get port from environment and store in Express.
