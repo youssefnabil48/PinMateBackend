@@ -19,12 +19,12 @@ var ChatSchema = new mongoose.Schema({
   },
   sender_id :  {
     type : mongoose.Schema.Types.ObjectId,
-    ref : User,
+    ref : "User",
     required : true
   },
   receiver_id : {
     type : mongoose.Schema.Types.ObjectId,
-    ref : User,
+    ref : "User",
     required : true
   }
 });

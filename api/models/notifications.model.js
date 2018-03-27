@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 
 var NotificationSchema = new mongoose.Schema({
   receiver_id : {
-    type : mongoose.Schema.Type.ObjectId,
-    ref : User,
-    required : true;
+    type : mongoose.Schema.Types.ObjectId,
+    ref : "User",
+    required : true
   },
   created_at : {
     type : Date,
@@ -26,7 +26,7 @@ var NotificationSchema = new mongoose.Schema({
       type : String,
       required : true
     },
-    
+
     desription : {
       type : String,
       required : true
