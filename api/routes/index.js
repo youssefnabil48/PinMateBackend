@@ -80,7 +80,7 @@ router.delete('/api/tracker/delete/:id',  trackerController.delete);
 router.get('/api/search/:query', searchController.generalSearch);
 
 //recommendationCTRL routes
-router.get('/api/reccoment/place', recommendationController.recommendPlace);
+router.get('/api/reccomend/place', recommendationController.recommendPlace);
 
 /* importing test controllers and routes */
 var testController = require('../controllers/test.controller');
