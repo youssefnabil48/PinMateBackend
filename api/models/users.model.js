@@ -1,3 +1,10 @@
+var mongoose = require('mongoose');
+
+var UserSchema = new mongoose.Schema({
+
+});
+
+mongoose.model('User',UserSchema);
 //example code of hotel model and mongoose SCHEMAS
 /*
 var mongoose = require('mongoose');
