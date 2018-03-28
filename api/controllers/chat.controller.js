@@ -39,7 +39,22 @@ module.exports.getAll = function(req, res) {
     Calling route:
 */
 module.exports.get = function(req, res) {
+  var chat = ChatModel({ _id: req.params.id });
+  var foundChat = ChatModel.findOne(chat, function(err, foundChat) {
+      if (err)
+          res.status(500).json({ error: err });
+      else {
+          if (!foundChat) {
+              res.json({ msg: "no object found" });
+          } else {
+              res.json({
+                  msg: "success",
+                  chats: foundChat
+              });
+          }
+      }
 
+  });
 };
 
 /*

@@ -1,63 +1,63 @@
 var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
-name{
+name : {
   type: String,
   required: true
 },
-username{
+username : {
   type: String,
   required: true,
 },
-email{
+email : {
   type: String,
   required: true
 },
-password{
+password : {
   type: String,
   required: true
 },
-gender{
+gender : {
   type: String,
   required: true
 },
-birth_date{
+birth_date : {
   type: Date,
   required: true
 },
-picture{
+picture : {
   type: String,
   required: true
 },
-avatar{
+avatar :{
   type: String,
   required: true
 },
-phone_number{
+phone_number :{
   type: String,
   required: true
 },
-home_location{
+home_location :{
   type: String,
   required: true
 },
-longitude{
+longitude :{
   type: String,
   required: true
 },
-latitude{
+latitude : {
   type: String,
   required: true
 },
-user_tkn{
+user_tkn : {
   type: String,
   required: true
 },
-email_verification_tkn{
+email_verification_tkn : {
   type: String,
   required: true
 },
-reset_pw_tkn{
+reset_pw_tkn : {
   type: String,
   required: true
 }

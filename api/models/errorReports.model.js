@@ -7,7 +7,6 @@ var ErrorReportSchema = new mongoose.Schema({
       },
       file : {
         type : File,
-        
       }
 });
 

@@ -1,62 +1,62 @@
 var mongoose = require('mongoose');
 
 var PlaceSchema = new mongoose.Schema({
-name{
+name : {
   type: String,
   required: true
 },
-icon{
+icon : {
   type: String,
   required: true
 },
-description{
+description : {
   type: String,
   required: true
 },
-longitude{
+longitude : {
   type: String,
   required: true
 },
-latitude{
+latitude : {
   type: String,
   required: true
 },
-picture{
+picture : {
   type:String,
   required: true
 },
-phone_number{
+phone_number : {
   type: String,
   required: true
 },
-event_id{
+event_id : {
   type : mongoose.Schema.Types.ObjectId,
   ref:"Event",
   required: false
 },
-review_id{
+review_id : {
   type : mongoose.Schema.Types.ObjectId,
   ref:"Review",
   required: false
-}
-story_id{
+},
+story_id : {
   type : mongoose.Schema.Types.ObjectId,
   ref:"Story",
   required: false
 },
-visit{
+visit : {
   type : mongoose.Schema.Types.ObjectId,
   ref: "User",
   required: false,
-  count{
+  count : {
     type: Number,
     required: true,
     default: 0
   },
-  timestamp{
+  timestamp : {
     type:Date,
     required: true,
-    default: Date.now();
+    default: Date.now()
   }
 }
 });
