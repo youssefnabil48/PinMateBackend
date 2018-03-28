@@ -18,21 +18,15 @@ var trackerController = require('../controllers/tracker.controller');
 router.get('/', function(req, res, next) {
     res.json({ title: 'Express app' });
 });
-/* defining routes */ // Hint: no routes for email controller
+/* defining routes */
+// Hint: no routes for email controller
+// Hint: no routes for chat controller (using web sockets)
 // userCTRL routes
 router.get('/api/user/all', userController.getAll);
 router.get('/api/user/:id', userController.get);
 router.post('/api/user/create', userController.create);
 router.post('/api/user/update/:id', userController.update);
 router.delete('/api/user/delete/:id', userController.delete);
-
-//chatCTRL routes
-router.get('/api/chat/all', chatController.getAll);
-router.get('/api/chat/:id', chatController.get);
-router.post('/api/chat/create', chatController.create);
-router.post('/api/chat/update/:id', chatController.update);
-router.delete('/api/chat/delete/:id', chatController.delete);
-router.post('/api/chat/send', chatController.sendMessage);
 
 //errorReportCTRL routes
 router.get('/api/errorReport/all', errorReportController.getAll);

@@ -6,7 +6,8 @@ require('../api/models/connection/db.js');
 var app = require('../app');
 var debug = require('debug')('learning-node:server');
 var http = require('http');
-
+var socket = require('socket.io');
+var socketDispacher = require('../api/controllers/dispachers/socketDispacher');
 /**
  * Get port from environment and store in Express.
  */
@@ -30,6 +31,10 @@ server.listen(port, function() {
 
 server.on('error', onError);
 server.on('listening', onListening);
+
+// Socket setup & pass server
+var io = socket(server);
+io.on('connection',socketDispacher.handle);
 
 /**
  * Normalize a port into a number, string, or false.
