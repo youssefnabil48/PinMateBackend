@@ -25,18 +25,16 @@ var HangoutRequestSchema = new mongoose.Schema({
   },
 
   responded_by : [
-    response : {
-    type : mongoose.Schema.Types.ObjectId,
-    ref : "User",
-    required : true
-  } ,
-  status : {
-    user_id : mongoose.Schema.Types.ObjectId,
-    ref : "User",
-    type : Boolean,
-    required : true
-  }
-]
+      {
+      type : mongoose.Schema.Types.ObjectId,
+      ref : "User",
+      required : true,
+      status : {
+        type : Boolean,
+        required : true
+      }
+    }
+  ]
 });
 
 mongoose.model('HangoutRequest',HangoutRequestSchema);

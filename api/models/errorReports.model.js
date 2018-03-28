@@ -6,8 +6,7 @@ var ErrorReportSchema = new mongoose.Schema({
         default : Date.now()
       },
       file : {
-        type : File,
-        
+        type : String,
       }
 });
 

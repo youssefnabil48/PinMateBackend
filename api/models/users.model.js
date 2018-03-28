@@ -1,66 +1,64 @@
 var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
-name{
-  type: String,
-  required: true
-},
-username{
-  type: String,
-  required: true,
-},
-email{
-  type: String,
-  required: true
-},
-password{
-  type: String,
-  required: true
-},
-gender{
-  type: String,
-  required: true
-},
-birth_date{
-  type: Date,
-  required: true
-},
-picture{
-  type: String,
-  required: true
-},
-avatar{
-  type: String,
-  required: true
-},
-phone_number{
-  type: String,
-  required: true
-},
-home_location{
-  type: String,
-  required: true
-},
-longitude{
-  type: String,
-  required: true
-},
-latitude{
-  type: String,
-  required: true
-},
-user_tkn{
-  type: String,
-  required: true
-},
-email_verification_tkn{
-  type: String,
-  required: true
-},
-reset_pw_tkn{
-  type: String,
-  required: true
-}
+  name : {
+    type: String,
+    required: true
+  },
+  username : {
+    type: String,
+    required: true,
+  },
+  email : {
+    type: String,
+    required: true
+  },
+  password : {
+    type: String,
+    required: true
+  },
+  gender : {
+    type: String,
+    required: true
+  },
+  birth_date : {
+    type: Date,
+    required: true
+  },
+  picture : {
+    type: String,
+    required: true
+  },
+  avatar : {
+    type: String,
+    required: true
+  },
+  phone_number : {
+    type: String,
+    required: true
+  },
+  home_location : {
+    type: String,
+    required: true
+  },
+  longitude : {
+    type: String,
+    required: true
+  },
+  latitude : {
+    type: String,
+    required: true
+  },
+  user_tkn : {
+    type: String,
+    required: true
+  },
+  email_verification_tkn : {
+    type: String
+  },
+  reset_pw_tkn : {
+    type: String
+  }
 });
 
 mongoose.model('User',UserSchema);
