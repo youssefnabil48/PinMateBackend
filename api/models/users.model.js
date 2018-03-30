@@ -1,128 +1,115 @@
 var mongoose = require('mongoose');
+var EmailController = require('../controllers/emailController');
 
 var UserSchema = new mongoose.Schema({
-name : {
-  type: String,
-  required: true
-},
-username : {
-  type: String,
-  required: true,
-},
-email : {
-  type: String,
-  required: true
-},
-password : {
-  type: String,
-  required: true
-},
-gender : {
-  type: String,
-  required: true
-},
-birth_date : {
-  type: Date,
-  required: true
-},
-picture : {
-  type: String,
-  required: true
-},
-avatar :{
-  type: String,
-  required: true
-},
-phone_number :{
-  type: String,
-  required: true
-},
-home_location :{
-  type: String,
-  required: true
-},
-longitude :{
-  type: String,
-  required: true
-},
-latitude : {
-  type: String,
-  required: true
-},
-user_tkn : {
-  type: String,
-  required: true
-},
-email_verification_tkn : {
-  type: String,
-  required: true
-},
-reset_pw_tkn : {
-  type: String,
-  required: true
-}
+  name : {
+    type: String,
+    required: true,
+    index : true
+  },
+  username : {
+    type: String,
+    required: true,
+    index : true
+  },
+  email : {
+    type: String,
+    required: true,
+    index : true
+  },
+  password : {
+    type: String,
+    required: true
+  },
+  gender : {
+    type: String,
+    required: true
+  },
+  birth_date : {
+    type: Date,
+    required: true
+  },
+  picture : {
+    type: String,
+    required: true
+  },
+  avatar :{
+    type: String,
+    required: true
+  },
+  phone_number :{
+    type: String,
+    required: true
+  },
+  home_location :{
+    type: String,
+    required: true
+  },
+  location :{
+    longitude :{
+      type: String,
+      required: true
+    },
+    latitude : {
+      type: String,
+      required: true
+    }
+  },
+  user_tkn : {
+    type: String,
+    required: true
+  },
+  email_verification_tkn : {
+    type: String,
+    required: true
+  },
+  reset_pw_tkn : {
+    type: String,
+    required: true
+  },
+  chat : [{
+    user_id : {
+      type : mongoose.types.ObjectId,
+      required : true
+    },
+    count : {
+      type : Number
+    }
+  }],
+  friends : [mongoose.types.ObjectId],
+  blocks : [mongoose.types.ObjectId],
+  views : [{
+    user_id : {
+      type : mongoose.types.ObjectId,
+      required : true
+    },
+    count : {
+      type : Number
+    }
+  }]
 });
 
 mongoose.model('User',UserSchema);
-//example code of hotel model and mongoose SCHEMAS
-/*
-var mongoose = require('mongoose');
 
-var reviewSchema = new mongoose.Schema({
-  name : {
-    type : String,
-    required : true
-  },
-  rating : {
-    type : Number,
-    required : true,
-    min : 0,
-    max : 5
-  },
-  review : {
-    type : String,
-    required : true
-  },
-  createdOn : {
-    type : Date,
-    "default" : Date.now
-  }
-});
+//helper methods
+module.exports.getUserById = function(userId,callback){
 
-var roomSchema = new mongoose.Schema({
-  type : String,
-  number : Number,
-  description : String,
-  photos : [String],
-  price : Number
-});
+}
+module.exports.getUserByEmail = function(email,callback){
 
-var hotelSchema = new mongoose.Schema({
-  name : {
-    type : String,
-    required : true
-  },
-  stars : {
-    type : Number,
-    min : 0,
-    max : 5,
-    default : 0
-  },
-  services : [String],
-  description : String,
-  photos : [String],
-  currency : String,
-  reviews : [reviewSchema],
-  rooms : [roomSchema],
-  location : {
-    address : String,
-    // Always store coordinates longitude (East/West), latitude (North/South) order.
-    coordinates : {
-      type : [Number],
-      index : '2dsphere'
-    }
-  }
-});
+}
+module.exports.getUserTkn = function(userId,callback){
 
-mongoose.model('Hotel', hotelSchema);
-*/
+}
+module.exports.SearchUsersByName = function(name,callback){
+
+}
+module.exports.hashPassword = function(pass,hash,callback){
+
+}
+module.exports.generateUserTkn = function(userId,gneratedTkn,callback){
+
+}
+module.exports.sendEmailToUser = function(userId,callback){
+
+}

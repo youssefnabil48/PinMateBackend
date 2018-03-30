@@ -7,6 +7,10 @@ var ErrorReportSchema = new mongoose.Schema({
       },
       file : {
         type : String,
+      },
+      related_user : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "User"
       }
 });
 

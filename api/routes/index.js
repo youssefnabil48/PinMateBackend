@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
 });
 /* defining routes */
 // Hint: no routes for email controller
-// Hint: no routes for chat controller (using web sockets)
+// Hint: no routes for chat controller for now(using web sockets)
 // userCTRL routes
 router.get('/api/user/all', userController.getAll);
 router.get('/api/user/:id', userController.get);
