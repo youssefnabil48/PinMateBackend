@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var NotificationSchema = new mongoose.Schema({
   receiver_id : {
-    type : mongoose.Schema.Types.ObjectId,
+    type : mongoose.Schema.ObjectId,
     ref : "User",
     required : true
   },
@@ -34,5 +34,59 @@ var NotificationSchema = new mongoose.Schema({
   }
 
 });
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+NotificationSchema.statics.getUserNotifications = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+NotificationSchema.statics.createNotification = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+NotificationSchema.statics.deleteNotification = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+NotificationSchema.statics.updateNotification = function(){
+
+}
+
+
 
 mongoose.model('Notification',NotificationSchema);

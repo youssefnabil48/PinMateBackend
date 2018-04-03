@@ -11,21 +11,7 @@ var Notification = mongoose.model('Notification');
     }
     Calling route:
 */
-module.exports.getAll = function(req, res) {
-
-};
-
-
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-module.exports.get = function(req, res) {
+module.exports.getUserNotifications = function(req, res) {
 
 };
 

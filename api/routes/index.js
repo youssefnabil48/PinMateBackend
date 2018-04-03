@@ -13,6 +13,8 @@ var placeController = require('../controllers/place.controller');
 var recommendationController = require('../controllers/recommendation.controller');
 var searchController = require('../controllers/search.controller');
 var trackerController = require('../controllers/tracker.controller');
+var storyController = require('../controllers/story.controller');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -21,16 +23,22 @@ router.get('/', function(req, res, next) {
 /* defining routes */
 // Hint: no routes for email controller
 // Hint: no routes for chat controller for now(using web sockets)
+
 // userCTRL routes
 router.get('/api/user/all', userController.getAll);
 router.get('/api/user/:id', userController.get);
 router.post('/api/user/create', userController.create);
 router.post('/api/user/update/:id', userController.update);
 router.delete('/api/user/delete/:id', userController.delete);
+router.post('/api/user/signin', userController.signIn);
+router.get('/api/user/signout', userController.signOut);
+router.get('/api/user/verifyemail', userController.verifyEmail);
+router.get('/api/user/forgetpassword', userController.forgetPassword);
 
 //errorReportCTRL routes
 router.get('/api/errorReport/all', errorReportController.getAll);
-router.get('/api/errorReport/:id', errorReportController.get);
+router.get('/api/errorReport/:id', errorReportController.getByID);
+router.get('/api/errorReport/:userID', errorReportController.getByUser);
 router.post('/api/errorReport/create', errorReportController.create);
 router.post('/api/errorReport/update/:id', errorReportController.update);
 router.delete('/api/errorReport/delete/:id', errorReportController.delete);
@@ -43,15 +51,14 @@ router.post('/api/friendRequest/update/:id', friendRequestController.update);
 router.delete('/api/friendRequest/delete/:id', friendRequestController.delete);
 
 //hangoutRequestCTRL routes
-router.get('/api/hangoutRequest/all', hangoutRequestController.getAll);
+router.get('/api/hangoutRequest/getuserrequests', hangoutRequestController.getUserRequests);
 router.get('/api/hangoutRequest/:id', hangoutRequestController.get);
 router.post('/api/hangoutRequest/create', hangoutRequestController.create);
 router.post('/api/hangoutRequest/update/:id', hangoutRequestController.update);
 router.delete('/api/hangoutRequest/delete/:id', hangoutRequestController.delete);
 
 //notificationCTRL routes
-router.get('/api/notification/all', notificationController.getAll);
-router.get('/api/notification/:id', notificationController.get);
+router.get('/api/notification/getusernotifications', notificationController.getUserNotifications);
 router.post('/api/notification/create', notificationController.create);
 router.post('/api/notification/update/:id', notificationController.update);
 router.delete('/api/notification/delete/:id', notificationController.delete);
@@ -64,11 +71,19 @@ router.post('/api/place/update/:id',  placeController.update);
 router.delete('/api/place/delete/:id',  placeController.delete);
 
 //trackerCTRL routes
-router.get('/api/tracker/all', trackerController.getAll);
+router.get('/api/tracker/getfriendstracker', trackerController.getFriendsTracker);
 router.get('/api/tracker/:id', trackerController.get);
 router.post('/api/tracker/create',  trackerController.create);
 router.post('/api/tracker/update/:id',  trackerController.update);
 router.delete('/api/tracker/delete/:id',  trackerController.delete);
+
+//storyCTRL routes
+ router.get('/api/story/getbyuser/:userId', storyController.getByUser);
+ router.get('/api/story/getbyplace/:placeId', storyController.getByPlace);
+ router.post('/api/story/create',  storyController.create);
+ router.post('/api/story/update/:id',  storyController.update);
+ router.delete('/api/story/delete/:id',  storyController.delete);
+ router.get('/api/story/file/:storyId', storyController.getFile);
 
 //searchCTRL routes
 router.get('/api/search/:query', searchController.generalSearch);

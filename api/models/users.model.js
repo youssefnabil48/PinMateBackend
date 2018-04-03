@@ -56,6 +56,11 @@ var UserSchema = new mongoose.Schema({
       required: true
     }
   },
+  favorite_places : [{
+    type : mongoose.Schema.ObjectId,
+    ref : "Place",
+    required : true
+  }],
   user_tkn : {
     type: String,
     required: true
@@ -70,7 +75,7 @@ var UserSchema = new mongoose.Schema({
   },
   chat : [{
     user_id : {
-      type : mongoose.Schema.Types.ObjectId,
+      type : mongoose.Schema.ObjectId,
       ref : "User",
       required : true
     },
@@ -78,23 +83,40 @@ var UserSchema = new mongoose.Schema({
       type : Number
     }
   }],
-  //friends : [{
-  //  type : mongoose.Schema.Types.ObjectId,
-  //  ref : "User"
-  //}],
+  friends : [{
+   type : mongoose.Schema.ObjectId,
+   ref : "User"
+  }],
   blocks : [{
-    type : mongoose.Schema.types.ObjectId,
+    type : mongoose.Schema.ObjectId,
     ref : "User"
   }],
   views : [{
     user_id : {
-      type : mongoose.Schema.Types.ObjectId,
+      type : mongoose.Schema.ObjectId,
       required : true
     },
     count : {
       type : Number
     }
-  }]
+  }],
+  visit : [{
+    place_id : {
+      type : mongoose.Schema.ObjectId,
+      ref : "Place",
+      required : true
+    },
+    count : {
+      type: Number,
+      required: true,
+      default: 0
+    },
+    timestamp : {
+      type:Date,
+      required: true,
+      default: Date.now()
+    }
+  }],
 });
 
 //helper methods
@@ -143,7 +165,7 @@ UserSchema.statics.getUserTkn = function(userId,callback){
     }
     Calling route:
 */
-UserSchema.statics.SearchUsersByName = function(name,callback){
+UserSchema.statics.getUsersByName = function(name,callback){
 
 }
 /*
@@ -204,7 +226,7 @@ UserSchema.statics.createUser = function(userId,callback){
     }
     Calling route:
 */
-UserSchema.statics.updateUSerInfo = function(userId,callback){
+UserSchema.statics.updateUserInfo = function(userId,callback){
 
 }
 
@@ -220,11 +242,91 @@ UserSchema.statics.updateUSerInfo = function(userId,callback){
 UserSchema.statics.deleteUser = function(userId,callback){
 
 }
-var model = mongoose.model('User',UserSchema);
 
-const ignoredFields = ['_id', 'created_at', '__v'];
-var randomObject = dummy(model, {
-    ignore: ignoredFields,
-    returnDate: true
-})
-console.log(randomObject);
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.comparePassword = function (candidatePassword,hash,callback){
+	bcrypt.compare(candidatePassword, hash, function (err, isMatch) {
+		callback(err, isMatch);
+	});
+};
+
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.signIn = function(){
+
+}
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.signOut = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.forgetPassword = function(){
+
+}
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.deleteUser = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.verifyEmail = function(userId,callback){
+
+}
+
+var model = mongoose.model('User',UserSchema);
+//
+// const ignoredFields = ['_id', 'created_at', '__v'];
+// var randomObject = dummy(model, {
+//     ignore: ignoredFields,
+//     returnDate: true
+// })
+// console.log(randomObject);

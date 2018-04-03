@@ -11,7 +11,7 @@ var Tracker = mongoose.model('Tracker');
     }
     Calling route:
 */
-module.exports.getAll = function(req, res) {
+module.exports.getFriendsTracker = function(req, res) {
 
 };
 

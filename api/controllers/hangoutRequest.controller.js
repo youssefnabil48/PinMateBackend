@@ -11,21 +11,21 @@ var HangoutRequest = mongoose.model('HangoutRequest');
     }
     Calling route:
 */
-module.exports.getAll = function(req, res) {
-  var hangoutRequests = HangoutRequest.find(function(err, tests) {
-      if (err)
-          res.status(500).json({ error: err });
-      else {
-          if (!hangoutRequests) {
-              res.json({ msg: "no object found" });
-          } else {
-              res.json({
-                  msg: "success",
-                  hangoutRequests: hangoutRequests
-              });
-          }
-      }
-  });
+module.exports.getUserRequests = function(req, res) {
+  // var hangoutRequests = HangoutRequest.find(function(err, tests) {
+  //     if (err)
+  //         res.status(500).json({ error: err });
+  //     else {
+  //         if (!hangoutRequests) {
+  //             res.json({ msg: "no object found" });
+  //         } else {
+  //             res.json({
+  //                 msg: "success",
+  //                 hangoutRequests: hangoutRequests
+  //             });
+  //         }
+  //     }
+  // });
 };
 
 

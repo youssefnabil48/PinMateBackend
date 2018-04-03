@@ -9,7 +9,7 @@ var ErrorReportSchema = new mongoose.Schema({
         type : String,
       },
       related_user : {
-        type : mongoose.Schema.Types.ObjectId,
+        type : mongoose.Schema.ObjectId,
         ref : "User"
       }
 });
@@ -35,7 +35,7 @@ ErrorReportSchema.statics.getReportById = function(){
     }
     Calling route:
 */
-ErrorReportSchema.statics.getReportOfUser = function(){
+ErrorReportSchema.statics.getReportByUser = function(){
 
 }
 
@@ -48,7 +48,7 @@ ErrorReportSchema.statics.getReportOfUser = function(){
     }
     Calling route:
 */
-ErrorReportSchema.statics.getReports = function(){
+ErrorReportSchema.statics.getAll = function(){
 
 }
 

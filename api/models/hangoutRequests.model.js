@@ -19,7 +19,7 @@ var HangoutRequestSchema = new mongoose.Schema({
   },
 
   created_by : {
-    type : mongoose.Schema.Types.ObjectId,
+    type : mongoose.Schema.ObjectId,
     ref : "User",
     required : true
   },
@@ -27,7 +27,7 @@ var HangoutRequestSchema = new mongoose.Schema({
   responded_by : [
       {
       user_id : {
-        type : mongoose.Schema.Types.ObjectId,
+        type : mongoose.Schema.ObjectId,
         ref : "User",
         required : true,
       },
@@ -62,20 +62,7 @@ HangoutRequestSchema.statics.createRequest = function(){
     }
     Calling route:
 */
-HangoutRequestSchema.statics.changeStatus = function(){
-
-}
-
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-HangoutRequestSchema.statics.createRequest = function(){
+HangoutRequestSchema.statics.respond = function(){
 
 }
 
@@ -113,10 +100,9 @@ HangoutRequestSchema.statics.getUserRequests = function(){
     }
     Calling route:
 */
-HangoutRequestSchema.statics.getAll = function(){
+HangoutRequestSchema.statics.update = function(){
 
 }
-
 /*
     Description
     Takes:

@@ -8,12 +8,12 @@ var FriendRequestSchema = new mongoose.Schema({
   status : Boolean,
 
   sender_id : {
-    type : mongoose.Schema.Types.ObjectId,
+    type : mongoose.Schema.ObjectId,
     ref : "User"
   },
 
   receiver_id : {
-    type : mongoose.Schema.Types.ObjectId,
+    type : mongoose.Schema.ObjectId,
     ref : "User"
     }
 });
@@ -41,20 +41,7 @@ FriendRequestSchema.statics.createRequest = function(){
     }
     Calling route:
 */
-FriendRequestSchema.statics.changeStatus = function(){
-
-}
-
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-FriendRequestSchema.statics.createRequest = function(){
+FriendRequestSchema.statics.respond = function(){
 
 }
 
@@ -80,19 +67,6 @@ FriendRequestSchema.statics.getRequestById = function(){
     Calling route:
 */
 FriendRequestSchema.statics.getUserRequests = function(){
-
-}
-
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-FriendRequestSchema.statics.getAll = function(){
 
 }
 

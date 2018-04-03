@@ -25,7 +25,20 @@ module.exports.getAll = function(req, res) {
     }
     Calling route:
 */
-module.exports.get = function(req, res) {
+module.exports.getByID = function(req, res) {
+
+};
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+module.exports.getByUser = function(req, res) {
 
 };
 
