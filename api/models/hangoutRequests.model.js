@@ -39,4 +39,97 @@ var HangoutRequestSchema = new mongoose.Schema({
   ]
 });
 
+//helper functions
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+HangoutRequestSchema.statics.createRequest = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+HangoutRequestSchema.statics.changeStatus = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+HangoutRequestSchema.statics.createRequest = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+HangoutRequestSchema.statics.getRequestById = function(){
+
+}
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+HangoutRequestSchema.statics.getUserRequests = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+HangoutRequestSchema.statics.getAll = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+HangoutRequestSchema.statics.deleteRequest = function(){
+
+}
+
+
+
 mongoose.model('HangoutRequest',HangoutRequestSchema);

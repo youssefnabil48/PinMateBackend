@@ -13,13 +13,95 @@ var TrackerSchema = new mongoose.Schema({
       type : Date,
       default : Date.now()
     },
-    ETA : function(){
+    eta : function(){
       //it will look something like that
       /*
         var eta = Date.now() - created_at;
         return eta;
       */
-    }
+    },
+    users : [{
+      userId : mongoose.types.ObjectId
+    }]
 });
+//helper functions
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+TrackerSchema.statics.getAll = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+TrackerSchema.statics.createTracker = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+TrackerSchema.statics.getTrackerById = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+TrackerSchema.statics.deleteTracker = function(){
+
+}
+
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+TrackerSchema.statics.addUser = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+TrackerSchema.statics.removeUser = function(){
+
+}
 
 mongoose.model('Tracker',TrackerSchema);

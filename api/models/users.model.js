@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var EmailController = require('../controllers/emailController');
+var EmailController = require('../controllers/email.controller');
+var dummy = require('mongoose-dummy');
 
 var UserSchema = new mongoose.Schema({
   name : {
@@ -69,18 +70,25 @@ var UserSchema = new mongoose.Schema({
   },
   chat : [{
     user_id : {
-      type : mongoose.types.ObjectId,
+      type : mongoose.Schema.Types.ObjectId,
+      ref : "User",
       required : true
     },
     count : {
       type : Number
     }
   }],
-  friends : [mongoose.types.ObjectId],
-  blocks : [mongoose.types.ObjectId],
+  //friends : [{
+  //  type : mongoose.Schema.Types.ObjectId,
+  //  ref : "User"
+  //}],
+  blocks : [{
+    type : mongoose.Schema.types.ObjectId,
+    ref : "User"
+  }],
   views : [{
     user_id : {
-      type : mongoose.types.ObjectId,
+      type : mongoose.Schema.Types.ObjectId,
       required : true
     },
     count : {
@@ -89,27 +97,134 @@ var UserSchema = new mongoose.Schema({
   }]
 });
 
-mongoose.model('User',UserSchema);
-
 //helper methods
-module.exports.getUserById = function(userId,callback){
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.getUserById = function(userId,callback){
 
 }
-module.exports.getUserByEmail = function(email,callback){
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.getUserByEmail = function(email,callback){
 
 }
-module.exports.getUserTkn = function(userId,callback){
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.getUserTkn = function(userId,callback){
 
 }
-module.exports.SearchUsersByName = function(name,callback){
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.SearchUsersByName = function(name,callback){
 
 }
-module.exports.hashPassword = function(pass,hash,callback){
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.hashPassword = function(pass,hash,callback){
 
 }
-module.exports.generateUserTkn = function(userId,gneratedTkn,callback){
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.generateUserTkn = function(userId,gneratedTkn,callback){
 
 }
-module.exports.sendEmailToUser = function(userId,callback){
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.sendEmailToUser = function(userId,callback){
 
 }
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.createUser = function(userId,callback){
+
+}
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.updateUSerInfo = function(userId,callback){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.deleteUser = function(userId,callback){
+
+}
+var model = mongoose.model('User',UserSchema);
+
+const ignoredFields = ['_id', 'created_at', '__v'];
+var randomObject = dummy(model, {
+    ignore: ignoredFields,
+    returnDate: true
+})
+console.log(randomObject);

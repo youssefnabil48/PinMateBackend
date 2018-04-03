@@ -14,4 +14,69 @@ var ErrorReportSchema = new mongoose.Schema({
       }
 });
 
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+ErrorReportSchema.statics.getReportById = function(){
+
+}
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+ErrorReportSchema.statics.getReportOfUser = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+ErrorReportSchema.statics.getReports = function(){
+
+}
+
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+ErrorReportSchema.statics.createReport = function(){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+ErrorReportSchema.statics.deleteReport = function(){
+
+}
+
 mongoose.model('ErrorReport',ErrorReportSchema);
