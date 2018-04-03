@@ -14,7 +14,7 @@ PostSchema.add({
     ref : "User"
   },
   //how to embed object from itself
-  posts : [PostSchema],
+  //posts : [PostSchema],
   likes : [{
     user_id : {
       type : mongoose.Schema.ObjectId,
@@ -34,9 +34,10 @@ var EventSchema = new mongoose.Schema({
   },
   start_date : {
     type : Date,
-    default : Date.now()
+    default : Date.now(),
+    required : true
   },
-  start_date : {
+  end_date : {
     type : Date,
     default : Date.now()
   },
@@ -54,7 +55,8 @@ var ReviewSchema = new mongoose.Schema({
   },
   created_at : {
     type : Date,
-    default : Date.now()
+    default : Date.now(),
+    required : true
   },
   user_id : {
     type : mongoose.Schema.ObjectId,
@@ -94,18 +96,18 @@ var PlaceSchema = new mongoose.Schema({
     type:String,
     required: true
   }],
-  phone_number : {
+  mobile_number : {
     type: String,
     required: true
   },
   events : [EventSchema],
   posts : [PostSchema],
   reviews : [ReviewSchema],
-  story_id : {
+  story_id : [{
     type : mongoose.Schema.ObjectId,
     ref:"Story",
     required: false
-  },
+  }],
   managed_by : {
     type : mongoose.Schema.ObjectId,
     ref : "User"
@@ -310,19 +312,14 @@ PlaceSchema.statics.deleteReview = function(){
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 mongoose.model('Place',PlaceSchema);
+
+//generating dummy object
+
+var dummy = require('mongoose-dummy');
+const ignoredFields = ['_id', 'created_at', '__v'];
+var randomObject = dummy(mongoose.model('Place',PlaceSchema), {
+    ignore: ignoredFields,
+    returnDate: true
+})
+console.log(randomObject);

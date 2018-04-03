@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var EmailController = require('../controllers/email.controller');
-var dummy = require('mongoose-dummy');
 
 var UserSchema = new mongoose.Schema({
   name : {
@@ -38,7 +37,7 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  phone_number :{
+  mobile_number :{
     type: String,
     required: true
   },
@@ -322,10 +321,13 @@ UserSchema.statics.verifyEmail = function(userId,callback){
 
 }
 
-var model = mongoose.model('User',UserSchema);
-//
+mongoose.model('User',UserSchema);
+
+//generating dummy object
+
+//var dummy = require('mongoose-dummy');
 // const ignoredFields = ['_id', 'created_at', '__v'];
-// var randomObject = dummy(model, {
+// var randomObject = dummy(mongoose.model('User',UserSchema), {
 //     ignore: ignoredFields,
 //     returnDate: true
 // })

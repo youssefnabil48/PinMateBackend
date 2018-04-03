@@ -65,10 +65,19 @@ router.delete('/api/notification/delete/:id', notificationController.delete);
 
 //placeCTRL routes
 router.get('/api/place/all', placeController.getAll);
-router.get('/api/place/:id', placeController.get);
+router.get('/api/place/:id', placeController.getById);
+router.get('/api/place/:name', placeController.getByName);
 router.post('/api/place/create',  placeController.create);
 router.post('/api/place/update/:id',  placeController.update);
 router.delete('/api/place/delete/:id',  placeController.delete);
+router.post('/api/place/post/create',  placeController.addPost);
+router.delete('/api/place/post/delete/:postId',  placeController.deletePost);
+router.post('/api/place/review/create',  placeController.addReview);
+router.delete('/api/place/review/delete/:reviewId',  placeController.deleteReview);
+router.post('/api/place/favorite',  placeController.favoritePlace);
+router.post('/api/place/unfavorite',  placeController.unfavoritePlace);
+router.post('/api/place/event/create',  placeController.addEvent);
+router.delete('/api/place/event/delete/:eventId',  placeController.deleteEvent);
 
 //trackerCTRL routes
 router.get('/api/tracker/getfriendstracker', trackerController.getFriendsTracker);
