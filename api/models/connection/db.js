@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var dburl = 'mongodb://localhost:27017/PinMate';
 var retry = null;
+mongoose.Promise = global.Promise;
 mongoose.connect(dburl);
 
 // CONNECTION EVENTS
