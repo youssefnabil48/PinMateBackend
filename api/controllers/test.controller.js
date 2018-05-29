@@ -12,21 +12,22 @@ var TestModel = mongoose.model('Test');
     }
     Calling route: '/test/all'
 */
-module.exports.getAll = function(req, res) {
-    var tests = TestModel.find(function(err, tests) {
-        if (err)
-            res.status(500).json({ error: err });
-        else {
-            if (!tests) {
-                res.json({ msg: "no object found" });
-            } else {
-                res.json({
-                    msg: "success",
-                    tests: tests
-                });
-            }
-        }
-    });
+module.exports.getAll = async function(req, res) {
+    try{
+      var tests = await TestModel.find().exec();
+      if (!tests) {
+        res.json({
+          msg: "no object fouund"
+        });
+        return;
+      }
+      res.json({
+        msg: "success",
+        tests: tests
+      });
+    }catch(error){
+      res.status(500).json({ error: error.toString() });
+    }
 };
 
 /*

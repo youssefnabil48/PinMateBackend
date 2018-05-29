@@ -15,7 +15,6 @@ var searchController = require('../controllers/search.controller');
 var trackerController = require('../controllers/tracker.controller');
 var storyController = require('../controllers/story.controller');
 
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.json({ title: 'Express app' });
