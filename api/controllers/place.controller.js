@@ -10,8 +10,22 @@ var Place = mongoose.model('Place');
     }
     Calling route:
 */
-module.exports.getAll = function(req, res) {
-
+module.exports.getAll = async function(req, res) {
+  try{
+    var places = await Place.getAll();
+    if (!places) {
+      res.json({
+        msg: "no object found"
+      });
+      return;
+    }
+    res.json({
+      msg: "success",
+      places: places
+    });
+  }catch(error){
+    res.status(500).json({ error: error.toString() });
+  }
 };
 
 
@@ -24,8 +38,22 @@ module.exports.getAll = function(req, res) {
     }
     Calling route:
 */
-module.exports.getById = function(req, res) {
-
+module.exports.getById = async function(req, res) {
+  try{
+    var places = await Place.getById(req.params.id);
+    if (!places) {
+      res.json({
+        msg: "no object found"
+      });
+      return;
+    }
+    res.json({
+      msg: "success",
+      places: places
+    });
+  }catch(error){
+    res.status(500).json({ error: error.toString() });
+  }
 };
 
 /*
@@ -37,8 +65,22 @@ module.exports.getById = function(req, res) {
     }
     Calling route:
 */
-module.exports.getByName = function(req, res) {
-
+module.exports.getByName = async function(req, res) {
+  try{
+    var places = await Place.getByName(req.params.name);
+    if (!places) {
+      res.json({
+        msg: "no object found"
+      });
+      return;
+    }
+    res.json({
+      msg: "success",
+      places: places
+    });
+  }catch(error){
+    res.status(500).json({ error: error.toString() });
+  }
 };
 
 /*
@@ -64,7 +106,7 @@ module.exports.create = function(req, res) {
     }
     Calling route:
 */
-module.exports.update = function(req, res) {
+module.exports.update = async function(req, res) {
 
 };
 
@@ -77,8 +119,23 @@ module.exports.update = function(req, res) {
     }
     Calling route:
 */
-module.exports.delete = function(req, res) {
-
+module.exports.delete = async function(req, res) {
+  try{
+    var places = await Place.deletePlace(req.params.id);
+    console.log(places);
+    if (!places) {
+      res.json({
+        msg: "no object found"
+      });
+      return;
+    }
+    res.json({
+      msg: "success",
+      places: places
+    });
+  }catch(error){
+    res.status(500).json({ error: error.toString() });
+  }
 };
 
 /*

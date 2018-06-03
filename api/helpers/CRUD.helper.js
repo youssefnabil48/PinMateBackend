@@ -4,7 +4,7 @@ module.exports = {
 
   getById: async function(model, id) {
     try{
-      var obj = await model.findOne({ '_id' : id }).exec();
+      var obj = await model.findOne({ _id : id }).exec();
       return obj;
     }catch(error){
       console.log(error);
@@ -44,7 +44,7 @@ module.exports = {
 
   create: async function(model, newInstance){
     try{
-      var obj = await model.save(newInstance).exec();
+      var obj = await newInstance.save().exec();
       return obj;
     }catch(error){
       console.log(error);
@@ -64,18 +64,11 @@ module.exports = {
 
   deleteModel: async function(model, id){
     try{
-        var obj = await model.delete({_id : id}).exec();
+        var obj = await model.remove({_id : id}).exec();
         return obj;
     }catch(error){
       console.log(error);
       throw error;
     }
-  },
-
-
-
-
-
-
-
+  }
 }

@@ -71,8 +71,8 @@ router.delete('/api/notification/delete/:id', notificationController.delete);
 
 //placeCTRL routes
 router.get('/api/place/all', placeController.getAll);
-router.get('/api/place/:id', placeController.getById);
-router.get('/api/place/:name', placeController.getByName);
+router.get('/api/place/getbyid/:id', placeController.getById);
+router.get('/api/place/getbyname/:name', placeController.getByName);
 router.post('/api/place/create',  placeController.create);
 router.post('/api/place/update/:id',  placeController.update);
 router.delete('/api/place/delete/:id',  placeController.delete);

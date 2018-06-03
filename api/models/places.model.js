@@ -127,8 +127,16 @@ var PlaceSchema = new mongoose.Schema({
     }
     Calling route:
 */
-PlaceSchema.statics.createPlace = function(){
-
+PlaceSchema.statics.createPlace = async function(newPlace){
+  try {
+   var p = new Place(newPlace);
+  //  await p.save();
+    return await CRUDHelper.create(this,p);
+  }
+  catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*
@@ -140,8 +148,13 @@ PlaceSchema.statics.createPlace = function(){
     }
     Calling route:
 */
-PlaceSchema.statics.deletePlace = function(){
-
+PlaceSchema.statics.deletePlace = async function(id){
+  try {
+    return CRUDHelper.deleteModel(this, id);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*
@@ -166,8 +179,13 @@ PlaceSchema.statics.updatePlace = function(){
     }
     Calling route:
 */
-PlaceSchema.statics.getAll = function(){
-
+PlaceSchema.statics.getAll = async function(){
+  try {
+      return CRUDHelper.getAll(this);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*
@@ -197,8 +215,13 @@ PlaceSchema.statics.getById = function(id){
     }
     Calling route:
 */
-PlaceSchema.statics.getByName = function(){
-
+PlaceSchema.statics.getByName = function(name){
+  try {
+    return CRUDHelper.getByName(this, name);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*
@@ -323,11 +346,3 @@ PlaceSchema.statics.deleteReview = function(){
 mongoose.model('Place',PlaceSchema);
 
 //generating dummy object
-
-// var dummy = require('mongoose-dummy');
-// const ignoredFields = ['_id', 'created_at', '__v'];
-// var randomObject = dummy(mongoose.model('Place',PlaceSchema), {
-//     ignore: ignoredFields,
-//     returnDate: true
-// })
-// console.log(randomObject);
