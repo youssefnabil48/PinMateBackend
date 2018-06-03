@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var CRUDHelper = require('../helpers/CRUD.helper');
 
 var HangoutRequestSchema = new mongoose.Schema({
   date : {
@@ -75,8 +76,13 @@ HangoutRequestSchema.statics.respond = function(){
     }
     Calling route:
 */
-HangoutRequestSchema.statics.getRequestById = function(){
-
+HangoutRequestSchema.statics.getRequestById = function(id){
+  try {
+    return CRUDHelper.getById(this, id);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 /*
     Description

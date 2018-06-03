@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var CRUDHelper = require('../helpers/CRUD.helper');
 
 var ErrorReportSchema = new mongoose.Schema({
       created_at : {
@@ -23,8 +24,13 @@ var ErrorReportSchema = new mongoose.Schema({
     }
     Calling route:
 */
-ErrorReportSchema.statics.getReportById = function(){
-
+ErrorReportSchema.statics.getReportById = function(id){
+  try {
+    return CRUDHelper.getById(this, id);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 /*
     Description

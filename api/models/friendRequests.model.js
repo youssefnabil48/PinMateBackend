@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var CRUDHelper = require('../helpers/CRUD.helper');
 
 var FriendRequestSchema = new mongoose.Schema({
   created_at : {
@@ -54,8 +55,13 @@ FriendRequestSchema.statics.respond = function(){
     }
     Calling route:
 */
-FriendRequestSchema.statics.getRequestById = function(){
-
+FriendRequestSchema.statics.getRequestById = function(id){
+  try {
+    return CRUDHelper.getById(this, id);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 /*
     Description

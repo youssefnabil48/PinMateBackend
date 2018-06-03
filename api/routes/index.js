@@ -15,6 +15,13 @@ var searchController = require('../controllers/search.controller');
 var trackerController = require('../controllers/tracker.controller');
 var storyController = require('../controllers/story.controller');
 
+//team individuals test controllers
+var youssefIndividualTest = require('../individualTests/youssef.individual.test');
+var saraIndividualTest = require('../individualTests/sara.individual.test');
+var hagarIndividualTest = require('../individualTests/hagar.individual.test');
+var doniaIndividualTest = require('../individualTests/donia.individual.test');
+var hussienIndividualTest = require('../individualTests/hussien.individual.test');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.json({ title: 'Express app' });
@@ -106,6 +113,13 @@ router.get('/test/get/:id', testController.get);
 router.post('/test/create', testController.create);
 router.post('/test/update/:id', testController.update);
 router.delete('/test/delete/:id', testController.delete);
+
+//routes for individuals devs
+router.get('/youssef/test', youssefIndividualTest.test);
+router.get('/sara/test', saraIndividualTest.test);
+router.get('/donia/test', doniaIndividualTest.test);
+router.get('/hagar/test', hagarIndividualTest.test);
+router.get('/hussien/test', hussienIndividualTest.test);
 
 /* exporting router module */
 module.exports = router;

@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var CRUDHelper = require('../helpers/CRUD.helper');
 var EmailController = require('../controllers/email.controller');
 
 var UserSchema = new mongoose.Schema({
@@ -128,7 +129,24 @@ var UserSchema = new mongoose.Schema({
     }
     Calling route:
 */
-UserSchema.statics.getUserById = function(userId,callback){
+UserSchema.statics.getUserById = function(userId){
+  try {
+    return CRUDHelper.getById(this, userId);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+}
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.getUserByEmail = function(email){
 
 }
 /*
@@ -140,7 +158,7 @@ UserSchema.statics.getUserById = function(userId,callback){
     }
     Calling route:
 */
-UserSchema.statics.getUserByEmail = function(email,callback){
+UserSchema.statics.getUserTkn = function(userId){
 
 }
 /*
@@ -152,7 +170,7 @@ UserSchema.statics.getUserByEmail = function(email,callback){
     }
     Calling route:
 */
-UserSchema.statics.getUserTkn = function(userId,callback){
+UserSchema.statics.getUsersByName = function(name){
 
 }
 /*
@@ -164,7 +182,7 @@ UserSchema.statics.getUserTkn = function(userId,callback){
     }
     Calling route:
 */
-UserSchema.statics.getUsersByName = function(name,callback){
+UserSchema.statics.hashPassword = function(password){
 
 }
 /*
@@ -176,7 +194,7 @@ UserSchema.statics.getUsersByName = function(name,callback){
     }
     Calling route:
 */
-UserSchema.statics.hashPassword = function(pass,hash,callback){
+UserSchema.statics.generateUserTkn = function(userId,gneratedTkn){
 
 }
 /*
@@ -188,44 +206,7 @@ UserSchema.statics.hashPassword = function(pass,hash,callback){
     }
     Calling route:
 */
-UserSchema.statics.generateUserTkn = function(userId,gneratedTkn,callback){
-
-}
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-UserSchema.statics.sendEmailToUser = function(userId,callback){
-
-}
-
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-UserSchema.statics.createUser = function(userId,callback){
-
-}
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-UserSchema.statics.updateUserInfo = function(userId,callback){
+UserSchema.statics.sendEmailToUser = function(userId){
 
 }
 
@@ -238,7 +219,32 @@ UserSchema.statics.updateUserInfo = function(userId,callback){
     }
     Calling route:
 */
-UserSchema.statics.deleteUser = function(userId,callback){
+UserSchema.statics.createUser = function(userId){
+
+}
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.updateUserInfo = function(userId){
+
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.deleteUser = function(userId){
 
 }
 
@@ -304,7 +310,7 @@ UserSchema.statics.forgetPassword = function(){
     }
     Calling route:
 */
-UserSchema.statics.deleteUser = function(){
+UserSchema.statics.deleteUser = function(userId){
 
 }
 
@@ -317,7 +323,7 @@ UserSchema.statics.deleteUser = function(){
     }
     Calling route:
 */
-UserSchema.statics.verifyEmail = function(userId,callback){
+UserSchema.statics.verifyEmail = function(userId){
 
 }
 

@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var CRUDHelper = require('../helpers/CRUD.helper');
 
 var ChatSchema = new mongoose.Schema({
   created_at : {
@@ -40,8 +41,13 @@ var ChatSchema = new mongoose.Schema({
     }
     Calling route:
 */
-ChatSchema.statics.getChatById = function(){
-
+ChatSchema.statics.getChatById = function(id){
+  try {
+    return CRUDHelper.getById(this, id);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*

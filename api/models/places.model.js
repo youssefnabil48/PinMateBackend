@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
+var CRUDHelper = require('../helpers/CRUD.helper');
 var PostSchema = new mongoose.Schema();
+
+
 PostSchema.add({
   content : {
     type : String,
@@ -176,8 +179,13 @@ PlaceSchema.statics.getAll = function(){
     }
     Calling route:
 */
-PlaceSchema.statics.getById = function(){
-
+PlaceSchema.statics.getById = function(id){
+  try {
+    return CRUDHelper.getById(this, id);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*
@@ -316,10 +324,10 @@ mongoose.model('Place',PlaceSchema);
 
 //generating dummy object
 
-var dummy = require('mongoose-dummy');
-const ignoredFields = ['_id', 'created_at', '__v'];
-var randomObject = dummy(mongoose.model('Place',PlaceSchema), {
-    ignore: ignoredFields,
-    returnDate: true
-})
-console.log(randomObject);
+// var dummy = require('mongoose-dummy');
+// const ignoredFields = ['_id', 'created_at', '__v'];
+// var randomObject = dummy(mongoose.model('Place',PlaceSchema), {
+//     ignore: ignoredFields,
+//     returnDate: true
+// })
+// console.log(randomObject);

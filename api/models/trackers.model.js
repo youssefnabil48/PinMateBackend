@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var CRUDHelper = require('../helpers/CRUD.helper');
 
 var TrackerSchema = new mongoose.Schema({
     source : {
@@ -53,8 +54,13 @@ TrackerSchema.statics.createTracker = function(){
     }
     Calling route:
 */
-TrackerSchema.statics.getTrackerById = function(){
-
+TrackerSchema.statics.getTrackerById = function(id){
+  try {
+    return CRUDHelper.getById(this, id);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*
