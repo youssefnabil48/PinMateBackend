@@ -130,7 +130,6 @@ var PlaceSchema = new mongoose.Schema({
 PlaceSchema.statics.createPlace = async function(newPlace){
   try {
    var p = new Place(newPlace);
-  //  await p.save();
     return await CRUDHelper.create(this,p);
   }
   catch (e) {
@@ -150,7 +149,7 @@ PlaceSchema.statics.createPlace = async function(newPlace){
 */
 PlaceSchema.statics.deletePlace = async function(id){
   try {
-    return CRUDHelper.deleteModel(this, id);
+    return await CRUDHelper.deleteModel(this, id);
   } catch (e) {
     console.log(e);
     throw e;
@@ -181,7 +180,7 @@ PlaceSchema.statics.updatePlace = function(){
 */
 PlaceSchema.statics.getAll = async function(){
   try {
-      return CRUDHelper.getAll(this);
+      return await CRUDHelper.getAll(this);
   } catch (e) {
     console.log(e);
     throw e;
@@ -199,7 +198,7 @@ PlaceSchema.statics.getAll = async function(){
 */
 PlaceSchema.statics.getById = function(id){
   try {
-    return CRUDHelper.getById(this, id);
+    return await CRUDHelper.getById(this, id);
   } catch (e) {
     console.log(e);
     throw e;
@@ -217,7 +216,7 @@ PlaceSchema.statics.getById = function(id){
 */
 PlaceSchema.statics.getByName = function(name){
   try {
-    return CRUDHelper.getByName(this, name);
+    return await CRUDHelper.getByName(this, name);
   } catch (e) {
     console.log(e);
     throw e;
