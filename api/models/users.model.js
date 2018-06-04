@@ -26,56 +26,57 @@ var UserSchema = new mongoose.Schema({
   },
   gender : {
     type: String,
-    required: true
+    required: true,
+    default: 'male'
   },
   birth_date : {
     type: Date,
-    required: true
+    // required: true
   },
   picture : {
     type: String,
-    required: true
+    // required: true
   },
   avatar :{
     type: String,
-    required: true
+    // required: true
   },
   mobile_number :{
     type: String,
-    required: true
+    // required: true
   },
   home_location :{
     type: String,
-    required: true
+    // required: true
   },
   location :{
     longitude :{
       type: String,
-      required: true
+      // required: true
     },
     latitude : {
       type: String,
-      required: true
+      // required: true
     }
   },
   favorite_places : [{
     type : mongoose.Schema.ObjectId,
     ref : "Place",
-    required : true
+    // required : true
   }],
   email_verification_tkn : {
     type: String,
-    required: true
+    // required: true
   },
   reset_pw_tkn : {
     type: String,
-    required: true
+    // required: true
   },
   chat : [{
     user_id : {
       type : mongoose.Schema.ObjectId,
       ref : "User",
-      required : true
+      // required : true
     },
     count : {
       type : Number
@@ -92,7 +93,7 @@ var UserSchema = new mongoose.Schema({
   views : [{
     user_id : {
       type : mongoose.Schema.ObjectId,
-      required : true
+      // required : true
     },
     count : {
       type : Number
@@ -102,7 +103,7 @@ var UserSchema = new mongoose.Schema({
     place_id : {
       type : mongoose.Schema.ObjectId,
       ref : "Place",
-      required : true
+      // required : true
     },
     count : {
       type: Number,
@@ -146,7 +147,7 @@ UserSchema.statics.getUserById = async function(userId){
 */
 UserSchema.statics.getUserByEmail = async function(email){
   try {
-    return await this.find({email: email});
+    return await this.findOne({email: email});
   } catch (e) {
     console.log(e);
     throw e;
@@ -181,6 +182,9 @@ UserSchema.statics.getUsersByName = async function(name){
 */
 UserSchema.statics.hashPassword = async function(password){
   try {
+    if(!password){
+      throw 'password is undefined';
+    }
     var hash = await bcrypt.hash(password, 10);
     return hash;
   } catch (e) {
