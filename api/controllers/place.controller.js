@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 var Place = mongoose.model('Place');
+var Post = mongoose.model('Post');
+var Event = mongoose.model('Event');
+var Review = mongoose.model('Review');
 
 /*
     Description
@@ -92,7 +95,7 @@ module.exports.getByName = async function(req, res) {
     }
     Calling route:
 */
-module.exports.create = function(req, res) {
+module.exports.create = async function(req, res) {
 
 };
 
@@ -173,7 +176,34 @@ module.exports.unfavoritePlace = function(req, res) {
     }
     Calling route:
 */
-module.exports.addPost = function(req, res) {
+module.exports.addPost = async function(req, res) {
+
+   try {
+        console.log(req.body);
+        var placeID = req.body.place_id;
+        var place =await Place.getById(placeID);
+        var p = new Post({
+            content: req.body.content,
+            created_at: req.body.created_at,
+            user : req.body.user,
+            likes : req.body.likes,
+        });
+        var query = await Place.addPost(place,p);
+        console.log(query);
+        if (!query) {
+          res.json({
+            msg: "object not inserted"
+          });
+          return;
+        }
+        res.json({
+          msg: "success",
+          query: query
+        });
+      }catch(error){
+        res.status(500).json({ error: error.toString() });
+      }
+
 
 };
 
