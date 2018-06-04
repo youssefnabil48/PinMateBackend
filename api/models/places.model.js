@@ -196,7 +196,7 @@ PlaceSchema.statics.getAll = async function(){
     }
     Calling route:
 */
-PlaceSchema.statics.getById = function(id){
+PlaceSchema.statics.getById = async function(id){
   try {
     return await CRUDHelper.getById(this, id);
   } catch (e) {
@@ -214,7 +214,7 @@ PlaceSchema.statics.getById = function(id){
     }
     Calling route:
 */
-PlaceSchema.statics.getByName = function(name){
+PlaceSchema.statics.getByName = async function(name){
   try {
     return await CRUDHelper.getByName(this, name);
   } catch (e) {

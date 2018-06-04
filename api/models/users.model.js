@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var CRUDHelper = require('../helpers/CRUD.helper');
 var EmailController = require('../controllers/email.controller');
+var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 
 var UserSchema = new mongoose.Schema({
   name : {
@@ -61,10 +63,6 @@ var UserSchema = new mongoose.Schema({
     ref : "Place",
     required : true
   }],
-  user_tkn : {
-    type: String,
-    required: true
-  },
   email_verification_tkn : {
     type: String,
     required: true
@@ -129,9 +127,9 @@ var UserSchema = new mongoose.Schema({
     }
     Calling route:
 */
-UserSchema.statics.getUserById = function(userId){
+UserSchema.statics.getUserById = async function(userId){
   try {
-    return CRUDHelper.getById(this, userId);
+    return await CRUDHelper.getById(this, userId);
   } catch (e) {
     console.log(e);
     throw e;
@@ -146,8 +144,31 @@ UserSchema.statics.getUserById = function(userId){
     }
     Calling route:
 */
-UserSchema.statics.getUserByEmail = function(email){
+UserSchema.statics.getUserByEmail = async function(email){
+  try {
+    return await this.find({email: email});
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+}
 
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+UserSchema.statics.getUsersByName = async function(name){
+  try {
+    return await CRUDHelper.getByName(this, name);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 /*
     Description
@@ -158,43 +179,14 @@ UserSchema.statics.getUserByEmail = function(email){
     }
     Calling route:
 */
-UserSchema.statics.getUserTkn = function(userId){
-
-}
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-UserSchema.statics.getUsersByName = function(name){
-
-}
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-UserSchema.statics.hashPassword = function(password){
-
-}
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-UserSchema.statics.generateUserTkn = function(userId,gneratedTkn){
+UserSchema.statics.hashPassword = async function(password){
+  try {
+    var hash = await bcrypt.hash(password, 10);
+    return hash;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 
 }
 /*
@@ -219,8 +211,14 @@ UserSchema.statics.sendEmailToUser = function(userId){
     }
     Calling route:
 */
-UserSchema.statics.createUser = function(userId){
-
+UserSchema.statics.createUser = async function(newUser){
+  try {
+    var userObj = new User(newUser);
+    return await CRUDHelper.create(this, userObj);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 /*
     Description
@@ -244,49 +242,13 @@ UserSchema.statics.updateUserInfo = function(userId){
     }
     Calling route:
 */
-UserSchema.statics.deleteUser = function(userId){
-
-}
-
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-UserSchema.statics.comparePassword = function (candidatePassword,hash,callback){
-	bcrypt.compare(candidatePassword, hash, function (err, isMatch) {
-		callback(err, isMatch);
-	});
-};
-
-
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-UserSchema.statics.signIn = function(){
-
-}
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-UserSchema.statics.signOut = function(){
-
+UserSchema.statics.deleteUser = async function(userId){
+  try {
+    return await CRUDHelper.deleteModel(this, id);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*
@@ -310,8 +272,13 @@ UserSchema.statics.forgetPassword = function(){
     }
     Calling route:
 */
-UserSchema.statics.deleteUser = function(userId){
-
+UserSchema.statics.deleteUser = async function(userId){
+  try {
+    return await CRUDHelper.deleteModel(this, userId);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*
