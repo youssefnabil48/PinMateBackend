@@ -3,6 +3,7 @@ var CRUDHelper = require('../helpers/CRUD.helper');
 var EmailController = require('../controllers/email.controller');
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
+var nodemailer = require('nodemailer');
 
 var UserSchema = new mongoose.Schema({
   name : {
@@ -116,6 +117,10 @@ var UserSchema = new mongoose.Schema({
       default: Date.now()
     }
   }],
+  tracker_id : {
+    type : mongoose.Schema.ObjectId,
+    ref : "Tracker",
+  }
 });
 
 //helper methods
@@ -202,8 +207,29 @@ UserSchema.statics.hashPassword = async function(password){
     }
     Calling route:
 */
-UserSchema.statics.sendEmailToUser = function(userId){
+UserSchema.statics.sendEmailToUser = async function(userId, subject, content){
+  try{
+    var user = this.getById(userId);
+    var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'youremail@gmail.com',
+      pass: 'yourpassword'
+    }
+    });
 
+    var mailOptions = {
+      from: 'youremail@gmail.com',
+      to: user.email,
+      subject: subject,
+      text: content
+    };
+
+    var info = await transporter.sendMail(mailOptions);
+  }catch(e){
+    console.log(e);
+    throw e;
+  }
 }
 
 /*

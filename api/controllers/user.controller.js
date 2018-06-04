@@ -192,6 +192,22 @@ module.exports.update = async function(req, res) {
 */
 module.exports.delete = async function(req, res) {
   try {
+    const rules = {
+      id: 'required'
+    };
+    await validateAll(req.params, rules);
+  } catch (e) {
+    console.log(e);
+    res.status(400).json({
+      ok: false,
+      data: null,
+      message: 'validation error bad request',
+      error: e
+    });
+    return;
+  }
+
+  try {
     var isDeleted = await User.deleteUser(req.params.id);
     if(!isDeleted){
       res.status(200).json({
@@ -286,20 +302,6 @@ module.exports.signIn = async function(req, res) {
      });
    }
 };
-
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-module.exports.signOut = async function(req, res) {
-
-};
-
 
 /*
     Description
