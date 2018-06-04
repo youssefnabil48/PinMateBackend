@@ -1,7 +1,7 @@
 
 var mongoose = require('mongoose');
 var Place = mongoose.model('Place');
-
+var Post = mongoose.model('Post');
 
 
 module.exports.test = async function(req, res){
@@ -9,22 +9,26 @@ module.exports.test = async function(req, res){
   try {
     var dummy = require('mongoose-dummy');
     const ignoredFields = ['_id', 'created_at', '__v'];
-    var randomObject = dummy(Place, {
+    var randomObject = dummy(Post, {
         ignore: ignoredFields,
         returnDate: true
     })
-    var p = new Place(randomObject);
-    var x = await Place.create(p);
 
-    res.send(x);
+    var post = new Post(randomObject);
+        console.log(randomObject);
+    var p =await Place.getById(req.params.id);
+    await Place.addPost(p,post);
+    // await p.save();
+     res.send(p);
   }
   catch (e) {
     console.log(e);
-    throw e;
+    res.status(500).send("Error");
   }
 
 }
 
+//
 //to insert model
 // var dummy = require('mongoose-dummy');
 // const ignoredFields = ['_id', 'created_at', '__v'];

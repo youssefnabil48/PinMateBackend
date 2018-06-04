@@ -51,7 +51,7 @@ module.exports = {
       throw error;
     }
   },
-
+  
   updateModel: async function(model, id, newValues){
     try{
         var obj = await model.update({_id: id}, {$set : newValues }).exec();
