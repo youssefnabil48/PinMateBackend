@@ -37,7 +37,6 @@ router.post('/api/user/create', userController.create);
 router.post('/api/user/update/:id', userController.update);
 router.delete('/api/user/delete/:id', userController.delete);
 router.post('/api/user/signin', userController.signIn);
-router.get('/api/user/signout', userController.signOut);
 router.get('/api/user/verifyemail', userController.verifyEmail);
 router.get('/api/user/forgetpassword', userController.forgetPassword);
 
