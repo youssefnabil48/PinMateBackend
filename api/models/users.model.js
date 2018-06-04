@@ -117,6 +117,10 @@ var UserSchema = new mongoose.Schema({
       default: Date.now()
     }
   }],
+  tracker_id : {
+    type : mongoose.Schema.ObjectId,
+    ref : "Tracker"
+  }
 });
 
 //helper methods

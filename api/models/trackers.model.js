@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var CRUDHelper = require('../helpers/CRUD.helper');
+var User = mongoose.model('User');
 
 var TrackerSchema = new mongoose.Schema({
     source : {
@@ -28,8 +29,18 @@ var TrackerSchema = new mongoose.Schema({
     }
     Calling route:
 */
-TrackerSchema.statics.getFriendsTracker = function(){
-
+TrackerSchema.statics.getFriendsTracker = async function(user_id){
+    try {
+        var user = User.getById(user_id);
+        for (var i=0; i<user.friends.length; i++){
+            var u = User.getById(user.friends[i]);
+            await this.getTrackerById(u.tracker_id);
+        }
+    }
+    catch (e)
+    {
+        console.log(e);
+    }
 }
 
 /*
@@ -41,8 +52,15 @@ TrackerSchema.statics.getFriendsTracker = function(){
     }
     Calling route:
 */
-TrackerSchema.statics.createTracker = function(){
-
+TrackerSchema.statics.createTracker = async function(newTracker){
+    try{
+        var t = new Tracker(newTracker);
+       return await CRUDHelper.create(this, t);
+    } catch (e)
+    {
+        console.log(e);
+        throw e;
+    }
 }
 
 /*
@@ -54,9 +72,9 @@ TrackerSchema.statics.createTracker = function(){
     }
     Calling route:
 */
-TrackerSchema.statics.getTrackerById = function(id){
+TrackerSchema.statics.getTrackerById = async function(id){
   try {
-    return CRUDHelper.getById(this, id);
+    return await CRUDHelper.getById(this, id);
   } catch (e) {
     console.log(e);
     throw e;
@@ -72,8 +90,14 @@ TrackerSchema.statics.getTrackerById = function(id){
     }
     Calling route:
 */
-TrackerSchema.statics.deleteTracker = function(){
-
+TrackerSchema.statics.deleteTracker = async function(id){
+    try {
+        return await CRUDHelper.deleteModel(this, id);
+    } catch (e)
+    {
+        console.log(e);
+        throw e;
+    }
 }
 
 mongoose.model('Tracker',TrackerSchema);
