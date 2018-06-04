@@ -25,6 +25,8 @@ PostSchema.add({
     }
   }]
 });
+mongoose.model('Post',PostSchema);
+var Post = mongoose.model('Post');
 
 
 var EventSchema = new mongoose.Schema({
@@ -47,6 +49,8 @@ var EventSchema = new mongoose.Schema({
   posts : [PostSchema]
 
 });
+mongoose.model('Event',EventSchema);
+var Event = mongoose.model('Event');
 
 var ReviewSchema = new mongoose.Schema({
   content : {
@@ -67,7 +71,8 @@ var ReviewSchema = new mongoose.Schema({
     required : true
   }
 });
-
+mongoose.model('Review',ReviewSchema);
+var Review = mongoose.model('Review');
 
 var PlaceSchema = new mongoose.Schema({
 
@@ -133,6 +138,7 @@ PlaceSchema.statics.createPlace = async function(newPlace){
     return await CRUDHelper.create(this,p);
   }
   catch (e) {
+
     console.log(e);
     throw e;
   }
@@ -196,7 +202,7 @@ PlaceSchema.statics.getAll = async function(){
     }
     Calling route:
 */
-PlaceSchema.statics.getById = function(id){
+PlaceSchema.statics.getById = async function(id){
   try {
     return await CRUDHelper.getById(this, id);
   } catch (e) {
@@ -214,7 +220,7 @@ PlaceSchema.statics.getById = function(id){
     }
     Calling route:
 */
-PlaceSchema.statics.getByName = function(name){
+PlaceSchema.statics.getByName = async function(name){
   try {
     return await CRUDHelper.getByName(this, name);
   } catch (e) {
@@ -258,8 +264,17 @@ PlaceSchema.statics.unfavoritePlace = function(){
     }
     Calling route:
 */
-PlaceSchema.statics.addPost = function(){
-
+PlaceSchema.statics.addPost = async function(place,newPost){
+      try {
+       var p = new Post(newPost);
+       await place.posts.push(p);
+       place.save();
+        return p;
+      }
+      catch (e) {
+        console.log(e);
+        throw e;
+      }
 }
 
 /*
@@ -327,7 +342,6 @@ PlaceSchema.statics.updateEvent = function(){
 PlaceSchema.statics.addReview = function(){
 
 }
-
 
 /*
     Description
