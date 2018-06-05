@@ -115,7 +115,7 @@ router.delete('/test/delete/:id', testController.delete);
 
 //routes for individuals devs
 router.get('/youssef/test', youssefIndividualTest.test);
-router.get('/sara/test/:id', saraIndividualTest.test);
+router.get('/sara/test', saraIndividualTest.test);
 router.get('/donia/test', doniaIndividualTest.test);
 router.get('/hagar/test', hagarIndividualTest.test);
 router.get('/hussien/test', hussienIndividualTest.test);

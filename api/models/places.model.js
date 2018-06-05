@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var CRUDHelper = require('../helpers/CRUD.helper');
 var PostSchema = new mongoose.Schema();
-
+var User = mongoose.model('User');
 
 PostSchema.add({
   content : {
@@ -75,7 +75,6 @@ mongoose.model('Review',ReviewSchema);
 var Review = mongoose.model('Review');
 
 var PlaceSchema = new mongoose.Schema({
-
   name : {
     type: String,
     required: true
@@ -119,7 +118,7 @@ var PlaceSchema = new mongoose.Schema({
   managed_by : {
     type : mongoose.Schema.ObjectId,
     ref : "User"
-  },
+  }
 });
 
 //helper functions
@@ -138,7 +137,6 @@ PlaceSchema.statics.createPlace = async function(newPlace){
     return await CRUDHelper.create(this,p);
   }
   catch (e) {
-
     console.log(e);
     throw e;
   }
@@ -171,7 +169,7 @@ PlaceSchema.statics.deletePlace = async function(id){
     }
     Calling route:
 */
-PlaceSchema.statics.updatePlace = function(){
+PlaceSchema.statics.updatePlace = async function(){
 
 }
 
@@ -238,8 +236,16 @@ PlaceSchema.statics.getByName = async function(name){
     }
     Calling route:
 */
-PlaceSchema.statics.favoritePlace = function(){
-
+PlaceSchema.statics.favoritePlace = async function(userId,placeId){
+  try {
+    var user = await User.getUserById(userId);
+    console.log(user);
+    await user.favorite_places.push(placeId);
+    return await user.save();
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*
@@ -251,8 +257,16 @@ PlaceSchema.statics.favoritePlace = function(){
     }
     Calling route:
 */
-PlaceSchema.statics.unfavoritePlace = function(){
-
+PlaceSchema.statics.unfavoritePlace = async function(userId,placeId){
+  try {
+    var user = await User.getUserById(userId);
+    console.log(user);
+    await user.favorite_places.id(placeId).remove();
+    return await user.save();
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*
@@ -267,9 +281,9 @@ PlaceSchema.statics.unfavoritePlace = function(){
 PlaceSchema.statics.addPost = async function(place,newPost){
       try {
        var p = new Post(newPost);
+       //add post to place
        await place.posts.push(p);
-       place.save();
-        return p;
+       return await place.save();
       }
       catch (e) {
         console.log(e);
@@ -286,7 +300,68 @@ PlaceSchema.statics.addPost = async function(place,newPost){
     }
     Calling route:
 */
-PlaceSchema.statics.deletePost = function(){
+PlaceSchema.statics.deletePost = async function(place,postId){
+  try {
+     await place.posts.id(postId).remove();
+    return await place.save();
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+PlaceSchema.statics.addEvent = async function(place,newEvent){
+    try {
+     var ev = new Event(newEvent);
+     //add post to place
+     await place.events.push(ev);
+     return await place.save();
+    }
+    catch (e) {
+      console.log(e);
+      throw e;
+    }
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+PlaceSchema.statics.deleteEvent = async function(place,eventId){
+    try {
+      await place.events.id(eventId).remove();
+      return await place.save();
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
+}
+
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+PlaceSchema.statics.updateEvent = async function(){
 
 }
 
@@ -299,21 +374,16 @@ PlaceSchema.statics.deletePost = function(){
     }
     Calling route:
 */
-PlaceSchema.statics.addEvent = function(){
-
-}
-
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
+PlaceSchema.statics.addReview = async function(place,newReview){
+    try {
+     var rev = new Review(newReview);
+     await place.reviews.push(rev);
+     return await place.save();
     }
-    Calling route:
-*/
-PlaceSchema.statics.deleteEvent = function(){
-
+    catch (e) {
+      console.log(e);
+      throw e;
+    }
 }
 
 
@@ -326,34 +396,14 @@ PlaceSchema.statics.deleteEvent = function(){
     }
     Calling route:
 */
-PlaceSchema.statics.updateEvent = function(){
-
-}
-
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
+PlaceSchema.statics.deleteReview = async function(place,reviewId){
+    try {
+      await place.reviews.id(reviewId).remove();
+      return await place.save();
+    } catch (e) {
+      console.log(e);
+      throw e;
     }
-    Calling route:
-*/
-PlaceSchema.statics.addReview = function(){
-
-}
-
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-PlaceSchema.statics.deleteReview = function(){
-
 }
 
 mongoose.model('Place',PlaceSchema);
