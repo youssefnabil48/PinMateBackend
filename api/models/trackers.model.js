@@ -55,7 +55,7 @@ TrackerSchema.statics.getFriendsTracker = async function(user_id){
 */
 TrackerSchema.statics.createTracker = async function(newTracker){
     try{
-      //  var t = new Tracker(newTracker);
+    
       console.log(newTracker);
        return await CRUDHelper.create(this, newTracker);
     } catch (e)
