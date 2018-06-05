@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var CRUDHelper = require('../helpers/CRUD.helper');
 var User = mongoose.model('User');
+//var Tracker = mongoose.model('Tracker');
 
 var TrackerSchema = new mongoose.Schema({
     source : {
@@ -54,12 +55,13 @@ TrackerSchema.statics.getFriendsTracker = async function(user_id){
 */
 TrackerSchema.statics.createTracker = async function(newTracker){
     try{
-        var t = new Tracker(newTracker);
-       return await CRUDHelper.create(this, t);
+      //  var t = new Tracker(newTracker);
+      console.log(newTracker);
+       return await CRUDHelper.create(this, newTracker);
     } catch (e)
     {
-        console.log(e);
-        throw e;
+         console.log(e);
+        // throw e;
     }
 }
 

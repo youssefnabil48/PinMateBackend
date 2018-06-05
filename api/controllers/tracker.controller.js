@@ -38,8 +38,27 @@ module.exports.get = function(req, res) {
     }
     Calling route:
 */
-module.exports.create = function(req, res) {
-
+module.exports.create = async function(req, res) {
+  
+    try{
+        var dummy = require('mongoose-dummy');
+        const ignoredFields = ['_id', '__v'];
+        var randomObject = dummy(Tracker, {
+            ignore: ignoredFields,
+            returnDate: true
+        })
+      
+      
+        var t = new Tracker(randomObject);
+        var x = await Tracker.createTracker(t);
+        
+         res.send(randomObject);
+      } catch (e)
+      {
+        console.log(e);
+        //throw e;
+      }
+    
 };
 
 

@@ -87,7 +87,7 @@ router.delete('/api/place/event/delete/:eventId',  placeController.deleteEvent);
 //trackerCTRL routes
 router.get('/api/tracker/getfriendstracker', trackerController.getFriendsTracker);
 router.get('/api/tracker/:id', trackerController.get);
-router.post('/api/tracker/create',  trackerController.create);
+router.get('/api/tracker/create',  trackerController.create);
 router.post('/api/tracker/update/:id',  trackerController.update);
 router.delete('/api/tracker/delete/:id',  trackerController.delete);
 

@@ -38,7 +38,7 @@ FriendRequestSchema.createRequest = async function(newRequest){
     } catch (e)
     {
         console.log(e);
-        throw e;
+        //throw e;
     }
 }
 
