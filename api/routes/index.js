@@ -73,7 +73,7 @@ router.get('/api/place/all', placeController.getAll);
 router.get('/api/place/getbyid/:id', placeController.getById);
 router.get('/api/place/getbyname/:name', placeController.getByName);
 router.post('/api/place/create',  placeController.create);
-router.post('/api/place/update/:id',  placeController.update);
+router.put('/api/place/update/:id',  placeController.update);
 router.delete('/api/place/delete/:id',  placeController.delete);
 router.post('/api/place/post/create',  placeController.addPost);
 router.delete('/api/place/post/delete/:postId',  placeController.deletePost);
@@ -82,6 +82,7 @@ router.delete('/api/place/review/delete/:reviewId',  placeController.deleteRevie
 router.post('/api/place/favorite',  placeController.favoritePlace);
 router.post('/api/place/unfavorite',  placeController.unfavoritePlace);
 router.post('/api/place/event/create',  placeController.addEvent);
+router.put('/api/place/event/update/:placeid/:id',  placeController.updateEvent);
 router.delete('/api/place/event/delete/:eventId',  placeController.deleteEvent);
 
 //trackerCTRL routes
