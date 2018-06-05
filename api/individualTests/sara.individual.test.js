@@ -2,24 +2,26 @@
 var mongoose = require('mongoose');
 var Place = mongoose.model('Place');
 var Post = mongoose.model('Post');
+var Event = mongoose.model('Event');
+var User = mongoose.model('User');
+var Review = mongoose.model('Review');
 
 
 module.exports.test = async function(req, res){
 
   try {
     var dummy = require('mongoose-dummy');
-    const ignoredFields = ['_id', 'created_at', '__v'];
-    var randomObject = dummy(Post, {
+    const ignoredFields = ['_id', '__v'];
+    var randomObject = dummy(Review, {
         ignore: ignoredFields,
         returnDate: true
     })
-
-    var post = new Post(randomObject);
-        console.log(randomObject);
-    var p =await Place.getById(req.params.id);
-    await Place.addPost(p,post);
+    var event = new Review(randomObject);
+    console.log(randomObject);
+    // var p =await Place.getById(req.params.id);
+    // await Place.addPost(p,post);
     // await p.save();
-     res.send(p);
+     res.send(event);
   }
   catch (e) {
     console.log(e);

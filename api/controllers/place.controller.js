@@ -45,17 +45,28 @@ module.exports.getById = async function(req, res) {
   try{
     var places = await Place.getById(req.params.id);
     if (!places) {
-      res.json({
-        msg: "no object found"
+      res.status(200).json({
+        ok: true,
+        data: user,
+        message: 'no user found',
+        error:null
       });
       return;
     }
-    res.json({
-      msg: "success",
-      places: places
+    res.status(200).json({
+      ok: true,
+      data: user,
+      message: 'user found',
+      error:null
     });
-  }catch(error){
-    res.status(500).json({ error: error.toString() });
+  }catch(e){
+    console.log(e);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'internal server error',
+      error: e
+    });
   }
 };
 
@@ -96,7 +107,38 @@ module.exports.getByName = async function(req, res) {
     Calling route:
 */
 module.exports.create = async function(req, res) {
-
+  try {
+    var place = new Place({
+      name : req.body.name,
+      icon : req.body.icon,
+      description: req.body.description,
+      longitude : req.body.longitude,
+      latitude : req.body.latitude,
+      picture : req.body.picture,
+      gallery : req.body.gallery,
+      mobile_number : req.body.mobile_number,
+      events : req.body.events,
+      posts : req.body.posts,
+      reviews : req.body.reviews,
+      story_id : req.body.story_id,
+      managed_by : req.body.managed_by
+    });
+    let newPlace = await Place.create(place);
+    res.status(200).json({
+      ok: true,
+      data: newPlace,
+      message: 'user created successfully',
+      error: null
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'internal server error',
+      error: e
+    });
+  }
 };
 
 
@@ -150,7 +192,24 @@ module.exports.delete = async function(req, res) {
     }
     Calling route:
 */
-module.exports.favoritePlace = function(req, res) {
+module.exports.favoritePlace = async function(req, res) {
+  try {
+    let newFavorite = await Place.favoritePlace(req.body.user_id,req.body.place_id);
+    res.status(200).json({
+      ok: true,
+      data: newFavorite,
+      message: 'favorite created successfully',
+      error: null
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'internal server error',
+      error: e
+    });
+  }
 
 };
 
@@ -163,8 +222,24 @@ module.exports.favoritePlace = function(req, res) {
     }
     Calling route:
 */
-module.exports.unfavoritePlace = function(req, res) {
-
+module.exports.unfavoritePlace = async function(req, res) {
+  try {
+    let removeFavorite = await Place.unfavoritePlace(req.body.user_id,req.body.place_id);
+    res.status(200).json({
+      ok: true,
+      data: removeFavorite,
+      message: 'favorite removed successfully',
+      error: null
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'internal server error',
+      error: e
+    });
+  }
 };
 
 /*
@@ -203,7 +278,38 @@ module.exports.addPost = async function(req, res) {
       }catch(error){
         res.status(500).json({ error: error.toString() });
       }
+};
 
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+module.exports.deletePost = async function(req, res) {
+  try {
+
+       var placeID = req.body.place_id;
+       var place =await Place.getById(placeID);
+       var postId = req.params.postId;
+       var query = await Place.deletePost(place,postId);
+
+       if (!query) {
+         res.json({
+           msg: "object not deleted"
+         });
+         return;
+       }
+       res.json({
+         msg: "success",
+         query: query
+       });
+     }catch(error){
+       res.status(500).json({ error: error.toString() });
+     }
 
 };
 
@@ -216,8 +322,32 @@ module.exports.addPost = async function(req, res) {
     }
     Calling route:
 */
-module.exports.deletePost = function(req, res) {
+module.exports.addEvent = async function(req, res) {
 
+    try {
+          var placeID = req.body.place_id;
+          var place =await Place.getById(placeID);
+          var e = new Event({
+              description: req.body.description,
+              name: req.body.name,
+              start_date : req.body.start_date,
+              end_date : req.body.end_date,
+              posts : req.body.posts,
+          });
+          var query = await Place.addEvent(place,e);
+          if (!query) {
+            res.json({
+              msg: "object not inserted"
+            });
+            return;
+          }
+          res.json({
+            msg: "success",
+            query: query
+          });
+        }catch(error){
+          res.status(500).json({ error: error.toString() });
+        }
 };
 
 /*
@@ -229,21 +359,25 @@ module.exports.deletePost = function(req, res) {
     }
     Calling route:
 */
-module.exports.addEvent = function(req, res) {
-
-};
-
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-module.exports.deleteEvent = function(req, res) {
-
+module.exports.deleteEvent = async function(req, res) {
+  try {
+       var placeID = req.body.place_id;
+       var place =await Place.getById(placeID);
+       var eventId = req.params.eventId;
+       var query = await Place.deleteEvent(place,eventId);
+       if (!query) {
+         res.json({
+           msg: "object not deleted"
+         });
+         return;
+       }
+       res.json({
+         msg: "success",
+         query: query
+       });
+     }catch(error){
+       res.status(500).json({ error: error.toString() });
+     }
 };
 
 
@@ -269,8 +403,33 @@ module.exports.updateEvent = function(req, res) {
     }
     Calling route:
 */
-module.exports.addReview = function(req, res) {
-
+module.exports.addReview = async function(req, res) {
+  try {
+    var placeID = req.body.place_id;
+    var place =await Place.getById(placeID);
+    console.log(place);
+    var r = new Review({
+      content : req.body.content,
+      rating : req.body.rating,
+      created_at : req.body.created_at,
+      user_id : req.body.user_id
+    });
+    let newReview = await place.addReview(place,r);
+    res.status(200).json({
+      ok: true,
+      data: newReview,
+      message: 'review created successfully',
+      error: null
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'internal server error',
+      error: e
+    });
+  }
 };
 
 /*
@@ -282,6 +441,24 @@ module.exports.addReview = function(req, res) {
     }
     Calling route:
 */
-module.exports.deleteReview = function(req, res) {
-
+module.exports.deleteReview = async function(req, res) {
+    try {
+      var placeId = req.body.place_id;
+      var place = Place.getById(placeId);
+      let rmReview = await place.deleteReview(place,req.body.review_id);
+      res.status(200).json({
+        ok: true,
+        data: rmReview,
+        message: 'review removed successfully',
+        error: null
+      });
+    } catch (e) {
+      console.log(e);
+      res.status(500).json({
+        ok: false,
+        data: null,
+        message: 'internal server error',
+        error: e
+      });
+    }
 };
