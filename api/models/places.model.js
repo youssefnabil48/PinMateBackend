@@ -169,8 +169,14 @@ PlaceSchema.statics.deletePlace = async function(id){
     }
     Calling route:
 */
-PlaceSchema.statics.updatePlace = async function(){
+PlaceSchema.statics.updatePlace = async function(placeId,updates){
+  try {
 
+      return await CRUDHelper.updateModel(this,placeId,updates);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*
@@ -361,8 +367,15 @@ PlaceSchema.statics.deleteEvent = async function(place,eventId){
     }
     Calling route:
 */
-PlaceSchema.statics.updateEvent = async function(){
-
+PlaceSchema.statics.updateEvent = async function(place,eventId,newValues){
+  try {
+      var ev = await place.events.id(eventId);
+      await ev.set(newValues);
+     return await place.save();
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*
