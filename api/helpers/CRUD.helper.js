@@ -44,7 +44,7 @@ module.exports = {
 
   create: async function(model, newInstance){
     try{
-      var obj = await newInstance.save().exec();
+      var obj = await newInstance.save();
       return obj;
     }catch(error){
       console.log(error);
