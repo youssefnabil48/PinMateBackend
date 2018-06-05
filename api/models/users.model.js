@@ -3,7 +3,7 @@ var CRUDHelper = require('../helpers/CRUD.helper');
 var EmailController = require('../controllers/email.controller');
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
-var nodemailer = require('nodemailer');
+var randomToken = require('random-token');
 
 var UserSchema = new mongoose.Schema({
   name : {
@@ -210,22 +210,7 @@ UserSchema.statics.hashPassword = async function(password){
 UserSchema.statics.sendEmailToUser = async function(userId, subject, content){
   try{
     var user = this.getById(userId);
-    var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'youremail@gmail.com',
-      pass: 'yourpassword'
-    }
-    });
-
-    var mailOptions = {
-      from: 'youremail@gmail.com',
-      to: user.email,
-      subject: subject,
-      text: content
-    };
-
-    var info = await transporter.sendMail(mailOptions);
+    return EmailController.sendEmail(user.email, subject, content);
   }catch(e){
     console.log(e);
     throw e;
@@ -290,8 +275,16 @@ UserSchema.statics.deleteUser = async function(userId){
     }
     Calling route:
 */
-UserSchema.statics.forgetPassword = function(){
-
+UserSchema.statics.forgetPassword = async function(userAuthToken){
+  try{
+    var user = await jwt.verjwt.verify(userAuthToken, 'secret');
+    var resetToken = randomToken(16); 
+    await this.sendEmailToUser(user.email, 'Resetting Password Request', resetToken);
+    return resetToken;
+  }catch(e){
+    console.log(e);
+    throw e;
+  }
 }
 /*
     Description
@@ -309,19 +302,6 @@ UserSchema.statics.deleteUser = async function(userId){
     console.log(e);
     throw e;
   }
-}
-
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-UserSchema.statics.verifyEmail = function(userId){
-
 }
 
 mongoose.model('User',UserSchema);

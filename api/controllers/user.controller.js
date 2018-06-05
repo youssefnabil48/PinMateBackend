@@ -327,5 +327,5 @@ module.exports.verifyEmail = async function(req, res) {
     Calling route:
 */
 module.exports.forgetPassword = async function(req, res) {
-
+  
 };
