@@ -133,8 +133,8 @@ var PlaceSchema = new mongoose.Schema({
 */
 PlaceSchema.statics.createPlace = async function(newPlace){
   try {
-   var p = new Place(newPlace);
-    return await CRUDHelper.create(this,p);
+//   var p = new Place(newPlace);
+    return await CRUDHelper.create(this,newPlace);
   }
   catch (e) {
     console.log(e);
