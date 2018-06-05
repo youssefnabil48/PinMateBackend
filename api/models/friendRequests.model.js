@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var CRUDHelper = require('../helpers/CRUD.helper');
+var User = mongoose.model('User');
 
 var FriendRequestSchema = new mongoose.Schema({
   created_at : {
@@ -29,8 +30,16 @@ var FriendRequestSchema = new mongoose.Schema({
     }
     Calling route:
 */
-FriendRequestSchema.statics.createRequest = function(){
-
+FriendRequestSchema.createRequest = async function(newRequest){
+    try{
+        //var r = new FriendRequest(newRequest);
+        return await CRUDHelper.create(this, newRequest);
+        
+    } catch (e)
+    {
+        console.log(e);
+        throw e;
+    }
 }
 
 /*
@@ -55,9 +64,9 @@ FriendRequestSchema.statics.respond = function(){
     }
     Calling route:
 */
-FriendRequestSchema.statics.getRequestById = function(id){
+FriendRequestSchema.statics.getRequestById = async function(id){
   try {
-    return CRUDHelper.getById(this, id);
+    return await CRUDHelper.getById(this, id);
   } catch (e) {
     console.log(e);
     throw e;
@@ -72,8 +81,16 @@ FriendRequestSchema.statics.getRequestById = function(id){
     }
     Calling route:
 */
-FriendRequestSchema.statics.getUserRequests = function(){
-
+FriendRequestSchema.statics.getUserRequests = async function(id){
+   try {
+        var userRequests = await this.find({
+        receiver_id : id});
+        return userRequests;
+   } catch (e)
+   {
+       console.log(e);
+       throw e;
+   }
 }
 
 /*
@@ -85,8 +102,14 @@ FriendRequestSchema.statics.getUserRequests = function(){
     }
     Calling route:
 */
-FriendRequestSchema.statics.deleteRequest = function(){
-
+FriendRequestSchema.statics.deleteRequest = async function(id){
+    try {
+        return await CRUDHelper.deleteModel(this, id);
+    } catch (e)
+    {
+        console.log (e);
+        throw e;
+    }
 }
 
 

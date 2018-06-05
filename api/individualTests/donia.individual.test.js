@@ -1,23 +1,24 @@
 var mongoose = require('mongoose');
 var CRUDHelper = require('../helpers/CRUD.helper');
-var Tracker = mongoose.model ('Tracker');
+var Request = mongoose.model('FriendRequest');
 
 module.exports.test = async function(req, res){
-  res.send('donia');
-try{
-  var dummy = require('mongoose-dummy');
-  const ignoredFields = ['_id', 'created_at', '__v'];
-  var randomObject = dummy(Tracker, {
-      ignore: ignoredFields,
-      returnDate: true
-  })
-  var t = new Tracker(randomObject);
-  var x = await Tracker.create(t);
-  
-  res.send(t);
-} catch (e)
-{
-  console.log(e);
-  throw e;
-}
+  try{
+    var dummy = require('mongoose-dummy');
+    const ignoredFields = ['_id', 'created_at', '__v'];
+    var randomObject = dummy(Request, {
+        ignore: ignoredFields,
+        returnDate: true
+    });
+    var r = new Request(randomObject);
+    console.log(r);
+    var x = await Request.createPlace(r);
+    
+    // res.send(r);
+    res.status(200).send('donia');
+  } catch (e)
+  {
+    console.log(e);
+    throw e;
+  }
 }
