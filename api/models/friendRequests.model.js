@@ -32,13 +32,13 @@ var FriendRequestSchema = new mongoose.Schema({
 */
 FriendRequestSchema.createRequest = async function(newRequest){
     try{
-        //var r = new FriendRequest(newRequest);
+       
         return await CRUDHelper.create(this, newRequest);
         
     } catch (e)
     {
         console.log(e);
-        //throw e;
+        throw e;
     }
 }
 

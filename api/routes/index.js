@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
 router.get('/api/user/all', userController.getAll);
 router.get('/api/user/:id', userController.get);
 router.post('/api/user/create', userController.create);
-router.post('/api/user/update/:id', userController.update);
+router.put('/api/user/update/:id', userController.update);
 router.delete('/api/user/delete/:id', userController.delete);
 router.post('/api/user/signin', userController.signIn);
 router.get('/api/user/forgetpassword', userController.forgetPassword);
@@ -44,14 +44,14 @@ router.get('/api/errorReport/all', errorReportController.getAll);
 router.get('/api/errorReport/:id', errorReportController.getByID);
 router.get('/api/errorReport/:userID', errorReportController.getByUser);
 router.post('/api/errorReport/create', errorReportController.create);
-router.post('/api/errorReport/update/:id', errorReportController.update);
+router.put('/api/errorReport/update/:id', errorReportController.update);
 router.delete('/api/errorReport/delete/:id', errorReportController.delete);
 
 //friendRequestCTRL routes
 router.get('/api/friendRequest/all', friendRequestController.getAll);
 router.get('/api/friendRequest/:id', friendRequestController.get);
 router.post('/api/friendRequest/create', friendRequestController.create);
-router.post('/api/friendRequest/update/:id', friendRequestController.update);
+router.put('/api/friendRequest/update/:id', friendRequestController.update);
 router.delete('/api/friendRequest/delete/:id', friendRequestController.delete);
 
 //hangoutRequestCTRL routes
@@ -64,7 +64,7 @@ router.delete('/api/hangoutRequest/delete/:id', hangoutRequestController.delete)
 //notificationCTRL routes
 router.get('/api/notification/getusernotifications', notificationController.getUserNotifications);
 router.post('/api/notification/create', notificationController.create);
-router.post('/api/notification/update/:id', notificationController.update);
+router.put('/api/notification/update/:id', notificationController.update);
 router.delete('/api/notification/delete/:id', notificationController.delete);
 
 //placeCTRL routes
@@ -87,15 +87,15 @@ router.delete('/api/place/event/delete/:eventId',  placeController.deleteEvent);
 //trackerCTRL routes
 router.get('/api/tracker/getfriendstracker', trackerController.getFriendsTracker);
 router.get('/api/tracker/:id', trackerController.get);
-router.get('/api/tracker/create',  trackerController.create);
-router.post('/api/tracker/update/:id',  trackerController.update);
+router.post('/api/tracker/create',  trackerController.create);
+router.put('/api/tracker/update/:id',  trackerController.update);
 router.delete('/api/tracker/delete/:id',  trackerController.delete);
 
 //storyCTRL routes
  router.get('/api/story/getbyuser/:userId', storyController.getByUser);
  router.get('/api/story/getbyplace/:placeId', storyController.getByPlace);
  router.post('/api/story/create',  storyController.create);
- router.post('/api/story/update/:id',  storyController.update);
+ router.put('/api/story/update/:id',  storyController.update);
  router.delete('/api/story/delete/:id',  storyController.delete);
  router.get('/api/story/file/:storyId', storyController.getFile);
 
@@ -110,7 +110,7 @@ var testController = require('../controllers/test.controller');
 router.get('/test/all', testController.getAll);
 router.get('/test/get/:id', testController.get);
 router.post('/test/create', testController.create);
-router.post('/test/update/:id', testController.update);
+router.put('/test/update/:id', testController.update);
 router.delete('/test/delete/:id', testController.delete);
 
 //routes for individuals devs

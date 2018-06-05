@@ -228,8 +228,7 @@ UserSchema.statics.sendEmailToUser = async function(userId, subject, content){
 */
 UserSchema.statics.createUser = async function(newUser){
   try {
-    var userObj = new User(newUser);
-    return await CRUDHelper.create(this, userObj);
+    return await CRUDHelper.create(this, newUser);
   } catch (e) {
     console.log(e);
     throw e;
