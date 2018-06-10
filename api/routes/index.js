@@ -39,6 +39,10 @@ router.delete('/api/user/delete/:id', userController.delete);
 router.post('/api/user/signin', userController.signIn);
 router.get('/api/user/forgetpassword', userController.forgetPassword);
 
+//chat routes
+router.post('api/chat', chatController.getMessagesBetweenTwoUsers);
+router.delete('api/chat/delete/:id', chatController.delete);
+
 //errorReportCTRL routes
 router.get('/api/errorReport/all', errorReportController.getAll);
 router.get('/api/errorReport/:id', errorReportController.getByID);

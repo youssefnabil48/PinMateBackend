@@ -178,7 +178,24 @@ module.exports.create = async function(req, res) {
     Calling route:
 */
 module.exports.update = async function(req, res) {
-
+  try {
+      var userId = req.params.id;
+      let newUser = await User.updatePlace(userId,req.body);
+      res.status(200).json({
+        ok: true,
+        data: newUser,
+        message: 'user updated successfully',
+        error: null
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'internal server error',
+      error: e
+    });
+  }
 };
 
 /*
@@ -312,10 +329,25 @@ module.exports.signIn = async function(req, res) {
     }
     Calling route:
 */
-module.exports.verifyEmail = async function(req, res) {
-
+module.exports.forgetPassword = async function(req, res) {
+  try {
+    var token = User.forgetPassword(req.headers.authorization);
+    res.status(200).json({
+      ok: true,
+      data: {'forgetPasswordToken' : token},
+      message: 'forget password is requested pleace check your email',
+      error: null
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'internal server error',
+      error: e
+    });
+  }
 };
-
 
 /*
     Description
@@ -326,6 +358,6 @@ module.exports.verifyEmail = async function(req, res) {
     }
     Calling route:
 */
-module.exports.forgetPassword = async function(req, res) {
-  
+module.exports.verifyEmail = async function(req, res) {
+
 };

@@ -243,8 +243,13 @@ UserSchema.statics.createUser = async function(newUser){
     }
     Calling route:
 */
-UserSchema.statics.updateUserInfo = function(userId){
-
+UserSchema.statics.updateUserInfo =async function(userId, newValues){
+  try {
+    return await CRUDHelper.updateModel(this,userId,newValues);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*
@@ -277,8 +282,9 @@ UserSchema.statics.deleteUser = async function(userId){
 UserSchema.statics.forgetPassword = async function(userAuthToken){
   try{
     var user = await jwt.verjwt.verify(userAuthToken, 'secret');
-    var resetToken = randomToken(16); 
+    var resetToken = randomToken(16);
     await this.sendEmailToUser(user.email, 'Resetting Password Request', resetToken);
+    await this.updateUserInfo({reset_pw_tkn : resetToken})
     return resetToken;
   }catch(e){
     console.log(e);
