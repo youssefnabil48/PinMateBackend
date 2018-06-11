@@ -120,6 +120,9 @@ var UserSchema = new mongoose.Schema({
   tracker_id : {
     type : mongoose.Schema.ObjectId,
     ref : "Tracker",
+  },
+  notification_token : {
+    type : String,
   }
 });
 
