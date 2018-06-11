@@ -12,6 +12,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "^4.16.3",
+    "fcm-node": "^1.2.1",
     "firebase-admin": "^5.12.1",
     "i": "^0.3.6",
     "indicative": "^5.0.5",
@@ -23,6 +24,7 @@
     "nodemailer": "^4.6.5",
     "pusher-push-notifications-node": "^0.10.3",
     "random-token": "0.0.8",
+    "request": "^2.87.0",
     "serve-favicon": "~2.4.5",
     "socket.io": "^2.1.1"
   },

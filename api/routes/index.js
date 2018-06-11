@@ -68,7 +68,7 @@ router.delete('/api/hangoutRequest/delete/:id', hangoutRequestController.delete)
 
 //notificationCTRL routes
 router.get('/api/notification/getusernotifications', notificationController.getUserNotifications);
-router.post('/api/notification/create', notificationController.create);
+router.get('/api/notification/create/:userToken', notificationController.create);
 router.put('/api/notification/update/:id', notificationController.update);
 router.delete('/api/notification/delete/:id', notificationController.delete);
 
