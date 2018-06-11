@@ -147,7 +147,8 @@ module.exports.create = async function(req, res) {
       chat: req.body.chat,
       favorite_places: req.body.favorite_places,
       friends: req.body.friends,
-      blocks: req.body.blocks
+      blocks: req.body.blocks,
+      notification_token: req.body.notification_toke
     });
     let newUser = await User.create(user);
     res.status(200).json({
@@ -178,7 +179,24 @@ module.exports.create = async function(req, res) {
     Calling route:
 */
 module.exports.update = async function(req, res) {
-
+  try {
+      var userId = req.params.id;
+      let newUser = await User.updatePlace(userId,req.body);
+      res.status(200).json({
+        ok: true,
+        data: newUser,
+        message: 'user updated successfully',
+        error: null
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'internal server error',
+      error: e
+    });
+  }
 };
 
 /*
@@ -312,10 +330,25 @@ module.exports.signIn = async function(req, res) {
     }
     Calling route:
 */
-module.exports.verifyEmail = async function(req, res) {
-
+module.exports.forgetPassword = async function(req, res) {
+  try {
+    var token = User.forgetPassword(req.headers.authorization);
+    res.status(200).json({
+      ok: true,
+      data: {'forgetPasswordToken' : token},
+      message: 'forget password is requested pleace check your email',
+      error: null
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'internal server error',
+      error: e
+    });
+  }
 };
-
 
 /*
     Description
@@ -326,6 +359,46 @@ module.exports.verifyEmail = async function(req, res) {
     }
     Calling route:
 */
-module.exports.forgetPassword = async function(req, res) {
-  
+module.exports.addNotificationToken = async function(req, res) {
+  try {
+    var userId = mongoose.Types.ObjectId(req.body.userId);
+    var user = await User.getUserById(userId);
+    var result = await User.updateUserInfo(userId, {'notification_token': req.body.token});
+    if(user.notification_toke != req.body.token){
+      res.status(500).json({
+        ok: false,
+        data: null,
+        message: 'unable to add device token',
+        error: 'key doesn\'t match user key'
+      });
+      return;
+    }
+    res.status(200).json({
+      ok: true,
+      data: null,
+      message: 'notification token added successfully',
+      error: null
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'internal server error',
+      error: e
+    });
+  }
+};
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+module.exports.verifyEmail = async function(req, res) {
+
 };

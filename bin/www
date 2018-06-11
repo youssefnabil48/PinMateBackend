@@ -33,9 +33,66 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 // Socket setup & pass server
-var io = socket(server);
-io.on('connection',socketDispacher.handle);
+var io = socket(server).listen(4000).sockets;
+console.log('socket server running on post 4000');
 
+// loged in user object
+var onlineUsers = {};
+//number of online users
+var onlineCount = 0;
+
+io.on('connection', function(socket){
+	console.log('a user connected'+socket.id);
+  var mongoose = require('mongoose');
+  var Chat = mongoose.model('Chat');
+	//listing to emit 'login' Event
+  //to send personal info about the user
+	socket.on('login', function(obj){
+		//setting the socket object name to the user id
+		socket.name = obj.userid;
+
+    //check if the user is already online
+		if(!onlineUsers.hasOwnProperty(obj.userid)) {
+			onlineUsers[obj.userid] = socket.id;
+			onlineCount++;
+		}
+    console.log("user registered, user id: "+ socket.name+" socket id: "+ socket.id);
+		//response to the client with number of online users and logged in users
+		io.emit('login', {onlineUsers:onlineUsers, onlineCount:onlineCount, user:obj});
+	});
+
+	//if user is desconnected event
+	socket.on('disconnect', function(){
+		//check if the user is registerd
+		if(onlineUsers.hasOwnProperty(socket.name)) {
+			var obj = {userid:socket.name, username:onlineUsers[socket.name]};
+			//remove the user from logged in users
+			delete onlineUsers[socket.name];
+			onlineCount--;
+      console.log("user disconnected, user id: "+socket.name+" socket id: "+socket.id);
+      //send updated to clients with the new state
+			io.emit('disconnect', {onlineUsers:onlineUsers, onlineCount:onlineCount, user:obj});
+		}
+	});
+
+	//sending a message
+	socket.on('message',async function(obj){
+     console.log("request to send a message sending to socket id: "+onlineUsers[obj.receiverId]+ ' with user id: '+obj.receiverId);
+     try {
+       io.to(onlineUsers[obj.receiverId]).emit('message', {message: obj.message});
+       var senderId = mongoose.Types.ObjectId(socket.name);
+       var receiverId = mongoose.Types.ObjectId(obj.receiverId);
+       await Chat.createMessage(senderId,receiverId,obj.message, true, true);
+       console.log('message sent sender_id: '+senderId+" receiver_id"+receiverId);
+     } catch (e) {
+       console.log(e);
+       io.to(onlineUsers[obj.receiverId]).emit('message', {message: 'message is not saved'});
+     }
+	});
+});
+app.set('socketio', io);
+app.set('socketUsers', onlineUsers);
+app.set('socketUsersCount', onlineCount);
 /**
  * Normalize a port into a number, string, or false.
  */
