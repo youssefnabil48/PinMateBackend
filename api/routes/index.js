@@ -38,6 +38,11 @@ router.put('/api/user/update/:id', userController.update);
 router.delete('/api/user/delete/:id', userController.delete);
 router.post('/api/user/signin', userController.signIn);
 router.get('/api/user/forgetpassword', userController.forgetPassword);
+router.post('/api/user/deviceToken', userController.addNotificationToken);
+
+//chat routes
+router.post('api/chat', chatController.getMessagesBetweenTwoUsers);
+router.delete('api/chat/delete/:id', chatController.delete);
 
 //errorReportCTRL routes
 router.get('/api/errorReport/all', errorReportController.getAll);

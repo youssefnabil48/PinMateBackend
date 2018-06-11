@@ -72,8 +72,19 @@ ChatSchema.statics.getUserChatList = function(){
     }
     Calling route:
 */
-ChatSchema.statics.getChatBetweenTwoUsers = function(){
-
+ChatSchema.statics.getChatBetweenTwoUsers = async function(firstUserId, secondUserId){
+  try {
+    var chat = await this.find({
+      $or:[
+        {sender_id: {$in: [firstUserId, secondUserId]}},
+        {receiver_id: {$in: [firstUserId, secondUserId]}}
+      ]
+    });
+    return chat;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 /*
@@ -85,8 +96,21 @@ ChatSchema.statics.getChatBetweenTwoUsers = function(){
     }
     Calling route:
 */
-ChatSchema.statics.createMessage = function(){
-
+ChatSchema.statics.createMessage = async function(senderId, receiverId, content, status, delivered){
+  try {
+    let message = new this({
+      created_at: Date.now(),
+      sender_id: senderId,
+      receiver_id: receiverId,
+      content: content,
+      delivered: delivered,
+      status: status
+    });
+    return await message.save();
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 

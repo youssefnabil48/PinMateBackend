@@ -8,7 +8,14 @@
 module.exports.handle = function(socket){
   console.log('socket connection made', socket.id);
   // Handle chat event
-  socket.on('chat', function(data){
+  socket.on('sendMessage', function(data){
       console.log(data);
+      console.log(io.clients);
   });
 }
+//
+// const client = require('socket.io').listen(4000).sockets;
+// console.log('socket server running on post 4000');
+// client.on('connection', function(socket){
+//   console.log(socket);
+// });
