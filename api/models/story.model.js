@@ -1,4 +1,8 @@
 var mongoose = require('mongoose');
+var CRUDHelper = require('../helpers/CRUD.helper');
+var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
+var randomToken = require('random-token');
 
 const StorySchema = new mongoose.Schema({
     posted_at :{
@@ -12,7 +16,7 @@ const StorySchema = new mongoose.Schema({
     user : {
       type : mongoose.Schema.ObjectId,
       ref : "User",
-      required : true
+      required : false
     },
     place : {
       type : mongoose.Schema.ObjectId,
@@ -36,8 +40,13 @@ const StorySchema = new mongoose.Schema({
     }
     Calling route:
 */
-StorySchema.statics.getByUser = function(){
-
+StorySchema.statics.getByUser = async function(user){
+    try {
+        return await this.findOne({user: user});
+      } catch (e) {
+        console.log(e);
+        throw e;
+      }
 }
 
 /*
@@ -49,8 +58,13 @@ StorySchema.statics.getByUser = function(){
     }
     Calling route:
 */
-StorySchema.statics.getByPlace = function(){
-
+StorySchema.statics.getByPlace = async function(place){
+    try {
+        return await this.findOne({place: place});
+      } catch (e) {
+        console.log(e);
+        throw e;
+      }
 }
 
 /*
@@ -62,8 +76,13 @@ StorySchema.statics.getByPlace = function(){
     }
     Calling route:
 */
-StorySchema.statics.updateStory = function(){
-
+StorySchema.statics.updateStory = async function(storyID,updates){
+    try {
+        return await CRUDHelper.updateModel(this,storyID,updates);
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
 }
 
 /*
@@ -75,8 +94,13 @@ StorySchema.statics.updateStory = function(){
     }
     Calling route:
 */
-StorySchema.statics.deleteStory = function(){
-
+StorySchema.statics.deleteStory = async function(id){
+    try {
+        return await CRUDHelper.deleteModel(this, id);
+      } catch (e) {
+        console.log(e);
+        throw e;
+      }
 }
 
 /*
@@ -88,8 +112,13 @@ StorySchema.statics.deleteStory = function(){
     }
     Calling route:
 */
-StorySchema.statics.createStory = function(){
-
+StorySchema.statics.createStory = async function(newStory){
+    try {
+        return await CRUDHelper.create(this, newStory);
+      } catch (e) {
+        console.log(e);
+        throw e;
+      }
 }
 /*
     Description

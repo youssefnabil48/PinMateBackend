@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
 
+
 /*importing controllers*/
 var userController = require('../controllers/user.controller');
 var chatController = require('../controllers/chat.controller');
@@ -94,7 +95,7 @@ router.delete('/api/tracker/delete/:id',  trackerController.delete);
 //storyCTRL routes
  router.get('/api/story/getbyuser/:userId', storyController.getByUser);
  router.get('/api/story/getbyplace/:placeId', storyController.getByPlace);
- router.post('/api/story/create',  storyController.create);
+ router.post('/api/story/create' ,storyController.create);
  router.put('/api/story/update/:id',  storyController.update);
  router.delete('/api/story/delete/:id',  storyController.delete);
  router.get('/api/story/file/:storyId', storyController.getFile);
