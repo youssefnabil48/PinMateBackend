@@ -364,7 +364,7 @@ module.exports.addNotificationToken = async function(req, res) {
     var userId = mongoose.Types.ObjectId(req.body.userId);
     var user = await User.getUserById(userId);
     var result = await User.updateUserInfo(userId, {'notification_token': req.body.token});
-    if(user.notification_toke != req.body.token){
+    if(user.notification_token != req.body.token){
       res.status(500).json({
         ok: false,
         data: null,
