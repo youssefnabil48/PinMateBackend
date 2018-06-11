@@ -362,9 +362,9 @@ module.exports.forgetPassword = async function(req, res) {
 module.exports.addNotificationToken = async function(req, res) {
   try {
     var userId = mongoose.Types.ObjectId(req.body.userId);
+    var result = await User.updateUserInfo(userId, {notification_token: req.body.token});
     var user = await User.getUserById(userId);
-    var result = await User.updateUserInfo(userId, {'notification_token': req.body.token});
-    if(user.notification_toke != req.body.token){
+    if(user.notification_token != req.body.token){
       res.status(500).json({
         ok: false,
         data: null,
