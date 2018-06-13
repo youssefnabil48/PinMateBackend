@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 require('../api/models/connection/db.js');
 /**
  * Module dependencies.

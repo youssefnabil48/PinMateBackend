@@ -11,12 +11,14 @@ var FriendRequestSchema = new mongoose.Schema({
 
   sender_id : {
     type : mongoose.Schema.ObjectId,
-    ref : "User"
+    ref : "User",
+    required : true
   },
 
   receiver_id : {
     type : mongoose.Schema.ObjectId,
-    ref : "User"
+    ref : "User",
+    required : true
     }
 });
 
@@ -81,10 +83,10 @@ FriendRequestSchema.statics.getRequestById = async function(id){
     }
     Calling route:
 */
-FriendRequestSchema.statics.getUserRequests = async function(id){
+FriendRequestSchema.statics.getUserRequests = async function(rcvrId){
    try {
         var userRequests = await this.find({
-        receiver_id : id});
+        receiver_id : rcvrId});
         return userRequests;
    } catch (e)
    {

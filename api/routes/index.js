@@ -53,17 +53,17 @@ router.put('/api/errorReport/update/:id', errorReportController.update);
 router.delete('/api/errorReport/delete/:id', errorReportController.delete);
 
 //friendRequestCTRL routes
-router.get('/api/friendRequest/all', friendRequestController.getAll);
+router.get('/api/friendRequest/getall/:rcvrId', friendRequestController.getAll);
 router.get('/api/friendRequest/:id', friendRequestController.get);
 router.post('/api/friendRequest/create', friendRequestController.create);
 router.put('/api/friendRequest/update/:id', friendRequestController.update);
 router.delete('/api/friendRequest/delete/:id', friendRequestController.delete);
 
 //hangoutRequestCTRL routes
-router.get('/api/hangoutRequest/getuserrequests', hangoutRequestController.getUserRequests);
+router.get('/api/hangoutRequest/getuserrequests/:userId', hangoutRequestController.getUserRequests);
 router.get('/api/hangoutRequest/:id', hangoutRequestController.get);
 router.post('/api/hangoutRequest/create', hangoutRequestController.create);
-router.post('/api/hangoutRequest/update/:id', hangoutRequestController.update);
+router.put('/api/hangoutRequest/update/:id', hangoutRequestController.update);
 router.delete('/api/hangoutRequest/delete/:id', hangoutRequestController.delete);
 
 //notificationCTRL routes
