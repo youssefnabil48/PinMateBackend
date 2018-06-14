@@ -50,7 +50,34 @@ var HangoutRequestSchema = new mongoose.Schema({
     }
     Calling route:
 */
-HangoutRequestSchema.statics.createRequest = function(){
+HangoutRequestSchema.statics.createRequest = async function(newHangoutReq){
+
+    try {
+        return await CRUDHelper.create(this, newHangoutReq);
+      } catch (e) {
+        console.log(e);
+        throw e;
+      }
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+HangoutRequestSchema.statics.updateRequest = async function(hangoutReqId,updates){
+
+    try {
+        return await CRUDHelper.updateModel(this,hangoutReqId,updates);
+    }
+     catch (e) {
+      console.log(e);
+      throw e;
+    }
 
 }
 
@@ -63,8 +90,14 @@ HangoutRequestSchema.statics.createRequest = function(){
     }
     Calling route:
 */
-HangoutRequestSchema.statics.respond = function(){
+HangoutRequestSchema.statics.deleteRequest = async function(id){
 
+    try {
+        return await CRUDHelper.deleteModel(this, id);
+      } catch (e) {
+        console.log(e);
+        throw e;
+      }
 }
 
 /*
@@ -76,16 +109,17 @@ HangoutRequestSchema.statics.respond = function(){
     }
     Calling route:
 */
-HangoutRequestSchema.statics.getRequestById = function(id){
-  try {
-    return CRUDHelper.getById(this, id);
-  } catch (e) {
-    console.log(e);
-    throw e;
+HangoutRequestSchema.statics.getRequestById = async function(id){
+    try {
+      return CRUDHelper.getById(this, id);
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
   }
-}
-/*
-    Description
+
+  /*
+    Description :  Gets the requests of the creator
     Takes:
     Returns: {
         error: "Error object if any",
@@ -93,12 +127,22 @@ HangoutRequestSchema.statics.getRequestById = function(id){
     }
     Calling route:
 */
-HangoutRequestSchema.statics.getUserRequests = function(){
+HangoutRequestSchema.statics.getUserRequests = async function(userId){
 
+    try {
+        //return CRUDHelper.get(this,created_by,user_id);
+        var hangoutReqs = await this.find({
+            created_by : userId });
+            return hangoutReqs;
+   } 
+    catch (e){
+       console.log(e);
+       throw e;
+   }
 }
 
-/*
-    Description
+ /*
+    Description :  Gets the requests of the receiver
     Takes:
     Returns: {
         error: "Error object if any",
@@ -106,22 +150,19 @@ HangoutRequestSchema.statics.getUserRequests = function(){
     }
     Calling route:
 */
-HangoutRequestSchema.statics.update = function(){
+// HangoutRequestSchema.statics.getRcvrRequest = async function(receiverId){
 
-}
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
-HangoutRequestSchema.statics.deleteRequest = function(){
-
-}
-
+//     try {
+//         //return CRUDHelper.get(this,created_by,user_id);
+//         var hangoutReqs = await this.find({
+//             responded_by : receiverId });
+//             return hangoutReqs;
+//    } 
+//     catch (e){
+//        console.log(e);
+//        throw e;
+//    }
+// }
 
 
 mongoose.model('HangoutRequest',HangoutRequestSchema);
