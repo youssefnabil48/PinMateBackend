@@ -25,19 +25,22 @@ var HangoutRequestSchema = new mongoose.Schema({
     required : true
   },
 
-  responded_by : [
-      {
-      user_id : {
-        type : mongoose.Schema.ObjectId,
-        ref : "User",
-        required : true,
-      },
-      status : {
-        type : Boolean,
-        required : true
-      }
-    }
-  ]
+  place : {
+    type : mongoose.Schema.ObjectId,
+    ref : "Place"
+  },
+
+  status : {
+    type : Boolean,
+    //required: true
+  },
+
+  invited : [{
+      type : mongoose.Schema.ObjectId,
+      ref : "User",
+      required: true
+  }]
+
 });
 
 //helper functions
@@ -119,7 +122,7 @@ HangoutRequestSchema.statics.getRequestById = async function(id){
   }
 
   /*
-    Description :  Gets the requests of the creator
+    Description :  Gets the requests of creator
     Takes:
     Returns: {
         error: "Error object if any",
@@ -127,7 +130,7 @@ HangoutRequestSchema.statics.getRequestById = async function(id){
     }
     Calling route:
 */
-HangoutRequestSchema.statics.getUserRequests = async function(userId){
+HangoutRequestSchema.statics.getSndrRequests = async function(userId){
 
     try {
         //return CRUDHelper.get(this,created_by,user_id);
@@ -142,7 +145,7 @@ HangoutRequestSchema.statics.getUserRequests = async function(userId){
 }
 
  /*
-    Description :  Gets the requests of the receiver
+    Description :  Gets the requests of invited
     Takes:
     Returns: {
         error: "Error object if any",
@@ -150,7 +153,19 @@ HangoutRequestSchema.statics.getUserRequests = async function(userId){
     }
     Calling route:
 */
-// HangoutRequestSchema.statics.getRcvrRequest = async function(receiverId){
+HangoutRequestSchema.statics.getRcvrRequests = async function(receiverId){
+
+    try {
+        //return CRUDHelper.get(this,created_by,user_id);
+        var hangoutReqs = await this.find({
+            invited : receiverId });
+            return hangoutReqs;
+   } 
+    catch (e){
+       console.log(e);
+       throw e;
+   }
+}
 
 //     try {
 //         //return CRUDHelper.get(this,created_by,user_id);
@@ -163,6 +178,5 @@ HangoutRequestSchema.statics.getUserRequests = async function(userId){
 //        throw e;
 //    }
 // }
-
 
 mongoose.model('HangoutRequest',HangoutRequestSchema);

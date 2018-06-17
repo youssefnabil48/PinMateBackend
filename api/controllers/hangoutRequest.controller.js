@@ -16,9 +16,10 @@ module.exports.create = async function (req, res) {
 
   try {
       const rules = {
-          title: 'required|max:30',
+          title: 'required|max:50',
           created_by: 'required',
-          description: 'max:300'
+          description: 'max:300',
+          invited: 'required'
          // responded_by : 'required'
         //  user_id: 'required', //responder id
         //  status: 'required' // status
@@ -42,7 +43,9 @@ module.exports.create = async function (req, res) {
           description: req.body.description,
           start_time: req.body.start_time,
           created_by: req.body.created_by,
-          responded_by: req.body.responded_by
+          place: req.body.place,
+          status: req.body.status,
+          invited: req.body.invited
       });
       let newHangoutReq = await HangoutRequest.create(hangoutReq);
       res.status(200).json({
@@ -117,15 +120,15 @@ module.exports.delete = async function (req, res) {
 
   try{
       var hangoutRequests = await HangoutRequest.deleteRequest(req.params.id);
-        if(hangoutRequests == undefined){
-          res.status(200).json({
-            ok: true,
-            data: hangoutRequests,
-            message: 'Request was not deleted',
-            error:null
-          });
-          return;
-        }
+      if(!hangoutRequests){
+        res.status(200).json({
+          ok: true,
+          data: hangoutRequests,
+          message: 'Hangout request is not deleted',
+          error: null
+        });
+        return;
+      }
         res.status(200).json({
           ok: true,
           data: hangoutRequests,
@@ -145,7 +148,7 @@ module.exports.delete = async function (req, res) {
 };
 
 /*
-    Description: Gets the requests of the creator
+    Description: Gets the requests of creator
     Takes:
     Returns: {
         error: "Error object if any",
@@ -153,9 +156,9 @@ module.exports.delete = async function (req, res) {
     }
     Calling route:
 */
-module.exports.getUserRequests = async function (req, res) {
+module.exports.getSndrRequests = async function (req, res) {
     try {
-        var hangoutRequests = await HangoutRequest.getUserRequests(req.params.userId);
+        var hangoutRequests = await HangoutRequest.getSndrRequests(req.params.userId);
         if(hangoutRequests.length <= 0){
           res.status(200).json({
             ok: true,
@@ -180,6 +183,44 @@ module.exports.getUserRequests = async function (req, res) {
           error: e
         });
       }
+};
+
+/*
+    Description: Gets the requests of invited
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+module.exports.getRcvrRequests = async function (req, res) {
+  try {
+      var hangoutRequests = await HangoutRequest.getRcvrRequests(req.params.receiverId);
+      if(hangoutRequests.length <= 0){
+        res.status(200).json({
+          ok: true,
+          data: hangoutRequests,
+          message: 'No requests found',
+          error:null
+        });
+        return;
+      }
+      res.status(200).json({
+        ok: true,
+        data: hangoutRequests,
+        message: 'Requests loaded successfully',
+        error:null
+      });
+    } catch (e) {
+      console.log(e);
+      res.status(500).json({
+        ok: false,
+        data: null,
+        message: 'Internal server error',
+        error: e
+      });
+    }
 };
 
 
@@ -250,12 +291,12 @@ module.exports.respond = async function(req,res){
   //Under construction still, not final yet
   try {
     var hangoutReqStatus = req.params.status;
-    var hangoutReq = await HangoutRequest.getUserRequests(req.params.userId);
+    var hangoutReq = await HangoutRequest.getRcvrRequests(req.params.receiverId);
       if(hangoutReqStatus == true){
         res.status(200).json({
           ok: true,
           data: hangoutReq,
-          message: 'Request accepted',
+          message: 'You accepted the request successfully',
           error:null
         });
       }
@@ -264,7 +305,7 @@ module.exports.respond = async function(req,res){
         res.status(200).json({
           ok: true,
           data: hangoutReq,
-          message: 'Request rejected',
+          message: 'You rejected the request successfully',
           error:null
         });
         
