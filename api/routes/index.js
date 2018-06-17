@@ -62,6 +62,7 @@ router.delete('/api/friendRequest/delete/:id', friendRequestController.delete);
 //hangoutRequestCTRL routes
 router.get('/api/hangoutRequest/getsndrrequests/:userId', hangoutRequestController.getSndrRequests);
 router.get('/api/hangoutRequest/getrcvrrequests/:receiverId', hangoutRequestController.getRcvrRequests);
+router.get('/api/hangoutRequest/getuserrequests/:userId', hangoutRequestController.getUserRequests);
 router.get('/api/hangoutRequest/:id', hangoutRequestController.get);
 router.post('/api/hangoutRequest/create', hangoutRequestController.create);
 router.put('/api/hangoutRequest/update/:id', hangoutRequestController.update);

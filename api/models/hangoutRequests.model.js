@@ -122,7 +122,11 @@ HangoutRequestSchema.statics.getRequestById = async function(id){
   }
 
   /*
+<<<<<<< HEAD
     Description :  Gets the requests of creator
+=======
+    Description :  Gets the requests of the creator
+>>>>>>> f993a10e002f776c071a1e55be3d16e3afd5be0e
     Takes:
     Returns: {
         error: "Error object if any",
@@ -130,7 +134,11 @@ HangoutRequestSchema.statics.getRequestById = async function(id){
     }
     Calling route:
 */
+<<<<<<< HEAD
 HangoutRequestSchema.statics.getSndrRequests = async function(userId){
+=======
+HangoutRequestSchema.statics.getUserRequests = async function(userId){
+>>>>>>> f993a10e002f776c071a1e55be3d16e3afd5be0e
 
     try {
         //return CRUDHelper.get(this,created_by,user_id);
@@ -145,7 +153,11 @@ HangoutRequestSchema.statics.getSndrRequests = async function(userId){
 }
 
  /*
+<<<<<<< HEAD
     Description :  Gets the requests of invited
+=======
+    Description :  Gets the requests of the receiver
+>>>>>>> f993a10e002f776c071a1e55be3d16e3afd5be0e
     Takes:
     Returns: {
         error: "Error object if any",
@@ -153,6 +165,7 @@ HangoutRequestSchema.statics.getSndrRequests = async function(userId){
     }
     Calling route:
 */
+<<<<<<< HEAD
 HangoutRequestSchema.statics.getRcvrRequests = async function(receiverId){
 
     try {
@@ -166,6 +179,20 @@ HangoutRequestSchema.statics.getRcvrRequests = async function(receiverId){
        throw e;
    }
 }
+=======
+// HangoutRequestSchema.statics.getRcvrRequest = async function(receiverId){
+>>>>>>> f993a10e002f776c071a1e55be3d16e3afd5be0e
 
+//     try {
+//         //return CRUDHelper.get(this,created_by,user_id);
+//         var hangoutReqs = await this.find({
+//             responded_by : receiverId });
+//             return hangoutReqs;
+//    } 
+//     catch (e){
+//        console.log(e);
+//        throw e;
+//    }
+// }
 
 mongoose.model('HangoutRequest',HangoutRequestSchema);
