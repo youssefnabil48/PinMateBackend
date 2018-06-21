@@ -110,7 +110,6 @@ module.exports.create = async function(req, res) {
   try {
     const rules = {
       name: 'required',
-      username: 'required',
       email: 'required|email',
       password: 'required'
     };
@@ -135,7 +134,6 @@ module.exports.create = async function(req, res) {
       avatar: req.body.avatar,
       gender: req.body.gender,
       picture: req.body.picture,
-      username: req.body.username,
       password: hashedPassword,
       birth_date: req.body.birth_date,
       home_location: req.body.home_location,

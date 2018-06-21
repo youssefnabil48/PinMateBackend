@@ -15,9 +15,7 @@
     "file-system": "^2.2.2",
     "fs": "0.0.1-security",
     "fcm-node": "^1.2.1",
-    "file-system": "^2.2.2",
     "firebase-admin": "^5.12.1",
-    "fs": "0.0.1-security",
     "i": "^0.3.6",
     "indicative": "^5.0.5",
     "jade": "~1.11.0",
@@ -31,11 +29,7 @@
     "request": "^2.87.0",
     "serve-favicon": "~2.4.5",
     "socket.io": "^2.1.1",
-<<<<<<< HEAD
     "winston": "^2.4.3"
-=======
-    "winston": "^2.4.2"
->>>>>>> f993a10e002f776c071a1e55be3d16e3afd5be0e
   },
   "devDependencies": {
     "nodemon": "^1.17.5"
