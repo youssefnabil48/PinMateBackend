@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
-var dburl = 'mongodb://localhost:27017/PinMate';
+//var dburl = 'mongodb://localhost:27017/PinMate';
+var dburl = 'mongodb+srv://pin:pinmate@pin-mate-9cfx5.mongodb.net/test?retryWrites=true'
 var retry = null;
 mongoose.Promise = global.Promise;
-mongoose.connect(dburl);
+mongoose.connect(dburl,{autoIndex: false});
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
