@@ -303,7 +303,10 @@ module.exports.signIn = async function(req, res) {
     var token = jwt.sign({user}, 'secret');
     res.status(200).json({
       ok: true,
-      data: {'token' : token},
+      data: {
+        'token' : token,
+        'user' : user
+      },
       message: 'user loggedin successfully',
       error: null
     });
