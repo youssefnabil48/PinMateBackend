@@ -8,108 +8,123 @@ var randomToken = require('random-token');
 // HOME LOCATION IS NOT A STRING ITS AN OBJECT WHICH HAS LATITUDE AND longitude
 
 var UserSchema = new mongoose.Schema({
-  name : {
+  name: {
     type: String,
     required: true,
-    index : true
+    index: true
   },
   // username : {
   //   type: String,
   //   required: true,
   //   index : true
   // },
-  email : {
+  email: {
     type: String,
     required: true,
-    index : true
+    index: true
   },
-  password : {
+  password: {
     type: String,
     required: true
   },
-  gender : {
+  gender: {
     type: String,
     required: true,
     default: 'male'
   },
-  birth_date : {
+  birth_date: {
     type: Date,
     // required: true
   },
-  picture : {
+  picture: {
     type: String,
     // required: true
   },
-  avatar :{
+  avatar: {
     type: String,
     // required: true
   },
-  mobile_number :{
+  mobile_number: {
     type: String,
     // required: true
   },
-  home_location :[Number],
-  location : [Number],
-  favorite_places : [{
-    type : mongoose.Schema.ObjectId,
-    ref : "Place",
+  home_location: {
+    longitude: {
+      type: int
+    },
+    latitude: {
+      type: int,
+    }
+  },
+  current_location: {
+    longitude: {
+      type: int
+    },
+    latitude: {
+      type: int,
+    }
+  },
+  home_adress: String,
+  favorite_places: [{
+    type: mongoose.Schema.ObjectId,
+    ref: "Place",
     // required : true
   }],
-  email_verification_tkn : {
+  email_verification_tkn: {
     type: String,
     // required: true
   },
-  reset_pw_tkn : {
+  reset_pw_tkn: {
     type: String,
     // required: true
   },
-  chat : [{
-    user_id : {
-      type : mongoose.Schema.ObjectId,
-      ref : "User",
+  chat: [{
+    user_id: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
       // required : true
     },
-    count : {
-      type : Number
+    count: {
+      type: Number
     }
   }],
-  friends : [{
-   type : mongoose.Schema.ObjectId,
-   ref : "User"
+  friends: [{
+    type: mongoose.Schema.ObjectId,
+    ref: "User"
   }],
-  blocks : [{
-    type : mongoose.Schema.ObjectId,
-    ref : "User"
+  blocks: [{
+    type: mongoose.Schema.ObjectId,
+    ref: "User"
   }],
-  views : [{
-    user_id : {
-      type : mongoose.Schema.ObjectId,
+  views: [{
+    user_id: {
+      type: mongoose.Schema.ObjectId,
       // required : true
     },
-    count : {
-      type : Number
+    count: {
+      type: Number
     }
   }],
-  visit : [{
-    place_id : {
-      type : mongoose.Schema.ObjectId,
-      ref : "Place",
+  visit: [{
+    place_id: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Place",
       // required : true
     },
-    count : {
+    count: {
       type: Number,
       required: true,
       default: 0
     },
-    timestamp : {
-      type:Date,
+    timestamp: {
+      type: Date,
       required: true,
       default: Date.now()
     }
   }],
-  tracker_id : {
-    type : mongoose.Schema.ObjectId,
-    ref : "Tracker",
+  tracker_id: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Tracker",
   }
 });
 
@@ -123,7 +138,7 @@ var UserSchema = new mongoose.Schema({
     }
     Calling route:
 */
-UserSchema.statics.getUserById = async function(userId){
+UserSchema.statics.getUserById = async function (userId) {
   try {
     return await CRUDHelper.getById(this, userId);
   } catch (e) {
@@ -140,9 +155,11 @@ UserSchema.statics.getUserById = async function(userId){
     }
     Calling route:
 */
-UserSchema.statics.getUserByEmail = async function(email){
+UserSchema.statics.getUserByEmail = async function (email) {
   try {
-    return await this.findOne({email: email});
+    return await this.findOne({
+      email: email
+    });
   } catch (e) {
     console.log(e);
     throw e;
@@ -158,7 +175,7 @@ UserSchema.statics.getUserByEmail = async function(email){
     }
     Calling route:
 */
-UserSchema.statics.getUsersByName = async function(name){
+UserSchema.statics.getUsersByName = async function (name) {
   try {
     return await CRUDHelper.getByName(this, name);
   } catch (e) {
@@ -175,9 +192,9 @@ UserSchema.statics.getUsersByName = async function(name){
     }
     Calling route:
 */
-UserSchema.statics.hashPassword = async function(password){
+UserSchema.statics.hashPassword = async function (password) {
   try {
-    if(!password){
+    if (!password) {
       throw 'password is undefined';
     }
     var hash = await bcrypt.hash(password, 10);
@@ -197,11 +214,11 @@ UserSchema.statics.hashPassword = async function(password){
     }
     Calling route:
 */
-UserSchema.statics.sendEmailToUser = async function(userId, subject, content){
-  try{
+UserSchema.statics.sendEmailToUser = async function (userId, subject, content) {
+  try {
     var user = this.getById(userId);
     return EmailController.sendEmail(user.email, subject, content);
-  }catch(e){
+  } catch (e) {
     console.log(e);
     throw e;
   }
@@ -216,7 +233,7 @@ UserSchema.statics.sendEmailToUser = async function(userId, subject, content){
     }
     Calling route:
 */
-UserSchema.statics.createUser = async function(newUser){
+UserSchema.statics.createUser = async function (newUser) {
   try {
     return await CRUDHelper.create(this, newUser);
   } catch (e) {
@@ -233,7 +250,7 @@ UserSchema.statics.createUser = async function(newUser){
     }
     Calling route:
 */
-UserSchema.statics.updateUserInfo = function(userId){
+UserSchema.statics.updateUserInfo = function (userId) {
 
 }
 
@@ -246,7 +263,7 @@ UserSchema.statics.updateUserInfo = function(userId){
     }
     Calling route:
 */
-UserSchema.statics.deleteUser = async function(userId){
+UserSchema.statics.deleteUser = async function (userId) {
   try {
     return await CRUDHelper.deleteModel(this, id);
   } catch (e) {
@@ -264,13 +281,13 @@ UserSchema.statics.deleteUser = async function(userId){
     }
     Calling route:
 */
-UserSchema.statics.forgetPassword = async function(userAuthToken){
-  try{
+UserSchema.statics.forgetPassword = async function (userAuthToken) {
+  try {
     var user = await jwt.verjwt.verify(userAuthToken, 'secret');
     var resetToken = randomToken(16);
     await this.sendEmailToUser(user.email, 'Resetting Password Request', resetToken);
     return resetToken;
-  }catch(e){
+  } catch (e) {
     console.log(e);
     throw e;
   }
@@ -284,7 +301,7 @@ UserSchema.statics.forgetPassword = async function(userAuthToken){
     }
     Calling route:
 */
-UserSchema.statics.deleteUser = async function(userId){
+UserSchema.statics.deleteUser = async function (userId) {
   try {
     return await CRUDHelper.deleteModel(this, userId);
   } catch (e) {
@@ -293,7 +310,7 @@ UserSchema.statics.deleteUser = async function(userId){
   }
 }
 
-mongoose.model('User',UserSchema);
+mongoose.model('User', UserSchema);
 
 //generating dummy object
 
