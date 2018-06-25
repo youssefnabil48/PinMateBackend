@@ -291,3 +291,8 @@
 ::1 - - [24/Jun/2018:18:38:18 +0000] "POST /api/search HTTP/1.1" 500 69 "-" "PostmanRuntime/7.1.5"
 ::1 - - [24/Jun/2018:18:39:32 +0000] "POST /api/search HTTP/1.1" 500 69 "-" "PostmanRuntime/7.1.5"
 ::1 - - [24/Jun/2018:18:40:13 +0000] "POST /api/search HTTP/1.1" 200 2835 "-" "PostmanRuntime/7.1.5"
+::1 - - [23/Jun/2018:13:14:57 +0000] "POST /api/user/signin HTTP/1.1" 200 790 "-" "PostmanRuntime/7.1.5"
+::1 - - [24/Jun/2018:00:25:20 +0000] "POST /api/chat HTTP/1.1" 404 2037 "-" "PostmanRuntime/7.1.5"
+::1 - - [24/Jun/2018:00:27:22 +0000] "POST /api/chat HTTP/1.1" 500 69 "-" "PostmanRuntime/7.1.5"
+::1 - - [24/Jun/2018:00:28:57 +0000] "POST /api/chat HTTP/1.1" 500 69 "-" "PostmanRuntime/7.1.5"
+::1 - - [24/Jun/2018:00:30:27 +0000] "POST /api/chat HTTP/1.1" 200 2891 "-" "PostmanRuntime/7.1.5"

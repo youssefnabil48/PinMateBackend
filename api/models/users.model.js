@@ -48,20 +48,8 @@ var UserSchema = new mongoose.Schema({
     type: String,
     // required: true
   },
-  home_location :{
-    type: String,
-    // required: true
-  },
-  location :{
-    longitude :{
-      type: String,
-      // required: true
-    },
-    latitude : {
-      type: String,
-      // required: true
-    }
-  },
+  home_location :[Number],
+  location : [Number],
   favorite_places : [{
     type : mongoose.Schema.ObjectId,
     ref : "Place",

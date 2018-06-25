@@ -41,8 +41,8 @@ router.get('/api/user/forgetpassword', userController.forgetPassword);
 router.post('/api/user/deviceToken', userController.addNotificationToken);
 
 //chat routes
-router.post('api/chat', chatController.getMessagesBetweenTwoUsers);
-router.delete('api/chat/delete/:id', chatController.delete);
+router.post('/api/chat', chatController.getMessagesBetweenTwoUsers);
+router.delete('/api/chat/delete/:id', chatController.delete);
 
 //errorReportCTRL routes
 router.get('/api/errorReport/all', errorReportController.getAll);
