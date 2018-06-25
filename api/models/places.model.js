@@ -14,7 +14,8 @@ PostSchema.add({
   },
   user : {
     type : mongoose.Schema.ObjectId,
-    ref : "User"
+    ref : "User",
+    required: true
   },
   //how to embed object from itself
   //posts : [PostSchema],
@@ -31,7 +32,8 @@ var Post = mongoose.model('Post');
 
 var EventSchema = new mongoose.Schema({
   description : {
-    type : String
+    type : String,
+    required: true
   },
   name : {
     type : String,
@@ -63,7 +65,7 @@ var ReviewSchema = new mongoose.Schema({
   created_at : {
     type : Date,
     default : Date.now(),
-    required : true
+    //required : true
   },
   user_id : {
     type : mongoose.Schema.ObjectId,
@@ -77,34 +79,38 @@ var Review = mongoose.model('Review');
 var PlaceSchema = new mongoose.Schema({
   name : {
     type: String,
-    required: true
+    //required: true,
+    index: true
   },
   icon : {
     type: String,
-    required: true
+    //required: true
   },
   description : {
     type: String,
+    required: true,
+    //index: true
+  },
+
+  address : {
+    type : String,
     required: true
   },
-  longitude : {
-    type: String,
-    required: true
-  },
-  latitude : {
-    type: String,
-    required: true
+  coordinates : {
+      type: [Number],
+    //  index : '2dsphere',
+      required : true
   },
   picture : {
     type:String,
-    required: true
+    //required: true
   },
   gallery : [{
     type:String,
-    required: true
+   // required: true
   }],
   mobile_number : {
-    type: String,
+    type: Number,
     required: true
   },
   events : [EventSchema],
@@ -120,6 +126,15 @@ var PlaceSchema = new mongoose.Schema({
     ref : "User"
   }
 });
+
+//Indexes
+PlaceSchema.index(
+  {
+    name: 'text',
+    description: 'text',
+    coordinates: '2dsphere'
+  }
+);
 
 //helper functions
 /*

@@ -17,11 +17,11 @@ var bcrypt = require('bcrypt');
 module.exports.getAll = async function(req, res) {
   try {
     var users = await User.find();
-    if(users.lenght <= 0){
+    if(users.length <= 0){
       res.status(200).json({
         ok: true,
         data: users,
-        message: 'no users found',
+        message: 'No users found',
         error:null
       });
       return;
@@ -29,7 +29,7 @@ module.exports.getAll = async function(req, res) {
     res.status(200).json({
       ok: true,
       data: users,
-      message: 'users loaded successfully',
+      message: 'Users loaded successfully',
       error:null
     });
   } catch (e) {
@@ -37,7 +37,7 @@ module.exports.getAll = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
@@ -64,7 +64,7 @@ module.exports.get = async function(req, res) {
     res.status(400).json({
       ok: false,
       data: null,
-      message: 'validation error bad request',
+      message: 'Validation error, bad request',
       error: e
     });
     return;
@@ -75,7 +75,7 @@ module.exports.get = async function(req, res) {
       res.status(200).json({
         ok: true,
         data: user,
-        message: 'no user found',
+        message: 'User not found',
         error:null
       });
       return;
@@ -83,15 +83,15 @@ module.exports.get = async function(req, res) {
     res.status(200).json({
       ok: true,
       data: user,
-      message: 'user found',
+      message: 'User found',
       error:null
     });
-  } catch (e) {
+  } catch (e){
     console.log(e);
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
@@ -119,7 +119,7 @@ module.exports.create = async function(req, res) {
     res.status(400).json({
       ok: false,
       data: null,
-      message: 'validation error bad request',
+      message: 'Validation error, bad request',
       error: e
     });
     return;
@@ -152,7 +152,7 @@ module.exports.create = async function(req, res) {
     res.status(200).json({
       ok: true,
       data: newUser,
-      message: 'user created successfully',
+      message: 'User created successfully',
       error: null
     });
   } catch (e) {
@@ -160,7 +160,7 @@ module.exports.create = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
@@ -179,11 +179,11 @@ module.exports.create = async function(req, res) {
 module.exports.update = async function(req, res) {
   try {
       var userId = req.params.id;
-      let newUser = await User.updatePlace(userId,req.body);
+      let newUser = await User.updateUser(userId,req.body);
       res.status(200).json({
         ok: true,
         data: newUser,
-        message: 'user updated successfully',
+        message: 'User updated successfully',
         error: null
     });
   } catch (e) {
@@ -191,7 +191,7 @@ module.exports.update = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
@@ -217,7 +217,7 @@ module.exports.delete = async function(req, res) {
     res.status(400).json({
       ok: false,
       data: null,
-      message: 'validation error bad request',
+      message: 'Validation error, bad request',
       error: e
     });
     return;
@@ -229,14 +229,14 @@ module.exports.delete = async function(req, res) {
       res.status(200).json({
         ok: true,
         data: isDeleted,
-        message: 'user is not deleted',
+        message: 'User is not deleted',
         error: null
       });
     }
     res.status(200).json({
       ok: true,
       data: isDeleted,
-      message: 'user deleted successfully',
+      message: 'User deleted successfully',
       error: null
     });
   } catch (e) {
@@ -244,7 +244,7 @@ module.exports.delete = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: isDeleted,
-      message: 'user is not deleted',
+      message: 'User is not deleted',
       error: e
     });
   }
@@ -272,7 +272,7 @@ module.exports.signIn = async function(req, res) {
     res.status(400).json({
       ok: false,
       data: null,
-      message: 'validation error bad request',
+      message: 'Validation error, bad request',
       error: e
     });
     return;
@@ -284,7 +284,7 @@ module.exports.signIn = async function(req, res) {
       res.status(200).json({
         ok: true,
         data: null,
-        message: 'no user found',
+        message: 'User not found',
         error: null
       });
       return;
@@ -295,7 +295,7 @@ module.exports.signIn = async function(req, res) {
       res.status(403).json({
         ok: true,
         data: null,
-        message: 'wrong email or password',
+        message: 'Wrong email or password',
         error: null
       });
       return;
@@ -307,7 +307,7 @@ module.exports.signIn = async function(req, res) {
         'token' : token,
         'user' : user
       },
-      message: 'user loggedin successfully',
+      message: 'User logged in successfully',
       error: null
     });
 
@@ -316,7 +316,7 @@ module.exports.signIn = async function(req, res) {
      res.status(500).json({
        ok: false,
        data: null,
-       message: 'error while login',
+       message: 'Error while login',
        error: e
      });
    }
@@ -337,7 +337,7 @@ module.exports.forgetPassword = async function(req, res) {
     res.status(200).json({
       ok: true,
       data: {'forgetPasswordToken' : token},
-      message: 'forget password is requested pleace check your email',
+      message: 'Forget password is requested pleace check your email',
       error: null
     });
   } catch (e) {
@@ -345,7 +345,7 @@ module.exports.forgetPassword = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
@@ -369,7 +369,7 @@ module.exports.addNotificationToken = async function(req, res) {
       res.status(500).json({
         ok: false,
         data: null,
-        message: 'unable to add device token',
+        message: 'Unable to add device token',
         error: 'key doesn\'t match user key'
       });
       return;
@@ -377,7 +377,7 @@ module.exports.addNotificationToken = async function(req, res) {
     res.status(200).json({
       ok: true,
       data: null,
-      message: 'notification token added successfully',
+      message: 'Notification token added successfully',
       error: null
     });
   } catch (e) {
@@ -385,7 +385,7 @@ module.exports.addNotificationToken = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
