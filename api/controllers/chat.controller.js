@@ -57,11 +57,12 @@ module.exports.getMessagesBetweenTwoUsers = async function(req, res) {
     }
     res.status(200).json({
       ok: true,
-      data: chats,
+      data: messages,
       message: 'messages loaded successfully',
       error:null
     });
   } catch (e) {
+    console.log(e);
     res.status(500).json({
       ok: false,
       data: null,
