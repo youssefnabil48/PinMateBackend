@@ -3,6 +3,7 @@ var Place = mongoose.model('Place');
 var Post = mongoose.model('Post');
 var Event = mongoose.model('Event');
 var Review = mongoose.model('Review');
+const { validateAll } = require('indicative');
 
 /*
     Description
@@ -19,7 +20,7 @@ module.exports.getAll = async function(req, res) {
     res.status(200).json({
       ok: true,
       data: places,
-      message: 'user created successfully',
+      message: 'Places loaded successfully',
       error: null
     });
   }catch (e) {
@@ -27,7 +28,7 @@ module.exports.getAll = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
@@ -50,7 +51,7 @@ module.exports.getById = async function(req, res) {
       res.status(200).json({
         ok: true,
         data: places,
-        message: 'no places found',
+        message: 'Place not found',
         error:null
       });
       return;
@@ -58,7 +59,7 @@ module.exports.getById = async function(req, res) {
     res.status(200).json({
       ok: true,
       data: places,
-      message: 'places loaded successfully',
+      message: 'Place loaded successfully',
       error:null
     });
   }catch(e){
@@ -66,7 +67,7 @@ module.exports.getById = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
@@ -88,7 +89,7 @@ module.exports.getByName = async function(req, res) {
       res.status(200).json({
         ok: true,
         data: places,
-        message: 'no places found',
+        message: 'Place not found',
         error:null
       });
       return;
@@ -96,7 +97,7 @@ module.exports.getByName = async function(req, res) {
     res.status(200).json({
       ok: true,
       data: places,
-      message: 'places loaded successfully',
+      message: 'Place loaded successfully',
       error:null
     });
   }catch(error){
@@ -114,13 +115,37 @@ module.exports.getByName = async function(req, res) {
     Calling route:
 */
 module.exports.create = async function(req, res) {
+
+  try {
+    const rules = {
+        name: 'required|max:50',
+        description: 'required|max:200',
+        address: 'required|max:150',
+        coordinates: 'required|array',
+        mobile_number : 'required'
+      //icon : 'required'
+      //picture : 'required'
+      //gallery : 'required'
+    };
+    await validateAll(req.body, rules);
+} catch (e) {
+    console.log(e);
+    res.status(400).json({
+        ok: false,
+        data: null,
+        message: 'Validation error, bad request',
+        error: e
+    });
+    return;
+}
+
   try {
     var place = new Place({
       name : req.body.name,
       icon : req.body.icon,
       description: req.body.description,
-      longitude : req.body.longitude,
-      latitude : req.body.latitude,
+      address : req.body.address,
+      coordinates : req.body.coordinates,
       picture : req.body.picture,
       gallery : req.body.gallery,
       mobile_number : req.body.mobile_number,
@@ -134,7 +159,7 @@ module.exports.create = async function(req, res) {
     res.status(200).json({
       ok: true,
       data: newPlace,
-      message: 'user created successfully',
+      message: 'Place created successfully',
       error: null
     });
   } catch (e) {
@@ -142,7 +167,7 @@ module.exports.create = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
@@ -167,7 +192,7 @@ module.exports.update = async function(req, res) {
       res.status(200).json({
         ok: true,
         data: newPlace,
-        message: 'place updated successfully',
+        message: 'Place updated successfully',
         error: null
     });
   } catch (e) {
@@ -175,7 +200,7 @@ module.exports.update = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
@@ -197,7 +222,7 @@ module.exports.delete = async function(req, res) {
         res.status(200).json({
           ok: true,
           data: places,
-          message: 'place not deleted',
+          message: 'Place was not deleted',
           error:null
         });
         return;
@@ -205,7 +230,7 @@ module.exports.delete = async function(req, res) {
       res.status(200).json({
         ok: true,
         data: places,
-        message: 'place deleted successfully',
+        message: 'Place deleted successfully',
         error:null
       });
   }catch (e) {
@@ -213,7 +238,7 @@ module.exports.delete = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
@@ -234,7 +259,7 @@ module.exports.favoritePlace = async function(req, res) {
     res.status(200).json({
       ok: true,
       data: newFavorite,
-      message: 'favorite created successfully',
+      message: 'Favorite added successfully',
       error: null
     });
   } catch (e) {
@@ -242,7 +267,7 @@ module.exports.favoritePlace = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
@@ -264,7 +289,7 @@ module.exports.unfavoritePlace = async function(req, res) {
     res.status(200).json({
       ok: true,
       data: removeFavorite,
-      message: 'favorite removed successfully',
+      message: 'Favorite removed successfully',
       error: null
     });
   } catch (e) {
@@ -272,7 +297,7 @@ module.exports.unfavoritePlace = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
@@ -292,6 +317,24 @@ module.exports.addPost = async function(req, res) {
    try {
         var placeID = req.body.place_id;
         var place =await Place.getById(placeID);
+
+        // try {
+        //   const rules = {
+        //     content: 'required',
+        //     user: 'required'
+        //   };
+        //   await validateAll(req.params, rules);
+        // } catch (e) {
+        //   console.log(e);
+        //   res.status(400).json({
+        //     ok: false,
+        //     data: null,
+        //     message: 'Validation error bad request',
+        //     error: e
+        //   });
+        //   return;
+        // }
+
         var p = new Post({
             content: req.body.content,
             created_at: req.body.created_at,
@@ -303,7 +346,7 @@ module.exports.addPost = async function(req, res) {
           res.status(200).json({
             ok: true,
             data: query,
-            message: 'post not created',
+            message: 'Post was not added',
             error: null
           });
           return;
@@ -311,7 +354,7 @@ module.exports.addPost = async function(req, res) {
         res.status(200).json({
           ok: true,
           data: query,
-          message: 'post created successfully',
+          message: 'Post added successfully',
           error: null
         });
       }catch (e) {
@@ -319,7 +362,7 @@ module.exports.addPost = async function(req, res) {
         res.status(500).json({
           ok: false,
           data: null,
-          message: 'internal server error',
+          message: 'Internal server error',
           error: e
         });
       }
@@ -345,7 +388,7 @@ module.exports.deletePost = async function(req, res) {
          res.status(200).json({
            ok: true,
            data: query,
-           message: 'post not deleted',
+           message: 'Post was not deleted',
            error: null
          });
          return;
@@ -353,7 +396,7 @@ module.exports.deletePost = async function(req, res) {
        res.status(200).json({
          ok: true,
          data: query,
-         message: 'post deleted successfully',
+         message: 'Post deleted successfully',
          error: null
        });
      }catch (e) {
@@ -361,7 +404,7 @@ module.exports.deletePost = async function(req, res) {
        res.status(500).json({
          ok: false,
          data: null,
-         message: 'internal server error',
+         message: 'Internal server error',
          error: e
        });
      }
@@ -379,6 +422,25 @@ module.exports.deletePost = async function(req, res) {
 */
 module.exports.addEvent = async function(req, res) {
 
+  // try {
+  //   const rules = {
+  //     name: 'required|max:50',
+  //     description: 'required|max:500',
+  //     start_date:'required|date',
+  //     place_id : 'required'
+  //   };
+  //   await validateAll(req.params, rules);
+  // } catch (e) {
+  //   console.log(e);
+  //   res.status(400).json({
+  //     ok: false,
+  //     data: null,
+  //     message: 'validation error bad request',
+  //     error: e
+  //   });
+  //   return;
+  // }
+
     try {
           var placeID = req.body.place_id;
           var place =await Place.getById(placeID);
@@ -394,7 +456,7 @@ module.exports.addEvent = async function(req, res) {
             res.status(200).json({
              ok: true,
              data: query,
-             message: 'event not added',
+             message: 'Event was not added',
              error: null
            });
            return;
@@ -402,7 +464,7 @@ module.exports.addEvent = async function(req, res) {
          res.status(200).json({
            ok: true,
            data: query,
-           message: 'event added successfully',
+           message: 'Event added successfully',
            error: null
          });
         }catch (e) {
@@ -410,7 +472,7 @@ module.exports.addEvent = async function(req, res) {
           res.status(500).json({
             ok: false,
             data: null,
-            message: 'internal server error',
+            message: 'Internal server error',
             error: e
           });
         }
@@ -435,7 +497,7 @@ module.exports.deleteEvent = async function(req, res) {
          res.status(200).json({
           ok: true,
           data: query,
-          message: 'event not deleted',
+          message: 'Event was not deleted',
           error: null
         });
         return;
@@ -443,7 +505,7 @@ module.exports.deleteEvent = async function(req, res) {
       res.status(200).json({
         ok: true,
         data: query,
-        message: 'event deleted successfully',
+        message: 'Event deleted successfully',
         error: null
       });
      }catch(e){
@@ -451,7 +513,7 @@ module.exports.deleteEvent = async function(req, res) {
        res.status(500).json({
          ok: false,
          data: null,
-         message: 'internal server error',
+         message: 'Internal server error',
          error: e
        });
      }
@@ -477,7 +539,7 @@ module.exports.updateEvent = async function(req, res) {
       res.status(200).json({
         ok: true,
         data: newPlace,
-        message: 'event updated successfully',
+        message: 'Event updated successfully',
         error: null
     });
   } catch (e) {
@@ -485,7 +547,7 @@ module.exports.updateEvent = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
@@ -501,10 +563,29 @@ module.exports.updateEvent = async function(req, res) {
     Calling route:
 */
 module.exports.addReview = async function(req, res) {
+  //commented because validation  fails
+   // try {
+    //   const rules = {
+    //     rating: 'required|number',
+    //     user_id : 'required' //consider mentioning place_id as well
+    //   };
+    //   await validateAll(req.params, rules);
+    // } catch (e) {
+    //   console.log(e);
+    //   res.status(400).json({
+    //     ok: false,
+    //     data: null,
+    //     message: 'Validation error, bad request',
+    //     error: e
+    //   });
+    //   return;
+    // }
+ 
   try {
     var placeID = req.body.place_id;
     var place =await Place.getById(placeID);
     console.log(place);
+
     var r = new Review({
       content : req.body.content,
       rating : req.body.rating,
@@ -515,7 +596,7 @@ module.exports.addReview = async function(req, res) {
     res.status(200).json({
       ok: true,
       data: newReview,
-      message: 'review created successfully',
+      message: 'Review added successfully',
       error: null
     });
   } catch (e) {
@@ -523,7 +604,7 @@ module.exports.addReview = async function(req, res) {
     res.status(500).json({
       ok: false,
       data: null,
-      message: 'internal server error',
+      message: 'Internal server error',
       error: e
     });
   }
@@ -546,7 +627,7 @@ module.exports.deleteReview = async function(req, res) {
       res.status(200).json({
         ok: true,
         data: rmReview,
-        message: 'review removed successfully',
+        message: 'Review removed successfully',
         error: null
       });
     } catch (e) {
@@ -554,7 +635,7 @@ module.exports.deleteReview = async function(req, res) {
       res.status(500).json({
         ok: false,
         data: null,
-        message: 'internal server error',
+        message: 'Internal server error',
         error: e
       });
     }

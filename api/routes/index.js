@@ -41,8 +41,8 @@ router.get('/api/user/forgetpassword', userController.forgetPassword);
 router.post('/api/user/deviceToken', userController.addNotificationToken);
 
 //chat routes
-router.post('api/chat', chatController.getMessagesBetweenTwoUsers);
-router.delete('api/chat/delete/:id', chatController.delete);
+router.post('/api/chat', chatController.getMessagesBetweenTwoUsers);
+router.delete('/api/chat/delete/:id', chatController.delete);
 
 //errorReportCTRL routes
 router.get('/api/errorReport/all', errorReportController.getAll);
@@ -106,7 +106,7 @@ router.delete('/api/tracker/delete/:id',  trackerController.delete);
  router.get('/api/story/file/:storyId', storyController.getFile);
 
 //searchCTRL routes
-router.get('/api/search/:query', searchController.generalSearch);
+router.post('/api/search', searchController.generalSearch);
 
 //recommendationCTRL routes
 router.get('/api/reccomend/place', recommendationController.recommendPlace);
