@@ -56,7 +56,6 @@ require('../trackers.model');
 require('../notifications.model');
 require('../hangoutRequests.model');
 require('../friendRequests.model');
-require('../errorReports.model');
 require('../chats.model');
 require('../story.model');
 require('../test.model');

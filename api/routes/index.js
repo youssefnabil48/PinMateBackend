@@ -5,7 +5,6 @@ var router = express.Router();
 /*importing controllers*/
 var userController = require('../controllers/user.controller');
 var chatController = require('../controllers/chat.controller');
-var errorReportController = require('../controllers/errorReport.controller');
 var friendRequestController = require('../controllers/friendRequest.controller');
 var hangoutRequestController = require('../controllers/hangoutRequest.controller');
 var notificationController = require('../controllers/notification.controller');
@@ -44,13 +43,6 @@ router.post('/api/user/deviceToken', userController.addNotificationToken);
 router.post('/api/chat', chatController.getMessagesBetweenTwoUsers);
 router.delete('/api/chat/delete/:id', chatController.delete);
 
-//errorReportCTRL routes
-router.get('/api/errorReport/all', errorReportController.getAll);
-router.get('/api/errorReport/:id', errorReportController.getByID);
-router.get('/api/errorReport/:userID', errorReportController.getByUser);
-router.post('/api/errorReport/create', errorReportController.create);
-router.put('/api/errorReport/update/:id', errorReportController.update);
-router.delete('/api/errorReport/delete/:id', errorReportController.delete);
 
 //friendRequestCTRL routes
 router.get('/api/friendRequest/getall/:rcvrId', friendRequestController.getAll);

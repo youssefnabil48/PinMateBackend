@@ -50,21 +50,21 @@ var UserSchema = new mongoose.Schema({
   },
   home_location: {
     longitude: {
-      type: int
+      type: Number
     },
     latitude: {
-      type: int,
+      type: Number,
     }
   },
   current_location: {
     longitude: {
-      type: int
+      type: Number
     },
     latitude: {
-      type: int,
+      type: Number,
     }
   },
-  home_adress: String,
+  home_address: String,
   favorite_places: [{
     type: mongoose.Schema.ObjectId,
     ref: "Place",
