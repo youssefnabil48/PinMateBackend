@@ -250,7 +250,19 @@ UserSchema.statics.createUser = async function (newUser) {
     }
     Calling route:
 */
+<<<<<<< HEAD
 UserSchema.statics.updateUserInfo = function (userId) {
+=======
+UserSchema.statics.updateUser = async function(userId,updates){
+
+ try {
+
+    return await CRUDHelper.updateModel(this,userId,updates);
+} catch (e) {
+  console.log(e);
+  throw e;
+}
+>>>>>>> 165f81aa57ebe41a2a538890a5da3bd79dfcc420
 
 }
 
