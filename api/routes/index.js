@@ -44,7 +44,6 @@ router.get('/api/user/friends/:id', userController.getUserFriends);
 router.post('/api/chat', chatController.getMessagesBetweenTwoUsers);
 router.delete('/api/chat/delete/:id', chatController.delete);
 
-
 //friendRequestCTRL routes
 router.get('/api/friendRequest/getall/:rcvrId', friendRequestController.getAll);
 router.get('/api/friendRequest/:id', friendRequestController.get);
@@ -84,7 +83,7 @@ router.put('/api/place/event/update/:placeid/:id',  placeController.updateEvent)
 router.delete('/api/place/event/delete/:eventId',  placeController.deleteEvent);
 
 //trackerCTRL routes
-router.get('/api/tracker/getfriendstracker', trackerController.getFriendsTracker);
+router.get('/api/tracker/getfriendstracker/:id', trackerController.getFriendsTracker);
 router.get('/api/tracker/:id', trackerController.get);
 router.post('/api/tracker/create',  trackerController.create);
 router.put('/api/tracker/update/:id',  trackerController.update);

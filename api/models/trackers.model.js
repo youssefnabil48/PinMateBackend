@@ -16,6 +16,11 @@ var TrackerSchema = new mongoose.Schema({
       type : Date,
       default : Date.now()
     },
+    user_id : {
+        type : mongoose.Schema.ObjectId,
+        ref : "User",
+        required : true
+      },
     eta : {
       type : Number
     }
@@ -31,17 +36,17 @@ var TrackerSchema = new mongoose.Schema({
     Calling route:
 */
 TrackerSchema.statics.getFriendsTracker = async function(user_id){
-    try {
-        var user = User.getById(user_id);
-        for (var i=0; i<user.friends.length; i++){
-            var u = User.getById(user.friends[i]);
-            await this.getTrackerById(u.tracker_id);
-        }
-    }
-    catch (e)
-    {
-        console.log(e);
-    }
+    // try {
+    //     var user = User.getUserById(user_id);
+    //     for (var i=0; i<user.friends.length; i++){
+    //         var u = User.getUserById(user.friends[i]);
+    //         await this.getTrackerById(u.tracker_id);
+    //     }
+    // }
+    // catch (e)
+    // {
+    //     console.log(e);
+    // }
 }
 
 /*
@@ -81,6 +86,27 @@ TrackerSchema.statics.getTrackerById = async function(id){
     console.log(e);
     throw e;
   }
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+TrackerSchema.statics.updateTracker = async function(trackerId,updates){
+
+    try {
+        return await CRUDHelper.updateModel(this,trackerId,updates);
+    }
+     catch (e) {
+      console.log(e);
+      throw e;
+    }
+
 }
 
 /*
