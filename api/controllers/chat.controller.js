@@ -44,13 +44,15 @@ module.exports.getAll = async function(req, res) {
 module.exports.getMessagesBetweenTwoUsers = async function(req, res) {
   var idOne = mongoose.Types.ObjectId(req.body.firstId);
   var idTwo = mongoose.Types.ObjectId(req.body.secondId);
+  console.log(idOne);
+  console.log(idTwo);
   try {
     var messages  = await Chat.getChatBetweenTwoUsers(idOne,idTwo);
     if(messages.lenght <= 0){
       res.status(200).json({
         ok: true,
         data: messages,
-        message: 'no users found',
+        message: 'no messages found',
         error:null
       });
       return;

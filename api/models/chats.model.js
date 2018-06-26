@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var CRUDHelper = require('../helpers/CRUD.helper');
+var User = mongoose.model('User');
 
 var ChatSchema = new mongoose.Schema({
   created_at : {
@@ -80,7 +81,13 @@ ChatSchema.statics.getChatBetweenTwoUsers = async function(firstUserId, secondUs
         {receiver_id: {$in: [firstUserId, secondUserId]}}
       ]
     });
-    return chat;
+    var firstUser = await User.getUserById(firstUserId);
+    var secondUser = await User.getUserById(secondUserId);
+    return {
+      chat : chat,
+      firstUser : firstUser,
+      secondUser : secondUser
+    };
   } catch (e) {
     console.log(e);
     throw e;
