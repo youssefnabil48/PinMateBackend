@@ -336,12 +336,17 @@ module.exports.addPost = async function(req, res) {
         //   return;
         // }
 
+        var u = await User.getUserById(req.body.user);
+        console.log(u.name);
         var p = new Post({
             content: req.body.content,
             created_at: req.body.created_at,
             user : req.body.user,
             likes : req.body.likes,
+            user_name : u.name,
+            user_pic : u.picture
         });
+
         var query = await Place.addPost(place,p);
         if (!query) {
           res.status(200).json({
