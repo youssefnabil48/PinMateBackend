@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Place = mongoose.model('Place');
 var Post = mongoose.model('Post');
 var Event = mongoose.model('Event');
+var User = mongoose.model('User');
 var Review = mongoose.model('Review');
 const { validateAll } = require('indicative');
 

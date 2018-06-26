@@ -12,11 +12,7 @@ PostSchema.add({
     type : Date,
     default : Date.now()
   },
-  user : {
-    type : mongoose.Schema.ObjectId,
-    ref : "User",
-    required: true
-  },
+  user : User,
   //how to embed object from itself
   //posts : [PostSchema],
   likes : [{
@@ -91,18 +87,24 @@ var PlaceSchema = new mongoose.Schema({
     required: true,
     //index: true
   },
+
   address : {
     type : String,
     required: true
   },
-  location: {
+  coordinates : {
+      type: [Number],
+    //  index : '2dsphere',
+      required : true
+  },
+location: {
     longitude: {
       type: Number
     },
     latitude: {
       type: Number,
     }
-  },
+  }
   picture : {
     type:String,
     //required: true
