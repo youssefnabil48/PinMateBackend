@@ -5,7 +5,6 @@ var router = express.Router();
 /*importing controllers*/
 var userController = require('../controllers/user.controller');
 var chatController = require('../controllers/chat.controller');
-var errorReportController = require('../controllers/errorReport.controller');
 var friendRequestController = require('../controllers/friendRequest.controller');
 var hangoutRequestController = require('../controllers/hangoutRequest.controller');
 var notificationController = require('../controllers/notification.controller');
@@ -43,14 +42,6 @@ router.post('/api/user/deviceToken', userController.addNotificationToken);
 //chat routes
 router.post('/api/chat', chatController.getMessagesBetweenTwoUsers);
 router.delete('/api/chat/delete/:id', chatController.delete);
-
-//errorReportCTRL routes
-router.get('/api/errorReport/all', errorReportController.getAll);
-router.get('/api/errorReport/:id', errorReportController.getByID);
-router.get('/api/errorReport/:userID', errorReportController.getByUser);
-router.post('/api/errorReport/create', errorReportController.create);
-router.put('/api/errorReport/update/:id', errorReportController.update);
-router.delete('/api/errorReport/delete/:id', errorReportController.delete);
 
 //friendRequestCTRL routes
 router.get('/api/friendRequest/getall/:rcvrId', friendRequestController.getAll);
@@ -91,7 +82,7 @@ router.put('/api/place/event/update/:placeid/:id',  placeController.updateEvent)
 router.delete('/api/place/event/delete/:eventId',  placeController.deleteEvent);
 
 //trackerCTRL routes
-router.get('/api/tracker/getfriendstracker', trackerController.getFriendsTracker);
+router.get('/api/tracker/getfriendstracker/:id', trackerController.getFriendsTracker);
 router.get('/api/tracker/:id', trackerController.get);
 router.post('/api/tracker/create',  trackerController.create);
 router.put('/api/tracker/update/:id',  trackerController.update);
