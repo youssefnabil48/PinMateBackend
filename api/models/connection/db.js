@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-//var dburl = 'mongodb://localhost:27017/PinMate';
-var dburl = 'mongodb+srv://pin:pinmate@pin-mate-9cfx5.mongodb.net/PinMate?retryWrites=true'
+var dburl = 'mongodb://localhost:27017/PinMate';
+//var dburl = 'mongodb+srv://pin:pinmate@pin-mate-9cfx5.mongodb.net/PinMate?retryWrites=true'
 var retry = null;
 mongoose.Promise = global.Promise;
 mongoose.connect(dburl,{autoIndex: false});
