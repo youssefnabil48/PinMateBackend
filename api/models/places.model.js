@@ -8,10 +8,7 @@ PostSchema.add({
     type : String,
     required : true
   },
-  created_at : {
-    type : Date,
-    default : Date.now()
-  },
+  created_at : String,
   user : {
     type:mongoose.Schema.ObjectId,
     ref: "User"
