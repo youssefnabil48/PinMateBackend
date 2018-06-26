@@ -44,15 +44,7 @@ module.exports.getAll = async function(req, res) {
 };
 
 
-/*
-    Description
-    Takes:
-    Returns: {
-        error: "Error object if any",
-        msg: "Success or failure message"
-    }
-    Calling route:
-*/
+
 module.exports.get = async function(req, res) {
   try {
     const rules = {

@@ -32,19 +32,17 @@ router.get('/', function(req, res, next) {
 // userCTRL routes
 router.get('/api/user/all', userController.getAll);
 router.get('/api/user/:id', userController.get);
-router.get('/api/user/getfriends/:id', userController.get);
 router.post('/api/user/create', userController.create);
 router.put('/api/user/update/:id', userController.update);
 router.delete('/api/user/delete/:id', userController.delete);
 router.post('/api/user/signin', userController.signIn);
 router.get('/api/user/forgetpassword', userController.forgetPassword);
 router.post('/api/user/deviceToken', userController.addNotificationToken);
+router.get('/api/user/friends/:id', userController.getUserFriends);
 
 //chat routes
 router.post('/api/chat', chatController.getMessagesBetweenTwoUsers);
 router.delete('/api/chat/delete/:id', chatController.delete);
-
-//erro]
 
 //friendRequestCTRL routes
 router.get('/api/friendRequest/getall/:rcvrId', friendRequestController.getAll);
@@ -85,7 +83,7 @@ router.put('/api/place/event/update/:placeid/:id',  placeController.updateEvent)
 router.delete('/api/place/event/delete/:eventId',  placeController.deleteEvent);
 
 //trackerCTRL routes
-router.get('/api/tracker/getfriendstracker', trackerController.getFriendsTracker);
+router.get('/api/tracker/getfriendstracker/:id', trackerController.getFriendsTracker);
 router.get('/api/tracker/:id', trackerController.get);
 router.post('/api/tracker/create',  trackerController.create);
 router.put('/api/tracker/update/:id',  trackerController.update);
