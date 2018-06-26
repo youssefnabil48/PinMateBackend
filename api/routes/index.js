@@ -32,6 +32,7 @@ router.get('/', function(req, res, next) {
 // userCTRL routes
 router.get('/api/user/all', userController.getAll);
 router.get('/api/user/:id', userController.get);
+router.get('/api/user/getfriends/:id', userController.get);
 router.post('/api/user/create', userController.create);
 router.put('/api/user/update/:id', userController.update);
 router.delete('/api/user/delete/:id', userController.delete);
@@ -43,6 +44,7 @@ router.post('/api/user/deviceToken', userController.addNotificationToken);
 router.post('/api/chat', chatController.getMessagesBetweenTwoUsers);
 router.delete('/api/chat/delete/:id', chatController.delete);
 
+//erro]
 
 //friendRequestCTRL routes
 router.get('/api/friendRequest/getall/:rcvrId', friendRequestController.getAll);

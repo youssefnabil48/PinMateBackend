@@ -313,3 +313,4 @@
 ::1 - - [24/Jun/2018:00:28:57 +0000] "POST /api/chat HTTP/1.1" 500 69 "-" "PostmanRuntime/7.1.5"
 ::1 - - [24/Jun/2018:00:30:27 +0000] "POST /api/chat HTTP/1.1" 200 2891 "-" "PostmanRuntime/7.1.5"
 >>>>>>> 312807e5943ea668bb360c01a2ecc86d17243453
+::1 - - [25/Jun/2018:12:42:39 +0000] "POST /api/user/signin HTTP/1.1" 200 1074 "-" "PostmanRuntime/7.1.5"
