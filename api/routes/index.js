@@ -38,6 +38,7 @@ router.delete('/api/user/delete/:id', userController.delete);
 router.post('/api/user/signin', userController.signIn);
 router.get('/api/user/forgetpassword', userController.forgetPassword);
 router.post('/api/user/deviceToken', userController.addNotificationToken);
+router.get('/api/user/friends/:id', userController.getUserFriends);
 
 //chat routes
 router.post('/api/chat', chatController.getMessagesBetweenTwoUsers);
