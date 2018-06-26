@@ -91,15 +91,17 @@ var PlaceSchema = new mongoose.Schema({
     required: true,
     //index: true
   },
-
   address : {
     type : String,
     required: true
   },
-  coordinates : {
-      type: [Number],
-    //  index : '2dsphere',
-      required : true
+  location: {
+    longitude: {
+      type: Number
+    },
+    latitude: {
+      type: Number,
+    }
   },
   picture : {
     type:String,

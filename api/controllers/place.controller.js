@@ -145,7 +145,7 @@ module.exports.create = async function(req, res) {
       icon : req.body.icon,
       description: req.body.description,
       address : req.body.address,
-      coordinates : req.body.coordinates,
+      location : req.body.location,
       picture : req.body.picture,
       gallery : req.body.gallery,
       mobile_number : req.body.mobile_number,
@@ -580,7 +580,7 @@ module.exports.addReview = async function(req, res) {
     //   });
     //   return;
     // }
- 
+
   try {
     var placeID = req.body.place_id;
     var place =await Place.getById(placeID);
