@@ -137,6 +137,8 @@ module.exports.create = async function(req, res) {
       password: hashedPassword,
       birth_date: req.body.birth_date,
       home_location: req.body.home_location,
+      current_location : req.body.current_location,
+      home_adress: req.body.home-address,
       reset_pw_tkn: req.body.reset_pw_tkn,
       mobile_number: req.body.mobile_number,
       email_verification_tkn: req.body.email_verification_tkn,
