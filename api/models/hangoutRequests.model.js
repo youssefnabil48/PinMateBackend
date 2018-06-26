@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var CRUDHelper = require('../helpers/CRUD.helper');
 
+//ivited feen el 3amlo respond?!
+
 var HangoutRequestSchema = new mongoose.Schema({
   date : {
     type : Date,
@@ -137,7 +139,7 @@ HangoutRequestSchema.statics.getSndrRequests = async function(userId){
         var hangoutReqs = await this.find({
             created_by : userId });
             return hangoutReqs;
-   } 
+   }
     catch (e){
        console.log(e);
        throw e;
@@ -160,7 +162,7 @@ HangoutRequestSchema.statics.getRcvrRequests = async function(receiverId){
         var hangoutReqs = await this.find({
             invited : receiverId });
             return hangoutReqs;
-   } 
+   }
     catch (e){
        console.log(e);
        throw e;
@@ -172,7 +174,7 @@ HangoutRequestSchema.statics.getRcvrRequests = async function(receiverId){
 //         var hangoutReqs = await this.find({
 //             responded_by : receiverId });
 //             return hangoutReqs;
-//    } 
+//    }
 //     catch (e){
 //        console.log(e);
 //        throw e;
