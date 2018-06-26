@@ -354,3 +354,10 @@
 ::1 - - [26/Jun/2018:02:46:14 +0000] "DELETE /api/tracker/delete/5b31a8b4be16c44a944f7011 HTTP/1.1" 200 87 "-" "PostmanRuntime/7.1.5"
 ::1 - - [26/Jun/2018:02:46:21 +0000] "DELETE /api/tracker/delete/5b31a8b4be16c44a944f7011 HTTP/1.1" 200 87 "-" "PostmanRuntime/7.1.5"
 >>>>>>> beb42584d4ad25e7cedfaede17ce91f0e4939dac
+::1 - - [26/Jun/2018:12:36:01 +0000] "GET /api/user/friends/5b2ce4ed13c7ef00147e5b12 HTTP/1.1" 200 74 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:12:37:52 +0000] "GET /api/user/friends/5b2ce4ed13c7ef00147e5b12 HTTP/1.1" 200 74 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:12:38:02 +0000] "GET /api/user/friends/5b2ce4ed13c7ef00147e5b12 HTTP/1.1" 200 74 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:12:38:46 +0000] "GET /api/user/friends/5b2ce4ed13c7ef00147e5b12 HTTP/1.1" 200 74 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:12:39:57 +0000] "GET /api/user/friends/5b2ce4ed13c7ef00147e5b12 HTTP/1.1" 200 74 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:12:40:34 +0000] "GET /api/user/friends/5b2ce4ed13c7ef00147e5b12 HTTP/1.1" 200 63 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:12:40:41 +0000] "GET /api/user/friends/5b2cf5036d34b90014d244c3 HTTP/1.1" 200 923 "-" "PostmanRuntime/7.1.5"

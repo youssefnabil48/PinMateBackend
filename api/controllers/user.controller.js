@@ -421,15 +421,25 @@ module.exports.getUserFriends = async function(req, res) {
     var userId = req.params.id;
     var user = await User.getUserById(userId);
     var users = [];
+
     for (let i = 0; i < user.friends.length; i++) {
       const friendId = user.friends[i];
-      const friend = await User.getUserById(friendId); 
-      users.push(friend);   
+      const friend = await User.getUserById(friendId);
+      users.push(friend);
+    }
+    if(users.length <= 0){
+      res.status(200).json({
+        ok: true,
+        data: users,
+        message: 'No friends found',
+        error:null
+      });
+      return;
     }
     res.status(200).json({
       ok: true,
       data: users,
-      message: 'friends loades successfully',
+      message: 'friends loaded successfully',
       error: null
     });
   } catch (error) {
