@@ -406,3 +406,39 @@ module.exports.addNotificationToken = async function(req, res) {
 module.exports.verifyEmail = async function(req, res) {
 
 };
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
+module.exports.getUserFriends = async function(req, res) {
+  try {
+    var userId = req.params.id;
+    var user = await User.getUserById(userId);
+    var users = [];
+    for (let i = 0; i < user.friends.length; i++) {
+      const friendId = user.friends[i];
+      const friend = await User.getUserById(friendId); 
+      users.push(friend);   
+    }
+    res.status(200).json({
+      ok: true,
+      data: users,
+      message: 'friends loades successfully',
+      error: null
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'Internal server error',
+      error: e
+    });
+  }
+};
