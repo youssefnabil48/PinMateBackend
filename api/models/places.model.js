@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var CRUDHelper = require('../helpers/CRUD.helper');
 var PostSchema = new mongoose.Schema();
 var User = mongoose.model('User');
+var ObjectId = mongoose.Schema.ObjectId;
 
 PostSchema.add({
   content : {
@@ -281,8 +282,11 @@ PlaceSchema.statics.favoritePlace = async function(userId,placeId){
 PlaceSchema.statics.unfavoritePlace = async function(userId,placeId){
   try {
     var user = await User.getUserById(userId);
-    console.log(user);
-    await user.favorite_places.id(placeId).remove();
+    var MyObjectId = require('mongoose').Types.ObjectId;
+    var p = new MyObjectId(placeId)
+    var f= await user.findOne({ favorite_places: mongoose.Types.ObjectId(placeId)})
+    console.log(f);
+    //.remove();
     return await user.save();
   } catch (e) {
     console.log(e);

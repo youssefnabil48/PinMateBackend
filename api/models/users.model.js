@@ -33,7 +33,7 @@ var UserSchema = new mongoose.Schema({
     default: 'male'
   },
   birth_date: {
-    type: Date,
+    type: String,
     // required: true
   },
   picture: {
@@ -65,6 +65,8 @@ var UserSchema = new mongoose.Schema({
     }
   },
   home_address: String,
+
+  //ka s
   favorite_places: [{
     type: mongoose.Schema.ObjectId,
     ref: "Place",

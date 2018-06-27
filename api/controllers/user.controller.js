@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Place = mongoose.model('Place');
 const { validateAll } = require('indicative');
 var jwt = require('jsonwebtoken');
 var CRUDHelper = require('../helpers/CRUD.helper');
@@ -407,6 +408,42 @@ module.exports.verifyEmail = async function(req, res) {
 
 };
 
+module.exports.getFavoritePlaces = async function (req,res){
+  try {
+    var userId = req.params.id;
+    var user = await User.getUserById(userId);
+    var favplaces = [];
+
+    for (let i = 0; i < user.favorite_places.length; i++) {
+      const placeId = user.favorite_places[i];
+      const place = await Place.getById(placeId);
+      favplaces.push(place);
+    }
+    if(favplaces.length <= 0){
+      res.status(200).json({
+        ok: true,
+        data: favplaces,
+        message: 'No favorites found',
+        error:null
+      });
+      return;
+    }
+    res.status(200).json({
+      ok: true,
+      data: favplaces,
+      message: 'Favorites loaded successfully',
+      error: null
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'Internal server error',
+      error: e
+    });
+  }
+  };
 /*
     Description
     Takes:
