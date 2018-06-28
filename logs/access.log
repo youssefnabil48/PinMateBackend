@@ -310,10 +310,6 @@
 ::1 - - [24/Jun/2018:00:27:22 +0000] "POST /api/chat HTTP/1.1" 500 69 "-" "PostmanRuntime/7.1.5"
 ::1 - - [24/Jun/2018:00:28:57 +0000] "POST /api/chat HTTP/1.1" 500 69 "-" "PostmanRuntime/7.1.5"
 ::1 - - [24/Jun/2018:00:30:27 +0000] "POST /api/chat HTTP/1.1" 200 2891 "-" "PostmanRuntime/7.1.5"
-<<<<<<< HEAD
->>>>>>> 312807e5943ea668bb360c01a2ecc86d17243453
-::1 - - [25/Jun/2018:12:42:39 +0000] "POST /api/user/signin HTTP/1.1" 200 1074 "-" "PostmanRuntime/7.1.5"
-=======
 ::1 - - [26/Jun/2018:00:01:05 +0000] "POST /api/tracker/create HTTP/1.1" 400 77 "-" "PostmanRuntime/7.1.5"
 ::1 - - [26/Jun/2018:00:01:52 +0000] "POST /api/tracker/create HTTP/1.1" 200 244 "-" "PostmanRuntime/7.1.5"
 ::1 - - [26/Jun/2018:00:04:12 +0000] "PUT /api/tracker/update HTTP/1.1" 404 1685 "-" "PostmanRuntime/7.1.5"
@@ -353,7 +349,6 @@
 ::1 - - [26/Jun/2018:02:45:56 +0000] "DELETE /api/tracker/delete/5b31a8b4be16c44a944f7011 HTTP/1.1" 200 87 "-" "PostmanRuntime/7.1.5"
 ::1 - - [26/Jun/2018:02:46:14 +0000] "DELETE /api/tracker/delete/5b31a8b4be16c44a944f7011 HTTP/1.1" 200 87 "-" "PostmanRuntime/7.1.5"
 ::1 - - [26/Jun/2018:02:46:21 +0000] "DELETE /api/tracker/delete/5b31a8b4be16c44a944f7011 HTTP/1.1" 200 87 "-" "PostmanRuntime/7.1.5"
->>>>>>> beb42584d4ad25e7cedfaede17ce91f0e4939dac
 ::1 - - [26/Jun/2018:12:36:01 +0000] "GET /api/user/friends/5b2ce4ed13c7ef00147e5b12 HTTP/1.1" 200 74 "-" "PostmanRuntime/7.1.5"
 ::1 - - [26/Jun/2018:12:37:52 +0000] "GET /api/user/friends/5b2ce4ed13c7ef00147e5b12 HTTP/1.1" 200 74 "-" "PostmanRuntime/7.1.5"
 ::1 - - [26/Jun/2018:12:38:02 +0000] "GET /api/user/friends/5b2ce4ed13c7ef00147e5b12 HTTP/1.1" 200 74 "-" "PostmanRuntime/7.1.5"
@@ -675,6 +670,7 @@
 ::ffff:192.168.1.5 - - [26/Jun/2018:23:54:46 +0000] "GET /api/place/getbyid/5b2d3c259b71d706a0b20e08 HTTP/1.1" 200 1370 "-" "Dalvik/2.1.0 (Linux; U; Android 7.0; SM-G930F Build/NRD90M)"
 ::ffff:192.168.1.5 - - [26/Jun/2018:23:54:51 +0000] "DELETE /api/place/post/delete/5b32d1c74c44b8013c8eb829 HTTP/1.1" 200 1044 "-" "okhttp/3.10.0"
 ::ffff:192.168.1.5 - - [26/Jun/2018:23:54:51 +0000] "GET /api/place/getbyid/5b2d3c259b71d706a0b20e08 HTTP/1.1" 200 1044 "-" "Dalvik/2.1.0 (Linux; U; Android 7.0; SM-G930F Build/NRD90M)"
+<<<<<<< HEAD
 ::1 - - [27/Jun/2018:12:14:46 +0000] "POST /api/place/favorite HTTP/1.1" 200 666 "-" "PostmanRuntime/7.1.5"
 ::ffff:192.168.1.5 - - [27/Jun/2018:12:57:30 +0000] "POST /api/user/signin HTTP/1.1" 200 1594 "-" "okhttp/3.10.0"
 ::ffff:192.168.1.5 - - [27/Jun/2018:12:57:32 +0000] "GET /api/place/all HTTP/1.1" 200 25952 "-" "Dalvik/2.1.0 (Linux; U; Android 7.0; SM-G930F Build/NRD90M)"
@@ -798,3 +794,19 @@
 ::ffff:192.168.1.5 - - [27/Jun/2018:14:33:16 +0000] "POST /api/place/unfavorite HTTP/1.1" 200 750 "-" "okhttp/3.10.0"
 ::ffff:192.168.1.5 - - [27/Jun/2018:14:33:16 +0000] "GET /api/user/favoriteplaces/5b2cf5036d34b90014d244c3 HTTP/1.1" 200 16309 "-" "Dalvik/2.1.0 (Linux; U; Android 7.0; SM-G930F Build/NRD90M)"
 ::ffff:192.168.1.5 - - [27/Jun/2018:14:34:57 +0000] "POST /api/place/unfavorite HTTP/1.1" 500 69 "-" "okhttp/3.10.0"
+=======
+=======
+::1 - - [26/Jun/2018:23:42:57 +0000] "POST /api/chat HTTP/1.1" 500 69 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:23:43:46 +0000] "POST /api/chat HTTP/1.1" 500 69 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:23:44:17 +0000] "POST /api/chat HTTP/1.1" 200 119 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:23:44:55 +0000] "POST /api/chat HTTP/1.1" 200 119 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:23:46:06 +0000] "POST /api/chat HTTP/1.1" 200 75 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:23:47:26 +0000] "GET /api/user/all HTTP/1.1" 200 2281 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:23:48:02 +0000] "POST /api/chat HTTP/1.1" 200 75 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:23:49:21 +0000] "POST /api/chat HTTP/1.1" 200 75 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:23:50:08 +0000] "POST /api/chat HTTP/1.1" 200 2891 "-" "PostmanRuntime/7.1.5"
+::1 - - [26/Jun/2018:23:51:48 +0000] "POST /api/chat HTTP/1.1" 200 3427 "-" "PostmanRuntime/7.1.5"
+>>>>>>> 8c2d925ad520d980b82de2471de83e82df17b645
+::1 - - [28/Jun/2018:01:15:53 +0000] "POST /api/chat HTTP/1.1" 200 2151 "-" "PostmanRuntime/7.1.5"
+::1 - - [28/Jun/2018:01:19:22 +0000] "POST /api/chat HTTP/1.1" 200 1926 "-" "PostmanRuntime/7.1.5"
+>>>>>>> 9e51dd9e545a32850cf47bf46b91850951c40bd3

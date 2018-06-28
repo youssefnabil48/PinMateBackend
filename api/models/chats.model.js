@@ -76,7 +76,7 @@ ChatSchema.statics.getUserChatList = function(){
 ChatSchema.statics.getChatBetweenTwoUsers = async function(firstUserId, secondUserId){
   try {
     var chat = await this.find({
-      $or:[
+      $and:[
         {sender_id: {$in: [firstUserId, secondUserId]}},
         {receiver_id: {$in: [firstUserId, secondUserId]}}
       ]
