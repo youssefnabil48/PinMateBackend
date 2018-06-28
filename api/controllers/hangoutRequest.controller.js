@@ -55,8 +55,8 @@ module.exports.create = async function (req, res) {
 
       for(let i=0;i<newHangoutReq.invited.length;i++){
         const friendId = newHangoutReq.invited[i];
-        const user = User.getUserById(friendId);
-        Notification.sendNotification(user.notification_token,sender.name +" invited you to " + newHangoutReq.title);
+        const user = await User.getUserById(friendId);
+       Notification.sendNotification(user.notification_token,sender.name +" invited you to " + newHangoutReq.title);
       }
       res.status(200).json({
           ok: true,
