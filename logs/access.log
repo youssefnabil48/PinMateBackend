@@ -810,3 +810,5 @@
 ::1 - - [28/Jun/2018:01:15:53 +0000] "POST /api/chat HTTP/1.1" 200 2151 "-" "PostmanRuntime/7.1.5"
 ::1 - - [28/Jun/2018:01:19:22 +0000] "POST /api/chat HTTP/1.1" 200 1926 "-" "PostmanRuntime/7.1.5"
 >>>>>>> 9e51dd9e545a32850cf47bf46b91850951c40bd3
+::1 - - [28/Jun/2018:12:31:03 +0000] "POST /api/place/unfavorite HTTP/1.1" 200 723 "-" "PostmanRuntime/7.1.5"
+::1 - - [28/Jun/2018:12:31:48 +0000] "POST /api/place/unfavorite HTTP/1.1" 200 696 "-" "PostmanRuntime/7.1.5"
