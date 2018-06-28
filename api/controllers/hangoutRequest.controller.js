@@ -53,7 +53,7 @@ module.exports.create = async function (req, res) {
       var sender = await User.getUserById(newHangoutReq.created_by);
 
       for(let i=0;i<newHangoutReq.invited.length;i++){
-        const friendId newHangoutReq.invited[i];
+        const friendId = newHangoutReq.invited[i];
         const user = User.getUserById(friendId);
         Notification.sendNotification(user.notification_token,sender.name +" invited you to " + newHangoutReq.title);
       }
