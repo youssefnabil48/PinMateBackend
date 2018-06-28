@@ -5,16 +5,14 @@ var CRUDHelper = require('../helpers/CRUD.helper');
 
 var HangoutRequestSchema = new mongoose.Schema({
   date : {
-    type : Date,
-    default : Date.now()
+    type : String
   },
   description : {
     type : String,
     required : false
   },
   start_time : {
-    type : Date,
-    default : Date.now()
+    type : String
   },
   title : {
     type : String,
