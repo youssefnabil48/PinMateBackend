@@ -282,11 +282,11 @@ PlaceSchema.statics.favoritePlace = async function(userId,placeId){
 PlaceSchema.statics.unfavoritePlace = async function(userId,placeId){
   try {
     var user = await User.getUserById(userId);
-    var MyObjectId = require('mongoose').Types.ObjectId;
-    var p = new MyObjectId(placeId)
-    var f= await user.findOne({ favorite_places: mongoose.Types.ObjectId(placeId)})
-    console.log(f);
-    //.remove();
+    //await user.favorite_places.id(placeId).remove();
+    var index = user.favorite_places.indexOf(placeId);
+    if (index > -1) {
+      user.favorite_places.splice(index, 1);
+    }
     return await user.save();
   } catch (e) {
     console.log(e);
