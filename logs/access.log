@@ -6,3 +6,6 @@
 ::ffff:192.168.1.5 - - [28/Jun/2018:21:41:20 +0000] "GET /api/user/friends/5b2cf5036d34b90014d244c3 HTTP/1.1" 200 819 "-" "Dalvik/2.1.0 (Linux; U; Android 7.0; SM-G930F Build/NRD90M)"
 ::ffff:192.168.1.5 - - [28/Jun/2018:21:41:21 +0000] "GET /api/place/all HTTP/1.1" 200 25952 "-" "Dalvik/2.1.0 (Linux; U; Android 7.0; SM-G930F Build/NRD90M)"
 ::ffff:192.168.1.5 - - [28/Jun/2018:21:41:33 +0000] "POST /api/hangoutRequest/create HTTP/1.1" 200 301 "-" "okhttp/3.10.0"
+::ffff:192.168.1.5 - - [28/Jun/2018:22:15:29 +0000] "PUT /api/user/update/5b2cf5036d34b90014d244c3 HTTP/1.1" 200 944 "-" "okhttp/3.10.0"
+::ffff:192.168.1.5 - - [28/Jun/2018:22:15:29 +0000] "GET /api/user/all HTTP/1.1" 200 2157 "-" "Dalvik/2.1.0 (Linux; U; Android 7.0; SM-G930F Build/NRD90M)"
+::ffff:192.168.1.5 - - [28/Jun/2018:22:15:30 +0000] "GET /api/user/friends/5b2cf5036d34b90014d244c3 HTTP/1.1" 200 993 "-" "Dalvik/2.1.0 (Linux; U; Android 7.0; SM-G930F Build/NRD90M)"

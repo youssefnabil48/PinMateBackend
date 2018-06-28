@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var HangoutRequest = mongoose.model('HangoutRequest');
 var Notification = mongoose.model('Notification');
+var User = mongoose.model('User');
 const { validateAll } = require('indicative');
 
 
