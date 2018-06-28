@@ -149,7 +149,8 @@ module.exports.create = async function(req, res) {
       favorite_places: req.body.favorite_places,
       friends: req.body.friends,
       blocks: req.body.blocks,
-      notification_token: req.body.notification_toke
+      notification_token: req.body.notification_token
+      hangout_requests : req.body.hangout_requests
     });
     let newUser = await User.create(user);
     res.status(200).json({

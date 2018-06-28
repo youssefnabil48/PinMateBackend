@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var HangoutRequest = mongoose.model('HangoutRequest');
+var Notification = mongoose.model('Notification');
 const { validateAll } = require('indicative');
 
 
@@ -48,6 +49,14 @@ module.exports.create = async function (req, res) {
           invited: req.body.invited
       });
       let newHangoutReq = await HangoutRequest.create(hangoutReq);
+      var invited = []
+      var sender = await User.getUserById(newHangoutReq.created_by);
+
+      for(let i=0;i<newHangoutReq.invited.length;i++){
+        const friendId newHangoutReq.invited[i];
+        const user = User.getUserById(friendId);
+        Notification.sendNotification(user.notification_token,sender.name +" invited you to " + newHangoutReq.title);
+      }
       res.status(200).json({
           ok: true,
           data: newHangoutReq,
@@ -308,9 +317,9 @@ module.exports.respond = async function(req,res){
           message: 'You rejected the request successfully',
           error:null
         });
-        
+
       }
-          
+
   } catch (e) {
     console.log(e);
     res.status(500).json({
@@ -321,5 +330,3 @@ module.exports.respond = async function(req,res){
     });
 }
 }
-
-
