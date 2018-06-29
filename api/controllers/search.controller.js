@@ -11,6 +11,49 @@ var User = mongoose.model('User');
     }
     Calling route:
 */
+module.exports.search = async function (req, res) {
+
+  try {
+    var query = req.params.query;
+    let results = await Place.find({
+      $or:[
+        {name: { $regex: RegExp(query), $options: 'si'}},
+        {description: {$regex: RegExp(query), $options: 'si'}}
+      ]
+    });
+    let userResults = await User.find({
+      name: {
+        $regex: RegExp(query),
+        $options: 'si'
+      }
+    });
+    results = results.concat(userResults);
+    res.status(200).json({
+      ok: true,
+      data: results,
+      message: 'Results loaded successfully',
+      error: null
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'Internal server error',
+      error: e
+    });
+  }
+}
+
+/*
+    Description
+    Takes:
+    Returns: {
+        error: "Error object if any",
+        msg: "Success or failure message"
+    }
+    Calling route:
+*/
 module.exports.searchPlaceByName = async function (req, res) {
 
   try {
