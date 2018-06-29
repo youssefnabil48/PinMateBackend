@@ -99,7 +99,9 @@ router.delete('/api/tracker/delete/:id',  trackerController.delete);
  router.get('/api/story/file/:storyId', storyController.getFile);
 
 //searchCTRL routes
-router.post('/api/search', searchController.generalSearch);
+router.post('/api/searchusers', searchController.searchUsers);
+router.post('/api/searchplacesname', searchController.searchPlaceByName);
+router.post('/api/searchplacesdescription', searchController.searchPlaceByDescription);
 
 //recommendationCTRL routes
 router.get('/api/reccomend/place', recommendationController.recommendPlace);
