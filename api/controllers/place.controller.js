@@ -122,7 +122,8 @@ module.exports.create = async function(req, res) {
         name: 'required|max:50',
         description: 'required|max:200',
         address: 'required|max:150',
-        coordinates: 'required|array',
+        longitude: 'required',
+        latitude: 'required',
         mobile_number : 'required'
       //icon : 'required'
       //picture : 'required'
