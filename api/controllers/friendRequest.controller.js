@@ -260,7 +260,6 @@ module.exports.create = async function(req, res) {
         const rules = {
           sender_id: 'required',
           receiver_id : 'required',
-          status: 'boolean'
         };
         await validateAll(req.params, rules);
       } catch (e) {
