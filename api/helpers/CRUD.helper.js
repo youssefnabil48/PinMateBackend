@@ -64,7 +64,7 @@ module.exports = {
 
   deleteModel: async function(model, id){
     try{
-        var obj = await model.remove({_id : id}).exec();
+        var obj = await model.findOneAndRemove({_id : id}).exec();
         return obj;
     }catch(error){
       console.log(error);

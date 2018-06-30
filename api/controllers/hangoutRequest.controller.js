@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var HangoutRequest = mongoose.model('HangoutRequest');
 var Notification = mongoose.model('Notification');
 var User = mongoose.model('User');
+var Place = mongoose.model('Place');
 const { validateAll } = require('indicative');
 
 
@@ -207,6 +208,25 @@ module.exports.getSndrRequests = async function (req, res) {
 module.exports.getRcvrRequests = async function (req, res) {
   try {
       var hangoutRequests = await HangoutRequest.getRcvrRequests(req.params.receiverId);
+      var senders = []
+      var places = []
+      for(let i =0;i<hangoutRequests.length;i++) {
+          const user = await User.getUserById(hangoutRequests[i].created_by);
+          const place = await Place.getById(hangoutRequests[i].place);
+          const u = new User({
+            name : user.name,
+            id : user.id,
+            picture : user.picture
+          });
+          const p = new Place({
+            name : place.name,
+            id : place.id,
+            picture : place.picture
+          });
+          senders.push(u);
+          places.push(p);
+      }
+
       if(hangoutRequests.length <= 0){
         res.status(200).json({
           ok: true,
@@ -219,6 +239,8 @@ module.exports.getRcvrRequests = async function (req, res) {
       res.status(200).json({
         ok: true,
         data: hangoutRequests,
+        sender : senders,
+        place : places,
         message: 'Requests loaded successfully',
         error:null
       });
@@ -300,27 +322,28 @@ module.exports.respond = async function(req,res){
 
   //Under construction still, not final yet
   try {
-    var hangoutReqStatus = req.params.status;
-    var hangoutReq = await HangoutRequest.getRcvrRequests(req.params.receiverId);
-      if(hangoutReqStatus == true){
+    var hangoutReqStatus = req.body.status;
+    var hangoutReq = await HangoutRequest.getRequestById(req.body.request_id);
+    var receiver_id = req.body.receiver_id;
+
+    var reqs = await HangoutRequest.respond(hangoutReq,receiver_id,hangoutReqStatus);
+          const sender = await User.getUserById(hangoutReq.created_by);
+          const receiver = await User.getUserById(receiver_id);
+          if(hangoutReqStatus)  {
+           Notification.sendNotification(sender.notification_token,receiver.name +" accepted your hangout request to "
+           + hangoutReq.title);
+          }
+          else {
+            Notification.sendNotification(sender.notification_token,receiver.name +" declined your hangout request to "
+            + hangoutReq.title);
+    }
         res.status(200).json({
           ok: true,
-          data: hangoutReq,
-          message: 'You accepted the request successfully',
+          data: reqs,
+          message: 'You responded to the request successfully',
           error:null
         });
-      }
-
-      else if(hangoutReqStatus == false){
-        res.status(200).json({
-          ok: true,
-          data: hangoutReq,
-          message: 'You rejected the request successfully',
-          error:null
-        });
-
-      }
-
+            return;
   } catch (e) {
     console.log(e);
     res.status(500).json({

@@ -49,8 +49,10 @@ router.delete('/api/chat/delete/:id', chatController.delete);
 router.get('/api/friendRequest/getall/:rcvrId', friendRequestController.getAll);
 router.get('/api/friendRequest/:id', friendRequestController.get);
 router.post('/api/friendRequest/create', friendRequestController.create);
-router.put('/api/friendRequest/update/:id', friendRequestController.update);
+router.post('/api/friendRequest/respond', friendRequestController.respond);
 router.delete('/api/friendRequest/delete/:id', friendRequestController.delete);
+router.get('/api/friendRequest/getsndrrequests/:userId', friendRequestController.getSndrRequests);
+router.get('/api/friendRequest/getrcvrrequests/:receiverId', friendRequestController.getRcvrRequests);
 
 //hangoutRequestCTRL routes
 router.get('/api/hangoutRequest/getsndrrequests/:userId', hangoutRequestController.getSndrRequests);
@@ -58,6 +60,7 @@ router.get('/api/hangoutRequest/getrcvrrequests/:receiverId', hangoutRequestCont
 router.get('/api/hangoutRequest/:id', hangoutRequestController.get);
 router.post('/api/hangoutRequest/create', hangoutRequestController.create);
 router.put('/api/hangoutRequest/update/:id', hangoutRequestController.update);
+router.post('/api/hangoutRequest/respond', hangoutRequestController.respond);
 router.delete('/api/hangoutRequest/delete/:id', hangoutRequestController.delete);
 
 //notificationCTRL routes
