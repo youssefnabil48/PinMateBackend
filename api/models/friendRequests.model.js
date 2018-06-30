@@ -4,8 +4,7 @@ var User = mongoose.model('User');
 
 var FriendRequestSchema = new mongoose.Schema({
   created_at : {
-    type : Date,
-    default : Date.now()
+    type : String
   },
   status : Boolean,
 
@@ -34,9 +33,9 @@ var FriendRequestSchema = new mongoose.Schema({
 */
 FriendRequestSchema.createRequest = async function(newRequest){
     try{
-       
+
         return await CRUDHelper.create(this, newRequest);
-        
+
     } catch (e)
     {
         console.log(e);
@@ -53,10 +52,35 @@ FriendRequestSchema.createRequest = async function(newRequest){
     }
     Calling route:
 */
-FriendRequestSchema.statics.respond = function(){
+FriendRequestSchema.statics.respond = async function(){
 
 }
+FriendRequestSchema.statics.getSndrRequests = async function(userId){
 
+    try {
+        //return CRUDHelper.get(this,created_by,user_id);
+        var friendReqs = await this.find({
+            sender_id: userId });
+            return friendReqs;
+   }
+    catch (e){
+       console.log(e);
+       throw e;
+   }
+}
+FriendRequestSchema.statics.getRcvrRequests = async function(receiverId){
+
+    try {
+        //return CRUDHelper.get(this,created_by,user_id);
+        var friendReqs = await this.find({
+            receiver_id : receiverId });
+            return friendReqs;
+   }
+    catch (e){
+       console.log(e);
+       throw e;
+   }
+}
 /*
     Description
     Takes:

@@ -166,6 +166,21 @@ HangoutRequestSchema.statics.getRcvrRequests = async function(receiverId){
        throw e;
    }
 }
+HangoutRequestSchema.statics.respond = async function(hangoutReq, receiver_id, status){
+
+    try {
+        //return CRUDHelper.get(this,created_by,user_id);
+            var index = hangoutReq.invited.indexOf(receiver_id);
+            if (index > -1) {
+            hangoutReq.invited.splice(index, 1);
+            }
+            return await hangoutReq.save();
+   }
+    catch (e){
+       console.log(e);
+       throw e;
+   }
+}
 
 //     try {
 //         //return CRUDHelper.get(this,created_by,user_id);
