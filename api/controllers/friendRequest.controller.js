@@ -110,10 +110,11 @@ module.exports.get = async function(req, res) {
 */
 module.exports.create = async function(req, res) {
 
-   /* try {
+    try {
         const rules = {
           sender_id: 'required',
-          receiver_id : 'required'
+          receiver_id : 'required',
+          status: 'boolean'
         };
         await validateAll(req.params, rules);
       } catch (e) {
@@ -125,7 +126,7 @@ module.exports.create = async function(req, res) {
           error: e
         });
         return;
-      }*/
+      }
     try {
         var friendRequest = new FriendRequest({
            created_at : req.body.created_at,
