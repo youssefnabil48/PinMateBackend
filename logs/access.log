@@ -215,3 +215,4 @@
 ::ffff:192.168.1.5 - - [30/Jun/2018:21:25:31 +0000] "GET /api/user/all HTTP/1.1" 200 3372 "-" "Dalvik/2.1.0 (Linux; U; Android 7.0; SM-G930F Build/NRD90M)"
 ::ffff:192.168.1.5 - - [30/Jun/2018:21:25:31 +0000] "GET /api/user/friends/5b2cf5036d34b90014d244c3 HTTP/1.1" 200 1329 "-" "Dalvik/2.1.0 (Linux; U; Android 7.0; SM-G930F Build/NRD90M)"
 ::ffff:192.168.1.5 - - [30/Jun/2018:21:26:56 +0000] "GET /api/hangoutrequest/getsndrrequests/5b2cf5036d34b90014d244c3 HTTP/1.1" 200 64 "-" "Dalvik/2.1.0 (Linux; U; Android 7.0; SM-G930F Build/NRD90M)"
+::1 - - [30/Jun/2018:23:32:37 +0000] "PUT /api/user/update/5b2ce4ed13c7ef00147e5b12 HTTP/1.1" 200 814 "-" "PostmanRuntime/7.1.5"
