@@ -79,9 +79,17 @@ io.on('connection', function(socket){
      console.log("request to send a message sending to socket id: "+onlineUsers[obj.receiverId]+ ' with user id: '+obj.receiverId);
      try {
        io.to(onlineUsers[obj.receiverId]).emit('message', {message: obj.message});
+       var mongoose = require('mongoose');
+       var Notification = mongoose.model('Notification');
+       var User = mongoose.model('User');
+       
        var senderId = mongoose.Types.ObjectId(socket.name);
        var receiverId = mongoose.Types.ObjectId(obj.receiverId);
        await Chat.createMessage(senderId,receiverId,obj.message, true, true);
+
+       const sender = await User.getUserById(senderId);
+       const receiver = await User.getUserById(receiverId);
+       Notification.sendNotification(receiver.notification_token, sender.name +" sent you a message");
        console.log('message sent sender_id: '+senderId+" receiver_id"+receiverId);
      } catch (e) {
        console.log(e);
