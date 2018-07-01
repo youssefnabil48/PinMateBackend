@@ -183,7 +183,9 @@ module.exports.create = async function(req, res) {
 module.exports.update = async function(req, res) {
   try {
       var userId = req.params.id;
-      req.body.password = await User.hashPassword(req.body.password);
+      if(req.body.password){
+        req.body.password = await User.hashPassword(req.body.password);
+      }
       let newUser = await User.updateUser(userId,req.body);
       res.status(200).json({
         ok: true,
