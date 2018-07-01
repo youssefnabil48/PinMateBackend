@@ -89,7 +89,7 @@ io.on('connection', function(socket){
 
        const sender = await User.getUserById(senderId);
        const receiver = await User.getUserById(receiverId);
-       Notification.sendNotification(receiver.notification_token, sender.name +" sent you a message");
+       Notification.sendNotification(receiver.notification_token, sender.name +" say: "+obj.message);
        console.log('message sent sender_id: '+senderId+" receiver_id"+receiverId);
      } catch (e) {
        console.log(e);
