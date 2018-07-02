@@ -17,8 +17,7 @@ module.exports.getFriendsTracker = async function(req, res) {
 
     try {
         var trackers = await Tracker.getFriendsTracker(req.params.id);
-        var senders = []
-        console.log(trackers.length);
+        var senders = [];
         for(let i =0;i<trackers.length;i++) {
             const user = await User.getUserById(trackers[i].user_id);
             const u = new User({
