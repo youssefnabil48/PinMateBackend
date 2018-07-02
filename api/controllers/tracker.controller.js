@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Tracker = mongoose.model('Tracker');
+var User = mongoose.model('User');
+
 const { validateAll } = require('indicative');
 
 /*
@@ -13,32 +15,44 @@ const { validateAll } = require('indicative');
 */
 module.exports.getFriendsTracker = async function(req, res) {
 
-    // try {
-    //     var trackers = await Tracker.getFriendsTracker(req.params.user_id);
-    //     if(trackers.length <= 0){
-    //       res.status(200).json({
-    //         ok: true,
-    //         data: trackers,
-    //         message: 'No trackers found',
-    //         error:null
-    //       });
-    //       return;
-    //     }
-    //     res.status(200).json({
-    //       ok: true,
-    //       data: trackers,
-    //       message: 'Trackers loaded successfully',
-    //       error:null
-    //     });
-    //   } catch (e) {
-    //     console.log(e);
-    //     res.status(500).json({
-    //       ok: false,
-    //       data: null,
-    //       message: 'Internal server error',
-    //       error: e
-    //     });
-    //   }
+    try {
+        var trackers = await Tracker.getFriendsTracker(req.params.id);
+        var senders = []
+        console.log(trackers.length);
+        for(let i =0;i<trackers.length;i++) {
+            const user = await User.getUserById(trackers[i].user_id);
+            const u = new User({
+              name : user.name,
+              id : user.id,
+              picture : user.picture
+            });
+            senders.push(u);
+        }
+        if(trackers.length <= 0){
+          res.status(200).json({
+            ok: true,
+            data: trackers,
+            message: 'No trackers found',
+            error:null
+          });
+          return;
+        }
+        res.status(200).json({
+          ok: true,
+          data: trackers,
+          friends : senders,
+          message: 'Trackers loaded successfully',
+          error:null
+        });
+      } catch (e) {
+        console.log(e);
+        res.status(500).json({
+          ok: false,
+          data: null,
+          message: 'Internal server error',
+          error: e
+        });
+       }
 
 };
 
@@ -107,7 +121,7 @@ module.exports.get = async function(req, res) {
     Calling route:
 */
 module.exports.create = async function(req, res) {
-  
+
     try {
         const rules = {
             source: 'required',
@@ -125,7 +139,7 @@ module.exports.create = async function(req, res) {
         });
         return;
     }
-  
+
     try {
         var tracker = new Tracker({
             source: req.body.source,
@@ -150,7 +164,7 @@ module.exports.create = async function(req, res) {
             error: e
         });
     }
-    
+
 };
 
 
@@ -260,7 +274,7 @@ module.exports.delete = async function(req, res) {
     }
     Calling route:
 */
-module.exports.broadcast = async function(req, res) { 
+module.exports.broadcast = async function(req, res) {
 
 
 };

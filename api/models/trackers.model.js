@@ -36,17 +36,21 @@ var TrackerSchema = new mongoose.Schema({
     Calling route:
 */
 TrackerSchema.statics.getFriendsTracker = async function(user_id){
-    // try {
-    //     var user = User.getUserById(user_id);
-    //     for (var i=0; i<user.friends.length; i++){
-    //         var u = User.getUserById(user.friends[i]);
-    //         await this.getTrackerById(u.tracker_id);
-    //     }
-    // }
-    // catch (e)
-    // {
-    //     console.log(e);
-    // }
+    try {
+        var user = await User.getUserById(user_id);
+        var trackers = [];
+        for (let i=0; i<user.friends.length; i++){
+            var u = await User.getUserById(user.friends[i]);
+            var tracker = await this.find({
+                user_id: u.id });
+            trackers.push(tracker);
+        }
+        return trackers;
+    }
+    catch (e)
+    {
+        console.log(e);
+    }
 }
 
 /*
@@ -60,7 +64,7 @@ TrackerSchema.statics.getFriendsTracker = async function(user_id){
 */
 TrackerSchema.statics.createTracker = async function(newTracker){
     try{
-    
+
       console.log(newTracker);
        return await CRUDHelper.create(this, newTracker);
     } catch (e)
