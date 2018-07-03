@@ -42,7 +42,7 @@ TrackerSchema.statics.getFriendsTracker = async function(user_id){
         for (let i=0; i<user.friends.length; i++){
             var u = await User.getUserById(user.friends[i]);
             var tracker = await this.findOne({
-                user_id: u.id 
+                user_id: u.id
             });
             if(tracker){
                 trackers.push(tracker);

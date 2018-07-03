@@ -39,6 +39,7 @@ router.post('/api/user/signin', userController.signIn);
 router.get('/api/user/forgetpassword', userController.forgetPassword);
 router.post('/api/user/deviceToken', userController.addNotificationToken);
 router.get('/api/user/friends/:id', userController.getUserFriends);
+router.get('/api/user/blocks/:id', userController.getBlockedUsers);
 router.get('/api/user/favoriteplaces/:id', userController.getFavoritePlaces);
 
 //chat routes

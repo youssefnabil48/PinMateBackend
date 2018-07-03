@@ -173,7 +173,7 @@ HangoutRequestSchema.statics.respond = async function(hangoutReq, receiver_id, s
             var index = hangoutReq.invited.indexOf(receiver_id);
             if (index > -1) {
             hangoutReq.invited.splice(index, 1);
-            }
+          }
             return await hangoutReq.save();
    }
     catch (e){

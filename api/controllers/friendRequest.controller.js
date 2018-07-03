@@ -314,6 +314,19 @@ module.exports.respond = async function(req, res) {
     var friendReqStatus = req.body.status;
     var friendReq = await FriendRequest.getRequestById(req.body.request_id)
     var receiver_id = req.body.receiver_id;
+    var sender_id = req.body.sender_id;
+
+    if(friendReqStatus == true) {
+      const u1 = await User.getUserById(receiver_id);
+      const u2 = await User.getUserById(sender_id);
+      u1.friends.push(sender_id);
+      await u1.save();
+      u2.friends.push(receiver_id);
+      await u2.save();
+      Notification.sendNotification(u1.notification_token,u2.name +" accepted your friend request.");
+    }  else {
+        Notification.sendNotification(u1.notification_token,u2.name +" declined your hangout request.");
+      }
 
     var reqs = await FriendRequest.deleteRequest(req.body.request_id);
 
@@ -325,15 +338,6 @@ module.exports.respond = async function(req, res) {
         error:null
       });
       return;
-    }
-
-    const sender = await User.getUserById(friendReq.sender_id);
-    const receiver = await User.getUserById(receiver_id);
-    if(friendReqStatus)  {
-      Notification.sendNotification(sender.notification_token,receiver.name +" accepted your friend request.");
-    }
-    else {
-      Notification.sendNotification(sender.notification_token,receiver.name +" declined your hangout request.");
     }
     res.status(200).json({
       ok: true,

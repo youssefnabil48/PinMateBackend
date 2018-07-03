@@ -491,4 +491,43 @@ module.exports.getUserFriends = async function(req, res) {
       error: e
     });
   }
+
+};
+
+module.exports.getBlockedUsers = async function(req, res) {
+  try {
+    var userId = req.params.id;
+    var user = await User.getUserById(userId);
+    var users = [];
+
+    for (let i = 0; i < user.blocks.length; i++) {
+      const friendId = user.blocks[i];
+      const friend = await User.getUserById(friendId);
+      users.push(friend);
+    }
+    if(users.length <= 0){
+      res.status(200).json({
+        ok: true,
+        data: users,
+        message: 'No friends found',
+        error:null
+      });
+      return;
+    }
+    res.status(200).json({
+      ok: true,
+      data: users,
+      message: 'friends loaded successfully',
+      error: null
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'Internal server error',
+      error: e
+    });
+  }
+
 };
