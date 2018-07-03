@@ -23,7 +23,8 @@ module.exports.getFriendsTracker = async function(req, res) {
             const u = new User({
               name : user.name,
               id : user.id,
-              picture : user.picture
+              picture : user.picture,
+              current_location : user.current_location
             });
             senders.push(u);
         }

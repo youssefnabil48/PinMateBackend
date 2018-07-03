@@ -112,7 +112,7 @@ location: {
    // required: true
   }],
   mobile_number : {
-    type: Number,
+    type: String,
     required: true
   },
   events : [EventSchema],
