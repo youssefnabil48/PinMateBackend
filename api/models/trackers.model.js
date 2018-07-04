@@ -5,13 +5,21 @@ var User = mongoose.model('User');
 
 var TrackerSchema = new mongoose.Schema({
     source : {
-      type : String,
-      required : true
-    },
+        longitude: {
+          type: Number
+        },
+        latitude: {
+          type: Number,
+        }
+      },
     destination : {
-      type : String,
-      required : true
-    },
+        longitude: {
+          type: Number
+        },
+        latitude: {
+          type: Number,
+        }
+      },
     created_at : {
       type : Date,
       default : Date.now()
