@@ -39,13 +39,11 @@ var EventSchema = new mongoose.Schema({
     required : true
   },
   start_date : {
-    type : Date,
-    default : Date.now(),
+    type : String,
     required : true
   },
   end_date : {
-    type : Date,
-    default : Date.now()
+    type : String,
   },
   posts : [PostSchema]
 
