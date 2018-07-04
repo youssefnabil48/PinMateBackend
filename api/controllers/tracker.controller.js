@@ -22,7 +22,7 @@ module.exports.getFriendsTracker = async function(req, res) {
             const user = await User.getUserById(trackers[i].user_id);
             const u = new User({
               name : user.name,
-              id : user.id,
+              _id : user.id,
               picture : user.picture,
               current_location : user.current_location
             });

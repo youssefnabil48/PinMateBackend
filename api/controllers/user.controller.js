@@ -84,7 +84,7 @@ module.exports.get = async function(req, res) {
     res.status(200).json({
       ok: true,
       data: user,
-      message: 'User found',
+      message: 'User found successfully',
       error:null
     });
   } catch (e){
