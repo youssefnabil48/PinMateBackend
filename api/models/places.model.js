@@ -60,8 +60,7 @@ var ReviewSchema = new mongoose.Schema({
     required : true
   },
   created_at : {
-    type : Date,
-    default : Date.now(),
+    type : String,
     //required : true
   },
   user_name :String,
