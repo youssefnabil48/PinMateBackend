@@ -630,7 +630,7 @@ module.exports.addReview = async function(req, res) {
 module.exports.deleteReview = async function(req, res) {
     try {
       var placeId = req.body.place_id;
-      var place = Place.getById(placeId);
+      var place = await Place.getById(placeId);
       let rmReview = await Place.deleteReview(place,req.params.reviewId);
       res.status(200).json({
         ok: true,
