@@ -596,7 +596,9 @@ module.exports.addReview = async function(req, res) {
       content : req.body.content,
       rating : req.body.rating,
       created_at : req.body.created_at,
-      user_id : req.body.user_id
+      user_id : req.body.user_id,
+      user_name :req.body.user_name,
+      user_pic : req.body.user_pic,
     });
     let newReview = await Place.addReview(place,r);
     res.status(200).json({

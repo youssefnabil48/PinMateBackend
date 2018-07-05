@@ -64,6 +64,8 @@ var ReviewSchema = new mongoose.Schema({
     default : Date.now(),
     //required : true
   },
+  user_name :String,
+  user_pic : String,
   user_id : {
     type : mongoose.Schema.ObjectId,
     ref : "User",
