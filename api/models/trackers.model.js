@@ -20,6 +20,11 @@ var TrackerSchema = new mongoose.Schema({
           type: Number,
         }
       },
+      destination_id :  {
+        type : mongoose.Schema.ObjectId,
+        ref : "Place",
+        required : true
+      },
     created_at : {
       type : Date,
       default : Date.now()

@@ -146,6 +146,7 @@ module.exports.create = async function(req, res) {
             destination: req.body.destination,
             created_at: req.body.created_at,
             user_id : req.body.user_id,
+            destination_id : req.body.destination_id,
             eta: req.body.eta,
         });
         let newTracker = await Tracker.create(tracker);
