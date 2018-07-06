@@ -385,7 +385,7 @@ module.exports.addPost = async function(req, res) {
 */
 module.exports.deletePost = async function(req, res) {
   try {
-
+      console.log(req.body);
        var placeID = req.body.place_id;
        var place =await Place.getById(placeID);
        var postId = req.params.postId;

@@ -98,6 +98,36 @@ module.exports.get = async function(req, res) {
   }
 };
 
+module.exports.checkIn = async function(req, res) {
+
+  try {
+    var user = await User.checkIn(req.body.user_id, req.body.place_id); 
+    if(!user){
+      res.status(200).json({
+        ok: true,
+        data: user,
+        message: 'User not found',
+        error:null
+      });
+      return;
+    }
+    res.status(200).json({
+      ok: true,
+      data: user,
+      message: 'User found successfully',
+      error:null
+    });
+  } catch (e){
+    console.log(e);
+    res.status(500).json({
+      ok: false,
+      data: null,
+      message: 'Internal server error',
+      error: e
+    });
+  }
+};
+
 /*
     Description
     Takes:

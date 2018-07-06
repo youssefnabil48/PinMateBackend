@@ -149,6 +149,25 @@ UserSchema.statics.getUserById = async function (userId) {
     throw e;
   }
 }
+
+UserSchema.statics.checkIn = async function (userId, placeId) {
+
+
+  try {
+
+    var u = await User.getUserById(userId);
+    var visits = u.visits;
+
+    visits.find(function(object) {
+        return object["place_id"] == placeId;
+    });
+    
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+}
+
 /*
     Description
     Takes:
@@ -158,6 +177,7 @@ UserSchema.statics.getUserById = async function (userId) {
     }
     Calling route:
 */
+
 UserSchema.statics.getUserByEmail = async function (email) {
   try {
     return await this.findOne({
