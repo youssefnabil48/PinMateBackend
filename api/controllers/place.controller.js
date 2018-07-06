@@ -596,7 +596,9 @@ module.exports.addReview = async function(req, res) {
       content : req.body.content,
       rating : req.body.rating,
       created_at : req.body.created_at,
-      user_id : req.body.user_id
+      user_id : req.body.user_id,
+      user_name :req.body.user_name,
+      user_pic : req.body.user_pic,
     });
     let newReview = await Place.addReview(place,r);
     res.status(200).json({
@@ -628,8 +630,8 @@ module.exports.addReview = async function(req, res) {
 module.exports.deleteReview = async function(req, res) {
     try {
       var placeId = req.body.place_id;
-      var place = Place.getById(placeId);
-      let rmReview = await Place.deleteReview(place,req.body.review_id);
+      var place = await Place.getById(placeId);
+      let rmReview = await Place.deleteReview(place,req.params.reviewId);
       res.status(200).json({
         ok: true,
         data: rmReview,

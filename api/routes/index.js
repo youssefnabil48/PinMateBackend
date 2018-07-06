@@ -111,7 +111,7 @@ router.post('/api/searchplacesname', searchController.searchPlaceByName);
 router.post('/api/searchplacesdescription', searchController.searchPlaceByDescription);
 
 //recommendationCTRL routes
-router.get('/api/reccomend/place', recommendationController.recommendPlace);
+router.post('/api/recommend/place', recommendationController.recommendPlace);
 
 /* importing test controllers and routes */
 var testController = require('../controllers/test.controller');

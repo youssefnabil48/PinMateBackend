@@ -39,13 +39,11 @@ var EventSchema = new mongoose.Schema({
     required : true
   },
   start_date : {
-    type : Date,
-    default : Date.now(),
+    type : String,
     required : true
   },
   end_date : {
-    type : Date,
-    default : Date.now()
+    type : String,
   },
   posts : [PostSchema]
 
@@ -62,10 +60,11 @@ var ReviewSchema = new mongoose.Schema({
     required : true
   },
   created_at : {
-    type : Date,
-    default : Date.now(),
+    type : String,
     //required : true
   },
+  user_name :String,
+  user_pic : String,
   user_id : {
     type : mongoose.Schema.ObjectId,
     ref : "User",
