@@ -19,7 +19,8 @@ module.exports.recommendPlace = async function(req,res){
             }
         }
         var sortedPlacesIds = sortProperties(rankedPlacesIds);
-        var places = await Place.find({
+        var places = [];
+        places = await Place.find({
             $or:[
                 {_id: mongoose.Types.ObjectId(sortedPlacesIds[0])},
                 {_id: mongoose.Types.ObjectId(sortedPlacesIds[1])},
@@ -32,6 +33,14 @@ module.exports.recommendPlace = async function(req,res){
                 return obj._id == sortedPlacesIds[i];
             });
             rankedPlaces.push(result[0]);
+        }
+        rankedPlaces = filter_array(rankedPlaces);
+        console.log('ranked places',rankedPlaces);
+        if(rankedPlaces.length < 1){
+            var newPlaces = await Place.find();
+            rankedPlaces.push(newPlaces[0]);
+            rankedPlaces.push(newPlaces[1]);
+            rankedPlaces.push(newPlaces[2]);
         }
         res.status(200).json({
             ok: true,
@@ -53,8 +62,7 @@ module.exports.recommendPlace = async function(req,res){
 
 //this should sort keys but return the objects 
 //after modifications it return the keys only sorted according to the values
-function sortProperties(obj)
-{
+function sortProperties(obj){
   // convert object into array
 	var sortable=[];
 	for(var key in obj)
@@ -68,4 +76,21 @@ function sortProperties(obj)
 	  return b[1]-a[1]; // compare numbers
 	});
 	return sortable; // array in format [ [ key1, val1 ], [ key2, val2 ], ... ]
+}
+
+function filter_array(test_array) {
+    var index = -1,
+        arr_length = test_array ? test_array.length : 0,
+        resIndex = -1,
+        result = [];
+
+    while (++index < arr_length) {
+        var value = test_array[index];
+
+        if (value) {
+            result[++resIndex] = value;
+        }
+    }
+
+    return result;
 }
